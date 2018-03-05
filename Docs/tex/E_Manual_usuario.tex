@@ -9,25 +9,22 @@
 \section{Manual del usuario}
 \subsection{\textit{Alp’s Labeling Tool (ALT)}}
 
-Para hacer el etiquetado se va a usar \textit{Alp’s Labeling Tool (ALT)}.\\
-Se trata de un etiquetador bastante sencillo, tanto de descargar como de usar.\\
-
+Para hacer el etiquetado se va a usar \textit{Alp’s Labeling Tool (ALT)}.
+Se trata de un etiquetador bastante sencillo, tanto de descargar como de usar.
 \subsubsection{Software necesario}
-Para poder hacer uso de ella para la funcionalidad que queremos, en este caso etiquetar imágenes, vamos a neceseitar 3 tipos de software:\\
+Para poder hacer uso de ella para la funcionalidad que queremos, en este caso etiquetar imágenes, vamos a neceseitar 3 tipos de software:
 \begin{itemize}
-	\item \href{http://fiji.sc/#download}{Fiji}. Esta herramienta no precisa de instalación como tal, simplemente hay que descomprimir la carpeta que contiene la aplicación y ubicarla donde nos resulte más cómoda trabajar on ella.\\
-	
+	\item \href{http://fiji.sc/#download}{Fiji}. Esta herramienta no precisa de instalación como tal, simplemente hay que descomprimir la carpeta que contiene la aplicación y ubicarla donde nos resulte más cómoda trabajar con ella.
 	Para descargarla solo es necesario escoger el sistema operativo sobre el que vamos a trabajar.
 	\item \href{https://github.com/imagejan/ActionBar/releases/download/SciJava-Parameters/action_bar-2.0.5-SNAPSHOT.jar}{Action Bar}. Se trata de un plugin que hay que instalar directamente en la aplicación Fiji.
 	\item \href{https://www.dropbox.com/s/ihkr0ahhif3csvp/ALT_Windows_22mar2017.zip?dl=0}{ALT}. Este macro plugin nos va ha permitir cargar las imágenes, dibujar etiquetas sobre ellas, poner nombres a dichas etiquetas, guardar la información, volver a cargarla y devolver las coordenadas en formato .txt o .csv.
 \end{itemize}
-
 Considerando que ya se tiene todo el software especificado,
 la instalación de la aplicación se realizará siguiendo los siguientes pasos:
 \begin{enumerate}
 	\item Lo primero que vamos a hacer es descomprimir la carpeta que contiene la aplicación de \textbf{Fiji} y ubicar dicha carpeta dónde nos sea más cómodo trabajar.
 	\item A continuación, descomprimimos el plugin de \textbf{Action Bar} y lo dejamos dónde lo podamos usar.
-	\item Vamos a iniciar la aplicación, la cual se encuentra dentro de la carpeta extraída. Veremos una barra de tareas como la mostrada en la imagen [\ref{fig:barra_de_tareas}]
+	\item Vamos a iniciar la aplicación, la cual se encuentra dentro de la carpeta extraída. Veremos una barra de tareas como la mostrada en la imagen~\ref{fig:barra_de_tareas}
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.7\linewidth]{img/barra}
@@ -43,8 +40,7 @@ la instalación de la aplicación se realizará siguiendo los siguientes pasos:
 Todo este proceso de instalación se puede ver en \href{https://www.youtube.com/watch?v=G6ib950iDvQ}{videotutoriales} que el propio desarrollador ha subido a Youtube.
 \subsubsection{Uso de la aplicación}
 \begin{itemize}
-	\item \textbf{Uso de los plugins.} Una vez tenemos abierta la aplicación, nos dirigimos a la opción "Plugins" y en el desplegable y nos dirigimos al final de este. Seleccionamos "Alps Labeling Tool", como se muestra en la imagen \ref{fig:alpsltplugin}.\\
-	
+	\item \textbf{Uso de los plugins.} Una vez tenemos abierta la aplicación, nos dirigimos a la opción "Plugins" y en el desplegable y nos dirigimos al final de este. Seleccionamos "Alps Labeling Tool", como se muestra en la imagen \ref{fig:alpsltplugin}.
 	Se nos abrirá una nueva barra de tareas como en la que se muestra en la imagen \ref{fig:alt}, con la que vamos a trabajar para hacer el etiquetado.
 	\begin{figure}
 		\centering
@@ -56,8 +52,7 @@ Todo este proceso de instalación se puede ver en \href{https://www.youtube.com/
 	\begin{figure}
 		\centering
 		\includegraphics[width=0.7\linewidth]{img/AlpsLTPlugin}
-		\caption[Plugin Alps Labeling Tool]{}
-		\caption{}
+		\caption{Plugin Alps Labeling Tool}
 		\label{fig:alpsltplugin}
 	\end{figure}
 	Esta barra de trabajo contiene 6 funcionalidades básicas:
@@ -71,10 +66,30 @@ Todo este proceso de instalación se puede ver en \href{https://www.youtube.com/
 		
 	\end{enumerate}
 	
-	\item \textbf{Cargar Imágenes.}
-	\item \textbf{Etiquetado.}
-	\item \textbf{Guardar imágenes.}
+	\item \textbf{Cargar Imágenes.} Para poder trabajar etiquetando las imágenes, antes tenemos que cargarlas para visualizarlas. Para ello seleccionamos la opción \textit{OPEN IMAGES \& LABELS.}. Nos va a permitir navegar entre directorios para seleccionar finalmente qué imagen queremos etiquetar.
+	Una vez esté la imagen abierta, la vista será similar a la mostrada en la imagen \ref{fig:etiquetado0}.
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{img/etiquetado0}
+		\caption{Estado de la aplicación antes del etiquetado}
+		\label{fig:etiquetado0}
+	\end{figure}
+	
+	\item \textbf{Etiquetado.} Para realizar el etiquetado dentro de una imagen que previamente hemos cargado tenemos que dibujar un rectángulo con el puntero sobre dicha imagen.
+	Vamos a ponerle nombre a la etiqueta que hemos dibujado, para ello, una vez dibujado el rectángulo, pulsamos \textit{Add New Sel} en la columna de botones que hay a la derecha de la imagen. Ver imagen \ref{fig:etiquetapingu}.
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\linewidth]{img/etiquetapingu}
+		\caption{Nombrar una etiqueta}
+		\label{fig:etiquetapingu}
+	\end{figure}
+	
+	En el caso de que después necesitásemos saber el nombre de la etiqueta que hemos puesto, manteniendo la etiqueta seleccionada, le damos a \textit{Name of sel} y nos dirá el nombre.
+	\item \textbf{Guardar imágenes y etiquetas.} Una vez lo tenemos todo etiquetado dentro de la imagen tenemos que guardar la información generada por el etiquetado.
+	Para llevar esto a cabo tenemos tres opciones: Guardar sólo las etiquetas y continuar etiquetando, guardar etiquetas y salir o guardar etiquetas e imágenes.
+	Preferiblemente vamos a darle a la opción (en el menú ALT) de guardar etiquetas e imágenes y guardar todas las etiquetas en la misma carpeta de resultados para trabajar mejor con ellas.
 	\item \textbf{Generar datos.}
 	
 \end{itemize}
 \subsubsection{Recomendaciones}
+He subido una máquina virtual a One Drive para que no sea necesario hacer ninguna instalación. Se puede acceder a la descarga desde \href{https://universidaddeburgos-my.sharepoint.com/:f:/g/personal/mmb0093_alu_ubu_es/EmokrIxFowNKvCanhqclkqkB90ruM7w-TPeXQS1MQQNmCQ?e=HMXXW4}{aquí}.
