@@ -26,3 +26,9 @@ no necesita instalacíón pero necesita dos plugins.
 [Digital Ocean](https://www.digitalocean.com/?ref=stackshare)
 
 [Heoku](https://www.heroku.com/?ref=stackshare)
+
+## Diseño
+### Casos de uso
+https://msdn.microsoft.com/es-es/library/dd409432.aspx
+
+https://creately.com/blog/diagrams/use-case-diagram-relationships/
