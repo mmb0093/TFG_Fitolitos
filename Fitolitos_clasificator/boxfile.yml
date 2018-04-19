@@ -1,0 +1,18 @@
+run.config:
+  engine: python
+  engine.config:
+    runtime: python-3.6 
+
+  # add extra packages
+  extra_packages:
+    - nginx
+
+# add a web component and give it a "start" command
+web.main:
+  start:
+    nginx: nginx -c /app/etc/nginx.conf
+    flask: gunicorn -c /app/etc/gunicorn.py Hola_Mundo:app
+
+# add a worker component and give it a "start" command
+# worker.main:
+#   start: python worker.py
