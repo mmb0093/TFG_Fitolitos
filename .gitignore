@@ -101,3 +101,19 @@ ENV/
 .mypy_cache/
 
 img/
+
+Docs/anexos\.aux
+
+Docs/anexos\.lof
+
+Docs/anexos\.out
+
+Docs/anexos\.synctex\.gz
+
+Docs/anexos\.toc
+
+Docs/tex/A_Plan_proyecto\.aux
+
+Docs/tex/E_Manual_usuario\.aux
+
+*.aux
