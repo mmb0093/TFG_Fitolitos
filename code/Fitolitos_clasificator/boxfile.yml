@@ -7,8 +7,6 @@ run.config:
 web.main:
   start:
     nginx: nginx -c /app/etc/nginx.conf
-    flask: gunicorn -c /app/etc/gunicorn.py Hola_Mundo:app
+    flask: gunicorn -c /app/etc/gunicorn.py tfgfitolitos :app
 
-# add a worker component and give it a "start" command
-worker.main:
-  start: python worker.py
+
