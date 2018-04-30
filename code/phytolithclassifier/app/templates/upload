@@ -1,0 +1,6 @@
+<form>
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Selecciona un .zip con las imágenes que quieras subir</label>
+    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+  </div>
+</form>
