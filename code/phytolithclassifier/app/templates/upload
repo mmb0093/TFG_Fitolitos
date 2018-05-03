@@ -7,9 +7,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Subir imágenes</title>
-
+    <script>
+         function myFunction() {
+            document.getElementById("imagen").innerHTML = "Paragraph changed.";
+            }
+</script>
     <!-- CSS de Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+      <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
   </head>
   <body>
@@ -23,19 +29,46 @@
             <li class="nav-item active">
               <a class="nav-link" href="{{url_for('index')}}">home</a>
               <a class="nav-link" href="{{url_for('upfiles')}}">Subir imágenes</a>
+              <a class="nav-link" href="{{url_for('index')}}">Cerrar sesión</a>
             </li>
           </ul>
        </div>
   </nav>
-    <form>
-      <div class="form-group">
-        <label for="zipsubida">Selecciona un .zip con las imágenes que quieras subir</label>
-        <input type="file" class="form-control-file" id="zipsubida">
-        <input type="submit" value="Subir archivo" />
-         <img src='uploads/$zipsubida' >
+   <p></p>
+   <script>
+$(function() {
+  $(document).on('change', ':file', function() {
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [numFiles, label]);
+  });
+  $(document).ready( function() {
+      $(':file').on('fileselect', function(event, numFiles, label) {
 
-      </div>
-    </form>
+          var input = $(this).parents('.input-group').find(':text'),
+              log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+          if( input.length ) {
+              input.val(log);
+          } else {
+              if( log ) alert(log);
+          }
+
+      });
+  });
+
+});
+</script>
+<h6>Selecciona las imágenes que quieras etiquetar:</h6>
+ <form  method="post" onclick="myFunction()"  >
+    <div class="col-lg-6 col-sm-6 col-12">
+      <input type="file" class="custom-file-input" id="imagen" name="file">
+      <label class="custom-file-label" for="imagen" id="name">Seleccionar Archivo</label>
+        <p></p>
+      <button type="submit" class="btn btn-secundary">Subir</button>
+    </div>
+
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
