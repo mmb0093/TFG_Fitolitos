@@ -1,12 +1,13 @@
-run.config:
+run.config: 
   engine: python
-  engine.config:
-    runtime: python-3.6 
+  engine.config: 
+    runtime: python-3.6
 
-
-web.main:
+web.main: 
   start:
-    nginx: nginx -c /etc/nginx.conf
-    flask: gunicorn -c /etc/gunicorn.py run:app
+    flask: gunicorn -b 0.0.0.0:8080 run:app
+
+
+
 
 
