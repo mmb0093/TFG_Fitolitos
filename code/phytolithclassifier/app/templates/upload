@@ -27,7 +27,7 @@
             <li class="nav-item active">
               <a class="nav-link" href="{{url_for('index')}}">home</a>
               <a class="nav-link" href="{{url_for('upfiles')}}">Subir imágenes</a>
-              <a class="nav-link" href="{{url_for('index')}}">Cerrar sesión</a>
+              <a class="nav-link" href="{{url_for('google.authorized')}}">Cerrar sesión</a>
             </li>
           </ul>
        </div>

@@ -15,7 +15,6 @@
 
   </head>
   <body>
-
       <nav class="navbar navbar-dark" style="background-color: #4a3b78;">
       <a class="navbar-brand" href="#">Clasificador de fitolitos</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,18 +25,16 @@
             <li class="nav-item active">
               <a class="nav-link" href="{{url_for('index')}}">home</a>
               <a class="nav-link" href="{{url_for('upfiles')}}">Subir imágenes</a>
-              <a class="nav-link" href="{{url_for('index')}}">Cerrar sesión</a>
+              <a class="nav-link" href="{{url_for('google.authorized')}}">Cerrar sesión</a>
             </li>
            </ul>
           </div>
       </nav>
-<div class="container" style="margin-top: 20px;">
-    <div class="row">
-
-        <div class="col-lg-6 col-sm-6 col-12">
+<div class="container" style="margin-top: 30px;">
+        <div class="col-lg-10">
             <div class="jumbotron">
-                <h1>Clasificador de fitolitos</h1>
-            </div>
+                <h1>Hola :)</h1>
+                <h2> {{email}} </h2>
         </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

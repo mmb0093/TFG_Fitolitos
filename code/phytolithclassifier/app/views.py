@@ -27,7 +27,7 @@ def index():
         return redirect(url_for("google.login"))
     resp = google.get("/oauth2/v2/userinfo")
     assert resp.ok, resp.text
-    return render_template('index.html')
+    return render_template('index.html', email=resp.json()["email"])
 
 
 def allowed_file(filename):
