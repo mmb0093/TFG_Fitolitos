@@ -1,75 +1,42 @@
-
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Subir imágenes</title>
-    <script>
-         function myFunction() {
-            document.getElementById("imagen").innerHTML = "Paragraph changed.";
-            }
-</script>
-    <!-- CSS de Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-      <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<head>
+  <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Subir imágenes</title>
+   <!-- CSS de Bootstrap -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
-  </head>
-  <body>
-   <nav class="navbar navbar-dark" style="background-color: #4a3b78;">
-      <a class="navbar-brand" href="{{url_for('index')}}">Clasificador de fitolitos</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{{url_for('index')}}">home</a>
-              <a class="nav-link" href="{{url_for('upfiles')}}">Subir imágenes</a>
-              <a class="nav-link" href="{{url_for('google.authorized')}}">Cerrar sesión</a>
-            </li>
-          </ul>
-       </div>
-  </nav>
-   <p></p>
-   <script>
-$(function() {
-  $(document).on('change', ':file', function() {
-    var input = $(this),
-        numFiles = input.get(0).files ? input.get(0).files.length : 1,
-        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-    input.trigger('fileselect', [numFiles, label]);
-  });
-  $(document).ready( function() {
-      $(':file').on('fileselect', function(event, numFiles, label) {
+    {% block head %}
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+    {% block links %}{% endblock %}
+    {% endblock %}
+</head>
+<body>
+  <nav class="navbar navbar-dark" style="background-color: #4a3b78;">
 
-          var input = $(this).parents('.input-group').find(':text'),
-              log = numFiles > 1 ? numFiles + ' files selected' : label;
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
 
-          if( input.length ) {
-              input.val(log);
-          } else {
-              if( log ) alert(log);
-          }
+          </li>
+         </ul>
+        </div>
+    </nav>
+    <div class="container">
+      {% block content %}{% endblock %}
 
-      });
-  });
-
-});
-</script>
-<h6>Selecciona las imágenes que quieras etiquetar:</h6>
- <form  method="post" onclick="myFunction()"  >
-    <div class="col-lg-6 col-sm-6 col-12">
-      <input type="file" class="custom-file-input" id="imagen" name="file">
-      <label class="custom-file-label" for="imagen" id="name">Seleccionar Archivo</label>
-        <p></p>
-      <button type="submit" class="btn btn-secundary">Subir</button>
     </div>
- </form>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-  </body>
+    <script type="text/javascript"   src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script type="text/javascript"  src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+</body>
 </html>
