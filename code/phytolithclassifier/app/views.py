@@ -1,14 +1,15 @@
 import os
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
-from flask import redirect, url_for, render_template, request
+from flask import redirect, Blueprint, url_for, render_template, request, make_response, flash
 from flask_dance.contrib.google import make_google_blueprint, google
 from werkzeug.utils import secure_filename
 from app import app
+from build import Build
 
 UPLOAD_FOLDER = '/upload-file'
-ALLOWED_EXTENSIONS = set(['zip', 'rar'])
-
+ALLOWED_EXTENSIONS = set(['zip', 'rar', 'png', 'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
+pages = Blueprint('pages', __name__,template_folder='templates')
 
 app.secret_key = "supersekrit"
 blueprint = make_google_blueprint(
@@ -26,6 +27,7 @@ def index():
     if not google.authorized:
         return redirect(url_for("google.login"))
     resp = google.get("/oauth2/v2/userinfo")
+
     assert resp.ok, resp.text
     return render_template('index.html', email=resp.json()["email"])
 
@@ -36,16 +38,19 @@ def allowed_file(filename):
 
 @app.route("/upload-files", methods=['GET', 'POST'])
 def upfiles():
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('upload-file',
-                                    filename=filename))
+    return render_template('home.html')
 
-    return render_template('upload')
+def upload():
+    file = request.files['images']
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
+        bObj = Build()
+        bObj.build(app.config["UPLOAD_FOLDER"],app.config['UNZIP_FOLDER'])
+    return render_template("success.html")
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+
