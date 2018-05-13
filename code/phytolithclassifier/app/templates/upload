@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
       <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
+
   </head>
    <nav class="navbar navbar-dark" style="background-color: #4a3b78;">
       <a class="navbar-brand" href="{{url_for('index')}}">Clasificador de fitolitos</a>
@@ -79,7 +80,7 @@ $(function() {
         <hr>
         {% for image_name in image_names %}
         <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-            <img class="img-responsive" src=" {{url_for('send_image', filename=image_name)}}">
+            <img src=" {{url_for('send_image', filename=image_name)}}" class="img-fluid" alt="Responsive image">
         </div>
         {% endfor %}
     </div>
