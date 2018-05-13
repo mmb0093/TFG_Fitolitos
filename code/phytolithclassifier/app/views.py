@@ -33,22 +33,18 @@ def index():
 @app.route("/upload-files", methods=['GET', 'POST'])
 def upfiles():
     target = os.path.join(UPLOAD_FOLDER, 'images/')
-    print(target)
     if not os.path.isdir(target):
         os.mkdir(target)
-    print(request.files.getlist("file"))
-    print("hola fuera")
     for upload in request.files.getlist("file"):
         filename = upload.filename
         destination = "/".join([target, filename])
-        print("Accept incoming file:", filename)
-        print("hola")
-        print("Save it to:", destination)
         upload.save(destination)
-    return render_template("upload", )
+    image_names = os.listdir(target)
+    print(image_names)
+    return render_template("upload",image_names=image_names )
 
 
-@app.route('/upload/<filename>')
+@app.route('/upload-files/<filename>')
 def send_image(filename):
     return send_from_directory("images", filename)
 
