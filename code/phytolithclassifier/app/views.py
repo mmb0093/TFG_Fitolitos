@@ -37,12 +37,17 @@ def upfiles():
         os.mkdir(target)
     for upload in request.files.getlist("file"):
         filename = upload.filename
+        print(filename)
         destination = "/".join([target, filename])
         upload.save(destination)
     image_names = os.listdir(target)
     print(image_names)
     return render_template("upload",image_names=image_names )
 
+
+@app.route('/etiquetador')
+def annotator():
+    return render_template("etiquetador.html")
 
 @app.route('/upload-files/<filename>')
 def send_image(filename):
