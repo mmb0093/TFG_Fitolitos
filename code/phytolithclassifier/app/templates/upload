@@ -17,21 +17,14 @@
 
 
   </head>
-   <nav class="navbar navbar-dark" style="background-color: #4a3b78;">
-      <a class="navbar-brand" href="{{url_for('index')}}">Clasificador de fitolitos</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="{{url_for('index')}}">home</a>
-              <a class="nav-link" href="{{url_for('upfiles')}}">Subir imágenes</a>
-              <a class="nav-link" href="{{url_for('google.authorized')}}">Cerrar sesión</a>
-            </li>
-          </ul>
-       </div>
-  </nav>
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color: #4a3b78;">
+      <a class="navbar-brand" href="{{url_for('index')}}">Home</a>
+      <a class="navbar-brand" href="{{url_for('annotator')}}">Etiquetador</a>
+      <a class="navbar-brand" href="{{url_for('upfiles')}}">Subir imágenes</a>
+      <a class="navbar-brand" href="#">Clasificador</a>
+
+
+      </nav>
    <p></p>
    <script>
 $(function() {

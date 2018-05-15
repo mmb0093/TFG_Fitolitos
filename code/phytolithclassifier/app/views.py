@@ -47,7 +47,9 @@ def upfiles():
 
 @app.route('/etiquetador')
 def annotator():
-    return render_template("etiquetador.html")
+    target = os.path.join(UPLOAD_FOLDER, 'images/')
+    image_names = os.listdir(target)
+    return render_template("etiquetador.html", image_names=image_names)
 
 @app.route('/upload-files/<filename>')
 def send_image(filename):
