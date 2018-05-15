@@ -1,4 +1,7 @@
 import os
+
+from oauthlib.oauth2 import InvalidGrantError, TokenExpiredError, InvalidClientIdError
+
 os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 
 from flask import redirect, url_for, render_template, request, make_response, flash, send_from_directory
@@ -24,9 +27,11 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def index():
     if not google.authorized:
         return redirect(url_for("google.login"))
-    resp = google.get("/oauth2/v2/userinfo")
-
-    assert resp.ok, resp.text
+    try:
+        resp = google.get("/oauth2/v2/userinfo")
+        assert resp.ok, resp.text
+    except (InvalidGrantError, TokenExpiredError, InvalidClientIdError) as e:
+        return redirect(url_for("google.login"))
     return render_template('index.html', email=resp.json()["email"])
 
 
