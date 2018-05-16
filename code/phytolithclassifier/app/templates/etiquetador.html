@@ -32,69 +32,50 @@
   </head>
 
   <body onload="_via_init()" onresize="_via_update_ui_components()">
-    <svg style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-      <defs>
-        <symbol id="shape_rectangle">
-          <title>Rectangular region shape</title>
-          <rect width="20" height="12" x="6" y="10" stroke-width="2"/>
-        </symbol>
-        <symbol id="shape_circle">
-          <title>Circular region shape</title>
-          <circle r="10" cx="16" cy="16" stroke-width="2"/>
-        </symbol>
-        <symbol id="shape_ellipse">
-          <title>Elliptical region shape</title>
-          <ellipse rx="12" ry="8" cx="16" cy="16" stroke-width="2"/>
-        </symbol>
-        <symbol id="shape_polygon">
-          <title>Polyline region shape</title>
-          <path d="M 15.25,2.2372 3.625,11.6122 6,29.9872 l 20.75,-9.625 2.375,-14.75 z" stroke-width="2"/>
-        </symbol>
-        <symbol id="shape_point">
-          <title>Point region shape</title>
-          <circle r="3" cx="16" cy="16" stroke-width="2"/>
-        </symbol>
-      </defs>
-    </svg>
 
     <div class="top_panel" id="ui_top_panel">
      <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color: #4a3b78;">
       <a class="navbar-brand" href="{{url_for('index')}}">Home</a>
       <a class="navbar-brand" href="{{url_for('annotator')}}">Etiquetador</a>
-      <a class="navbar-brand" href="{{url_for('upfiles')}}">Subir imágenes</a>
       <a class="navbar-brand" href="#">Clasificador</a>
+      <a class="navbar-brand" href="{{url_for('upfiles')}}">Galería</a>
+
   <!-- end of #navbar -->
 
-      <input type="file" id="invisible_file_input" multiple name="files[]" style="display:none">
 
+      <input type="file"  multiple name="files[]" style="display:none">
     </div> <!-- endof #top_panel -->
     <p></p>
+    <h6>Selecciona las imágenes que quieras etiquetar:</h6>
+  <form  method="post" onclick="myFunction()" enctype="multipart/form-data" >
+    <div class="col-lg-6 col-sm-6 col-12" >
+           <div class="input-group">
+                <label class="btn btn-dark" >
+
+                        Buscar&hellip; <input id="invisible_file_input" onclick="sel_local_images()" type="file" style="display: none;", name="file"  multiple>
+
+                </label>
+                <input type="text" class="form-control" readonly>
+            </div>
+        <p></p>
+        <div id="msg"></div>
+      <button type="submit" class="btn btn-secundary">Subir</button>
+    </div>
+ </form>
     <button type="button" onclick="download_all_region_data('json')"  class="btn btn-dark">Descargar Json</button>
         <button type="button" onclick="download_all_region_data('csv')"  class="btn btn-dark">Descargar csv</button>
-        <button type="button" onclick="sel_local_images()"  class="btn btn-dark">Importar imágenes</button>
 
     <!-- Middle Panel contains a left-sidebar and image display areas -->
     <div class="middle_panel">
       <div id="leftsidebar">
-        <button onclick="toggle_accordion_panel(this)" class="leftsidebar_accordion active">Region Shape</button>
-        <div class="leftsidebar_accordion_panel show" id="accordion_region_shape_panel">
-          <ul class="region_shape">
-            <li id="region_shape_rect" class="selected" onclick="select_region_shape('rect')" title="Rectangle"><svg height="32" viewbox="0 0 32 32"><use xlink:href="#shape_rectangle"></use></svg></li>
-            <li id="region_shape_circle" onclick="select_region_shape('circle')" title="Circle"><svg height="32" viewbox="0 0 32 32"><use xlink:href="#shape_circle"></use></svg></li>
-            <li id="region_shape_ellipse" onclick="select_region_shape('ellipse')" title="Ellipse"><svg height="32" viewbox="0 0 32 32"><use xlink:href="#shape_ellipse"></use></svg></li>
-            <li id="region_shape_polygon" onclick="select_region_shape('polygon')" title="Polygon"><svg height="32" viewbox="0 0 32 32"><use xlink:href="#shape_polygon"></use></svg></li>
-            <li id="region_shape_point" onclick="select_region_shape('point')" title="Point"><svg height="32" viewbox="0 0 32 32"><use xlink:href="#shape_point"></use></svg></li>
-          </ul>
-        </div>
+
 
         <button onclick="toggle_img_list(this)" class="leftsidebar_accordion" id="loaded_img_panel">Imágenes Cargadas</button>
-        <div class="leftsidebar_accordion_panel" id="img_list_panel"> <p>hey</p></div>
-
+        <div class="leftsidebar_accordion_panel" id="img_list_panel"> </div>
         <button onclick="toggle_reg_attr_panel()" class="leftsidebar_accordion" id="reg_attr_panel_button">Region Attributes</button>
         <button onclick="toggle_file_attr_panel()" class="leftsidebar_accordion" id="file_attr_panel_button">File Attributes</button>
 
-        <button onclick="toggle_accordion_panel(this)" class="leftsidebar_accordion">Keyboard Shortcuts</button>
-        <div class="leftsidebar_accordion_panel">
+          <div class="leftsidebar_accordion_panel">
           <table style="padding: 2em 0em;">
             <tr>
               <td style="width: 6em;">n/p (&larr;/&rarr;)</td>
@@ -148,12 +129,14 @@
 
 
     <!-- region and file attributes input panel -->
+
     <div id="attributes_panel">
       <div id="attributes_panel_toolbar">
         <div onclick="toggle_attributes_input_panel()" class="attributes_panel_button">&times;</div>
       </div>
       <table id="attributes_panel_table"></table>
     </div>
+
 
     <!-- to show status messages -->
     <div id="message_panel"></div>
@@ -172,6 +155,32 @@
 
 
 "use strict";
+
+$(function() {
+  $(document).on('change', ':file', function() {
+    var input = $(this),
+        numFiles = input.get(0).files ? input.get(0).files.length : 1,
+        label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+    input.trigger('fileselect', [numFiles, label]);
+  });
+  $(document).ready( function() {
+      $(':file').on('fileselect', function(event, numFiles, label) {
+
+          var input = $(this).parents('.input-group').find(':text'),
+              log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+          if( input.length ) {
+              input.val(log);
+          } else {
+              if( log ) alert(log);
+          }
+
+      });
+  });
+
+});
+
+
 
 var VIA_VERSION      = '1.0.5';
 var VIA_NAME         = 'VGG Image Annotator';
@@ -373,6 +382,7 @@ function sel_local_images() {
     invisible_file_input.click();
   }
 }
+
 function download_all_region_data(type) {
   // Javascript strings (DOMString) is automatically converted to utf-8
   // see: https://developer.mozilla.org/en-US/docs/Web/API/Blob/Blob
@@ -1291,7 +1301,7 @@ function toggle_img_list(panel) {
 
 function show_img_list() {
   if (_via_img_count === 0) {
-    show_message("Please load some images first!");
+    show_message("No hay imágenes que mostrar ");
     return;
   }
 
@@ -3912,20 +3922,5 @@ function add_new_attribute(type, attribute_name) {
     <script type="text/javascript">
       //<!--AUTO_INSERT_VIA_TEST_JS_HERE-->
     </script>
-
-    <!--
-    <script src="via.js"></script>
-    -->
-    <!--
-    <script src="via_demo.js"></script>
-    -->
-
-    <!-- Unit Tests    -->
-    <!--
-    <script src="./tests/via_test_data.js"></script>
-    <script src="./tests/via_test.js"></script>
-    <script src="./tests/via_test_fileio.js"></script>
-    <script src="./tests/via_test_region.js"></script>
-     -->
   </body>
 </html>

@@ -35,8 +35,16 @@ def index():
     return render_template('index.html', email=resp.json()["email"])
 
 
-@app.route("/upload-files", methods=['GET', 'POST'])
+@app.route("/upload-files")
 def upfiles():
+    target = os.path.join(UPLOAD_FOLDER, 'images/')
+    image_names = os.listdir(target)
+    print(image_names)
+    return render_template("upload",image_names=image_names )
+
+
+@app.route('/etiquetador', methods=['GET', 'POST'])
+def annotator():
     target = os.path.join(UPLOAD_FOLDER, 'images/')
     if not os.path.isdir(target):
         os.mkdir(target)
@@ -47,13 +55,6 @@ def upfiles():
         upload.save(destination)
     image_names = os.listdir(target)
     print(image_names)
-    return render_template("upload",image_names=image_names )
-
-
-@app.route('/etiquetador')
-def annotator():
-    target = os.path.join(UPLOAD_FOLDER, 'images/')
-    image_names = os.listdir(target)
     return render_template("etiquetador.html", image_names=image_names)
 
 @app.route('/upload-files/<filename>')
