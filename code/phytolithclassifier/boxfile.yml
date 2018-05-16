@@ -6,9 +6,8 @@ run.config:
     - nginx
 web.main: 
   start:
-    flask: gunicorn -b 0.0.0.0:8080 run:app
-    #nginx: nginx -c /app/etc/nginx.conf
-    #flask: gunicorn -c /app/etc/gunicorn.py run:app
+    nginx: nginx -c /app/etc/nginx.conf
+    flask: gunicorn -c /app/etc/gunicorn.py run:app
 
 
 
