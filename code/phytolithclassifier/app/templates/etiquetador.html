@@ -63,32 +63,15 @@
       <a class="navbar-brand" href="{{url_for('annotator')}}">Etiquetador</a>
       <a class="navbar-brand" href="{{url_for('upfiles')}}">Subir imágenes</a>
       <a class="navbar-brand" href="#">Clasificador</a>
-      <a class="navbar-brand" title="Image" onclick="sel_local_images()">Imagen &#9662;</a>
-       <li class="navbar-brand"><a title="" class="drop_menu_item">Etiquetas&#9662;</a>
-            <div class="dropdown-content">
-              <a onclick="show_annotation_data()" title="View annotations">Ver etiquetas</a>
-              <a onclick="download_all_region_data('csv')" title="Guardar posición de las etiquetas como CSV">Guardar como CSV</a>
-              <a onclick="download_all_region_data('json')" title="Save image region annotations as a JSON(Javascript Object Notation) file">Guardar como JSON</a>
-            </div>
-          </li>
-          <li class="dropdown"><a title="View" class="drop_menu_item">View &#9662;</a>
-            <div class="dropdown-content">
-              <a onclick="toggle_leftsidebar()" title="Show/hide left sidebar">Show/hide left sidebar</a>
-              <a onclick="toggle_region_boundary_visibility()" title="Show or hide region boundaries">Show/hide region boundaries</a>
-              <a onclick="toggle_region_id_visibility()" title="Show or hide region labels">Show/hide region labels</a>
-            </div>
-          </li>
-          <li class="dropdown"><a onclick="show_about_panel()" title="Help">Help &#9662;</a>
-            <div class="dropdown-content">
-
-              <a onclick="show_license_panel()" title="VIA License">License</a>
-              <a onclick="show_about_panel()" title="About VGG Image Annotator (VIA)">About</a>Annotation
-            </div>
-          </li>
-      </div> <!-- end of #navbar -->
+  <!-- end of #navbar -->
 
       <input type="file" id="invisible_file_input" multiple name="files[]" style="display:none">
+
     </div> <!-- endof #top_panel -->
+    <p></p>
+    <button type="button" onclick="download_all_region_data('json')"  class="btn btn-dark">Descargar Json</button>
+        <button type="button" onclick="download_all_region_data('csv')"  class="btn btn-dark">Descargar csv</button>
+        <button type="button" onclick="sel_local_images()"  class="btn btn-dark">Importar imágenes</button>
 
     <!-- Middle Panel contains a left-sidebar and image display areas -->
     <div class="middle_panel">
@@ -153,10 +136,8 @@
         </div>
 
       </div> <!-- end of leftsidebar -->
-      <div id="leftsidebar_collapse_panel">
-        <div onclick="toggle_leftsidebar()" id="leftsidebar_collapse_button" title="Show/hide left toolbar">
-          &ltrif;</div>
-      </div>
+
+
 
       <!-- Main display area: contains image canvas, ... -->
       <div id="display_area">
@@ -180,6 +161,8 @@
     <!-- this vertical spacer is needed to allow scrollbar to show
          items like Keyboard Shortcut hidden under the attributes panel -->
     <div style="width: 100%;" id="vertical_space"></div>
+
+
 
     <script type="text/javascript">
       //<!--AUTO_INSERT_VIA_DEMO_JS_HERE-->
