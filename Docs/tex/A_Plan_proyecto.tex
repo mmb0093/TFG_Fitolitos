@@ -1,7 +1,7 @@
 \apendice{Plan de Proyecto Software}
 
 \section{Introducción}
-A lo largo del desarrollo del proyecto, vamos a trabajar bajo el método de \textit{Scrum}, el cual propone un marco de trabajo dentro del desarrollo ágil\footnote{Ver manifiesto ágil} en que las entregas son incrementales e iterativas. Se realizarán \textit{sprints}\footnote{Iteración de tiempo prefijado en el cual se entrega un incremento del producto} semanales en los que se harán reuniones con los tutores para evaluar lo realizado a lo largo del \textit{sprint} y planificar la continuación del siguiente.
+A lo largo del desarrollo del proyecto, vamos a trabajar bajo el método de \textit{Scrum}, el cual propone un marco de trabajo dentro del desarrollo ágil\footnote{http://agilemanifesto.org/} en que las entregas son incrementales e iterativas. Se realizarán \textit{sprints}\footnote{Iteración de tiempo prefijado en el cual se entrega un incremento del producto} semanales en los que se harán reuniones con los tutores para evaluar lo realizado a lo largo del \textit{sprint} y planificar la continuación del siguiente.
 Para manejar el proyecto bajo esta filosofía de trabajo y facilitar su gestión, se usará a lo largo del proyecto un repositorio de \textit{GitHub}: \url{https://github.com/mmb0093/TFG_Fitolitos}
 
 \section{Planificación temporal}
@@ -9,16 +9,20 @@ Para manejar el proyecto bajo esta filosofía de trabajo y facilitar su gestión
 En este sprint se han cubierto las primeras tareas del proyecto. En este caso las tareas han estado relacionadas principalmente con la lectura y comprensión de la documentación previa del mismo trabajo.
 También se comenzó con la búsqueda de etiquetadores, para encontrar el más adecuado para el uso que le queremos dar.
 \subsection{Sprint 2}
-En este segundo sprint la actividad a estado centrada en la elección del etiquetador y en el aprendizaje del mismo. Finalmente se tomó la decisión de utilizar \textit{Alp’s Labeling Tool (ALT)}. 
+En este segundo sprint la actividad ha estado centrada en la elección del etiquetador y en el aprendizaje del mismo. Finalmente se tomó la decisión de utilizar \textit{Alp’s Labeling Tool (ALT)}. 
 Se ha generado la documentación del manual de usuario para la instalación y uso del etiquetador y se ha creado una máquina virtual para facilitar el uso de la misma, ya que evita el tener que realizar la instalación, la cual puede ser algo confusa.
 \subsection{Sprint 3}
-Se ha realizado un script para comprobar la corrección de las coordenadas sobre las imágenes. El anterior etiquetador no etiquetaba bien y por lo tanto no ha habido aciertos.
+Se ha realizado un script para comprobar la corrección de las coordenadas sobre las imágenes. El anterior etiquetador no etiquetaba bien y por lo tanto no se van a poder emplear las imágenes previamente etiquetadas.
 \subsection{Sprint 4}
 Se ha comenzado a investigar para realizar el despliegue de la aplicación. En un inicio se pensó en Heroku como servidor y Flask como framework y se han realizado pruebas para comprobar si es lo más adecuado. 
 \subsection{Sprint 5}
-Se ha decidido cambiar el despliegue de Heroku a Digita, Ocean con el uso de nanobox. En cuanto a los casos de uso del sistema, de momento, se va a usar la estructura empleada en la versión previa del proyecto.
+Se ha decidido cambiar el despliegue de Heroku a Digital Ocean con el uso de nanobox. En cuanto a los casos de uso del sistema, de momento, se va a usar la estructura empleada en la versión previa del proyecto.
 \subsection{Sprint 6}
-En este sprint se ha realizado el login de la aplicación con Google y el uso de 'Flask-Dance'. Se pensó que sería buena idea, desde el punto de vista de la gestión de imágenes,hacer el login desde Dropbox, pero se descartó la idea durante la reunión y se decidío cambiaro de nuevo a Google.
+En este sprint se ha realizado el login de la aplicación con Google y el uso de 'Flask-Dance'. Se pensó que sería buena idea, desde el punto de vista de la gestión de imágenes, hacer el login desde Dropbox, pero se descartó la idea durante la reunión y se decidió cambiarlo de nuevo a Google.
+\subsection{Sprint 7}
+Durante el despliegue se han dado algunos errores que han estado relacionados con el fichero \textit{boxfile.yml}. Por lo general, en este fichero hemos de indicarle ciertos aspectos de la configuración que ha de seguirse para ubicar la aplicación funcional dentro del servidor. Esto es tarea de otros dos ficheros que existen dentro de la aplicación llamados \textit{gunicorn.py} y \textit{nginx.config}, ambos necesarios. El problema reside en que durante el despliegue, el fichero nginx no parece tener los permisos necesarios para hacer efectivo dicho despliegue. 
+
+
 \section{Estudio de viabilidad}
 
 \subsection{Viabilidad económica}
