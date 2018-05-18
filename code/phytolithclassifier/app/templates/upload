@@ -24,12 +24,12 @@
       <a class="navbar-brand" href="{{url_for('upfiles')}}">Galería</a>
 
 
-
       </nav>
    <p></p>
 <h3>Imágenes guardadas</h3>
     <p></p>
     <p></p>
+
 <div class="container">
 
     <div class="row">
