@@ -46,9 +46,9 @@
       <input type="file"  multiple name="files[]" style="display:none">
     </div> <!-- endof #top_panel -->
     <p></p>
-    <h6>Selecciona las imágenes que quieras etiquetar:</h6>
   <form  method="post" onclick="myFunction()" enctype="multipart/form-data" >
     <div class="col-lg-6 col-sm-6 col-12" >
+        <h6>Selecciona las imágenes que quieras etiquetar:</h6>
            <div class="input-group">
                 <label class="btn btn-dark" >
 
@@ -60,10 +60,13 @@
         <p></p>
         <div id="msg"></div>
       <button type="submit" class="btn btn-secundary">Subir</button>
-    </div>
- </form>
+        <p></p>
+    <p></p>
     <button type="button" onclick="download_all_region_data('json')"  class="btn btn-dark">Descargar Json</button>
         <button type="button" onclick="download_all_region_data('csv')"  class="btn btn-dark">Descargar csv</button>
+    </div>
+ </form>
+
 
     <!-- Middle Panel contains a left-sidebar and image display areas -->
     <div class="middle_panel">
