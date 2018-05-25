@@ -61,8 +61,14 @@
     </div>
       <div class="col-lg-8 col-sm-8 col-24" >
           <p></p>
-      <button type="button" value="bilobate" onclick="add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Tipo</button>
-      <button type="button" id="etiqueta" value="bilobate" onclick=" update_attribute_value('r#Tipo#0','Bilobate')"  class="btn btn-dark">Bilobate</button>
+      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Bilobate'), add_new_attribute('r', 'Tipo')" class="btn btn-dark">Bilobate</button>
+      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Bulliform'), add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Bulliform</button>
+      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Cyperaceae'),add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Cyperaceae</button>
+      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Rondel'),add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Rondel</button>
+      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Saddle'),add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Saddle</button>
+      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Spherical'),add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Spherical</button>
+      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Trichomas'),add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Trichomas</button>
+
           </div>
 
 
@@ -3631,7 +3637,7 @@ function init_spreadsheet_input(type, col_headers, data, row_names) {
       sel_rows.push(row);
     }
 var valor = document.getElementById("etiqueta").value;
-    for ( var key in col_headers ) {
+     for ( var key in col_headers ) {
       var input_id = type[0] + '#' + key + '#' + row_i;
 
       if ( di.hasOwnProperty(key) ) {
@@ -3639,12 +3645,12 @@ var valor = document.getElementById("etiqueta").value;
         // escape all single and double quotes
         ip_val = ip_val.replace(/'/g, '\'');
         ip_val = ip_val.replace(/"/g, '&quot;');
-        ip_val = "valor";
         if ( ip_val.length > 30 ) {
           row.insertCell(-1).innerHTML = '<textarea ' +
             ' rows="' + (Math.floor(ip_val.length/30)-1) + '"' +
             ' cols="30"' +
             ' id="' +   input_id + '"' +
+            ' name= "name"' +
             ' autocomplete="on"' +
             ' onchange="update_attribute_value(\'' + input_id + '\', this.value)"' +
             ' onblur="attr_input_blur(' + row_i + ')"' +
@@ -3653,9 +3659,10 @@ var valor = document.getElementById("etiqueta").value;
         } else {
         // después de haber escrito
           row.insertCell(-1).innerHTML = '<input type="text"' +
-            ' id="' +   input_id + '"' +
-            ' value="' + ip_val + '"' +
+            ' id="name"' +
+            ' value="Bilobate"' +
             ' autocomplete="on"' +
+            ' name= "name"' +
             ' onchange="update_attribute_value(\'' + input_id + '\', this.value)"' +
             ' onblur="attr_input_blur(' + row_i + ')"' +
             ' onfocus="attr_input_focus(' + row_i + ');"style="color: #ff0000  "; />';
