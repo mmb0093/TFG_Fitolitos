@@ -59,15 +59,15 @@
     <button type="button" onclick="download_all_region_data('json')"  class="btn btn-dark">Descargar Json</button>
     <button type="button" onclick="download_all_region_data('csv')"  class="btn btn-dark">Descargar csv</button>
     </div>
-      <div class="col-lg-8 col-sm-8 col-24" >
+       <div class="col-lg-8 col-sm-8 col-24" >
           <p></p>
-      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Bilobate'), add_new_attribute('r', 'Tipo')" class="btn btn-dark">Bilobate</button>
-      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Bulliform'), add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Bulliform</button>
-      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Cyperaceae'),add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Cyperaceae</button>
-      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Rondel'),add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Rondel</button>
-      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Saddle'),add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Saddle</button>
-      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Spherical'),add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Spherical</button>
-      <button type="button" onclick=" update_attribute_value('r#Tipo#0','Trichomas'),add_new_attribute('r', 'Tipo')"  class="btn btn-dark">Trichomas</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Bilobate')" class="btn btn-dark">Bilobate</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Bulliform')"  class="btn btn-dark">Bulliform</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Cyperaceae')"  class="btn btn-dark">Cyperaceae</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Rondel')"  class="btn btn-dark">Rondel</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Saddle')"  class="btn btn-dark">Saddle</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Spherical')"  class="btn btn-dark">Spherical</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Trichomas')"  class="btn btn-dark">Trichomas</button>
 
           </div>
 
@@ -224,6 +224,7 @@ var VIA_CSV_QUOTE_CHAR = '"';
 var VIA_CSV_KEYVAL_SEP = ':';
 var VIA_IMPORT_CSV_COMMENT_CHAR = '#';
 
+var id_fila = "";
 var _via_img_metadata = {};   // data structure to store loaded images metadata
 var _via_img_count    = 0;    // count of the loaded images
 var _via_canvas_regions = []; // image regions spec. in canvas space
@@ -3635,47 +3636,11 @@ function init_spreadsheet_input(type, col_headers, data, row_names) {
       region_id_cell.style.backgroundColor = '#5599FF';
       row.style.backgroundColor = '#f2f2f2';
       sel_rows.push(row);
+      id_fila  = row_i;
+      //////////////////////////aqui///////////////////////////////////////////////////
     }
-var valor = document.getElementById("etiqueta").value;
-     for ( var key in col_headers ) {
-      var input_id = type[0] + '#' + key + '#' + row_i;
 
-      if ( di.hasOwnProperty(key) ) {
-        var ip_val = di[key];
-        // escape all single and double quotes
-        ip_val = ip_val.replace(/'/g, '\'');
-        ip_val = ip_val.replace(/"/g, '&quot;');
-        if ( ip_val.length > 30 ) {
-          row.insertCell(-1).innerHTML = '<textarea ' +
-            ' rows="' + (Math.floor(ip_val.length/30)-1) + '"' +
-            ' cols="30"' +
-            ' id="' +   input_id + '"' +
-            ' name= "name"' +
-            ' autocomplete="on"' +
-            ' onchange="update_attribute_value(\'' + input_id + '\', this.value)"' +
-            ' onblur="attr_input_blur(' + row_i + ')"' +
-            ' onfocus="attr_input_focus(' + row_i + ');"' +
-            ' >' + ip_val + ';</textarea>';
-        } else {
-        // después de haber escrito
-          row.insertCell(-1).innerHTML = '<input type="text"' +
-            ' id="name"' +
-            ' value="Bilobate"' +
-            ' autocomplete="on"' +
-            ' name= "name"' +
-            ' onchange="update_attribute_value(\'' + input_id + '\', this.value)"' +
-            ' onblur="attr_input_blur(' + row_i + ')"' +
-            ' onfocus="attr_input_focus(' + row_i + ');"style="color: #ff0000  "; />';
-        }
-      } else {
-      //mientraas estás escribiendo
-        row.insertCell(-1).innerHTML = '<input type="text"' +
-          ' id="' + input_id + '"' +
-          ' onchange="update_attribute_value(\'' + input_id + '\', this.value)" ' +
-          ' onblur="attr_input_blur(' + row_i + ')"' +
-          ' onfocus="attr_input_focus(' + row_i + ');"style="color: #4bf7c8 "; />';
-      }
-    }
+
   }
 
   attributes_panel.replaceChild(attrtable, document.getElementById('attributes_panel_table'));
@@ -3694,6 +3659,15 @@ var valor = document.getElementById("etiqueta").value;
   } else {
     attributes_panel.scrollTop = 0;
   }
+}
+var ide = null;
+function pide_id(ide){
+    return ide;
+}
+var valor = null;
+function pide_valor(valor){
+    var ide_ojo = pide_id(ide);
+    update_attribute_value(id_ojo, valor);
 }
 
 function update_attributes_panel(type) {
@@ -3812,22 +3786,13 @@ function recive_id(val){
 valor = val;
 return valor;
 }
-function update_attribute_value(attr_id, value) {
-  var attr_id_split = attr_id.split('#');
-  var type = attr_id_split[0];
-  var attribute_name = attr_id_split[1];
-  var region_id = attr_id_split[2];
-  switch(type) {
-  case 'r': // region attribute
+function update_attribute_value(value) {
+  var attribute_name ="tipo";
+  var region_id = id_fila;
+
     _via_img_metadata[_via_image_id].regions[region_id].region_attributes[attribute_name] = value;
     update_region_attributes_input_panel();
-    break;
 
-  case 'f': // file attribute
-    _via_img_metadata[_via_image_id].file_attributes[attribute_name] = value;
-    update_file_attributes_input_panel();
-    break;
-  }
   if (_via_is_reg_attr_panel_visible) {
     set_region_select_state(region_id, false);
   }
