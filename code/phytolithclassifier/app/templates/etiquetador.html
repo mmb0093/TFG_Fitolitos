@@ -41,33 +41,32 @@
     </div> <!-- endof #top_panel -->
     <p></p>
   <form  method="post" onclick="myFunction()" enctype="multipart/form-data" >
-    <div class="col-lg-6 col-sm-6 col-12" >
+    <div class="col-lg-6 col-sm-6 " >
         <h6>Selecciona las imágenes que quieras etiquetar:</h6>
            <div class="input-group">
                 <label class="btn btn-dark" >
-
                         Buscar&hellip; <input id="invisible_file_input" onclick="sel_local_images()" type="file" style="display: none;", name="file"  multiple>
 
                 </label>
+
                 <input type="text" class="form-control"  readonly="readonly">
+
             </div>
         <p></p>
         <div id="msg"></div>
-      <button type="submit" class="btn btn-secundary">Subir</button>
         <p></p>
     <p></p>
-    <button type="button" onclick="download_all_region_data('json')"  class="btn btn-dark">Descargar Json</button>
-    <button type="button" onclick="download_all_region_data('csv')"  class="btn btn-dark">Descargar csv</button>
+
     </div>
-       <div class="col-lg-8 col-sm-8 col-24" >
+       <div class="col-lg-8 " >
           <p></p>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Bilobate')" class="btn btn-dark">Bilobate</button>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Bulliform')"  class="btn btn-dark">Bulliform</button>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Cyperaceae')"  class="btn btn-dark">Cyperaceae</button>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Rondel')"  class="btn btn-dark">Rondel</button>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Saddle')"  class="btn btn-dark">Saddle</button>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Spherical')"  class="btn btn-dark">Spherical</button>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), update_attribute_value('Trichomas')"  class="btn btn-dark">Trichomas</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Bilobate')" class="btn btn-dark">Bilobate</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Bulliform')"  class="btn btn-dark">Bulliform</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Cyperaceae')"  class="btn btn-dark">Cyperaceae</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Rondel')"  class="btn btn-dark">Rondel</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Saddle')"  class="btn btn-dark">Saddle</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Spherical')"  class="btn btn-dark">Spherical</button>
+      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Trichomas')"  class="btn btn-dark">Trichomas</button>
 
           </div>
 
@@ -77,13 +76,12 @@
 
     <!-- Middle Panel contains a left-sidebar and image display areas -->
     <div class="middle_panel">
+
       <div id="leftsidebar">
 
 
         <button onclick="toggle_img_list(this)" class="leftsidebar_accordion" id="loaded_img_panel" style="background-color:  #83c9b6 ;" >Imágenes Cargadas</button>
         <div class="leftsidebar_accordion_panel" id="img_list_panel"> </div>
-        <button onclick="toggle_reg_attr_panel()" class="leftsidebar_accordion" id="reg_attr_panel_button" style="background-color:  #83c9b6 ;">Region Attributes</button>
-        <button onclick="toggle_file_attr_panel()" class="leftsidebar_accordion" id="file_attr_panel_button" style="background-color:  #83c9b6 ;">File Attributes</button>
 
           <div class="leftsidebar_accordion_panel">
           <table style="padding: 2em 0em;">
@@ -142,7 +140,7 @@
 
     <div id="attributes_panel">
       <div id="attributes_panel_toolbar">
-        <div onclick="toggle_attributes_input_panel()" class="attributes_panel_button">&times;</div>
+        <div onclick="toggle_attributes_input_panel(),update_attribute_value()" class="attributes_panel_button">&times;</div>
       </div>
       <table id="attributes_panel_table"></table>
     </div>
@@ -225,6 +223,7 @@ var VIA_CSV_KEYVAL_SEP = ':';
 var VIA_IMPORT_CSV_COMMENT_CHAR = '#';
 
 var id_fila = "";
+var valor = "";
 var _via_img_metadata = {};   // data structure to store loaded images metadata
 var _via_img_count    = 0;    // count of the loaded images
 var _via_canvas_regions = []; // image regions spec. in canvas space
@@ -320,10 +319,10 @@ var annotation_data_window;
 
 var BBOX_LINE_WIDTH       = 4;
 var BBOX_SELECTED_OPACITY = 0.3;
-var BBOX_BOUNDARY_FILL_COLOR_ANNOTATED = "#f2f2f2";
-var BBOX_BOUNDARY_FILL_COLOR_NEW       = "#aaeeff";
-var BBOX_BOUNDARY_LINE_COLOR           = "#1a1a1a";
-var BBOX_SELECTED_FILL_COLOR           = "#ffffff";
+var BBOX_BOUNDARY_FILL_COLOR_ANNOTATED = "##9571bf";
+var BBOX_BOUNDARY_FILL_COLOR_NEW       = "#9571bf";
+var BBOX_BOUNDARY_LINE_COLOR           = " #9571bf";
+var BBOX_SELECTED_FILL_COLOR           = "#9571bf";
 
 //
 // Data structure for annotations
@@ -1980,6 +1979,7 @@ _via_reg_canvas.addEventListener('mousemove', function(e) {
   _via_current_x = e.offsetX; _via_current_y = e.offsetY;
 
   if ( _via_is_region_selected ) {
+  update_attribute_value();
     if ( !_via_is_user_resizing_region ) {
       // check if user moved mouse cursor to region boundary
       // which indicates an intention to resize the region
@@ -2035,11 +2035,13 @@ _via_reg_canvas.addEventListener('mousemove', function(e) {
     } else {
       // first region being drawn, just clear the full region canvas
       _via_reg_ctx.clearRect(0, 0, _via_reg_canvas.width, _via_reg_canvas.height);
+      update_attribute_value();
     }
 
     var region_x0, region_y0;
 
     if ( _via_click_x0 < _via_current_x ) {
+
       if ( _via_click_y0 < _via_current_y ) {
         region_x0 = _via_click_x0;
         region_y0 = _via_click_y0;
@@ -3637,6 +3639,7 @@ function init_spreadsheet_input(type, col_headers, data, row_names) {
       row.style.backgroundColor = '#f2f2f2';
       sel_rows.push(row);
       id_fila  = row_i;
+
       //////////////////////////aqui///////////////////////////////////////////////////
     }
 
@@ -3786,11 +3789,13 @@ function recive_id(val){
 valor = val;
 return valor;
 }
-function update_attribute_value(value) {
+function via_update_attribute_value(value){
+valor = value;
+}
+function update_attribute_value() {
   var attribute_name ="tipo";
   var region_id = id_fila;
-
-    _via_img_metadata[_via_image_id].regions[region_id].region_attributes[attribute_name] = value;
+    _via_img_metadata[_via_image_id].regions[region_id].region_attributes[attribute_name] = valor;
     update_region_attributes_input_panel();
 
   if (_via_is_reg_attr_panel_visible) {

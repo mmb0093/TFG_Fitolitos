@@ -46,7 +46,6 @@ def upfiles():
 @app.route('/etiquetador', methods=['GET', 'POST'])
 def annotator():
     target = os.path.join(UPLOAD_FOLDER, 'images/')
-    target = os.path.join(UPLOAD_FOLDER, 'images/')
     if not os.path.isdir(target):
         os.mkdir(target)
     for upload in request.files.getlist("file"):
