@@ -61,7 +61,6 @@
     </div>
        <div class="col-lg-8 " >
           <p></p>
-           <button type="button" onclick=" add_new_attribute('r', 'Tipo')"  class="btn btn-dark">tipo</button>
       <button type="button" onclick=" via_update_attribute_value('Bilobate')" class="btn btn-dark">Bilobate</button>
       <button type="button" onclick=" via_update_attribute_value('Bulliform')"  class="btn btn-dark">Bulliform</button>
       <button type="button" onclick=" via_update_attribute_value('Cyperaceae')"  class="btn btn-dark">Cyperaceae</button>
@@ -1947,7 +1946,7 @@ _via_reg_canvas.addEventListener('mouseup', function(e) {
 
 _via_reg_canvas.addEventListener("mouseover", function(e) {
   // change the mouse cursor icon
-
+    add_new_attribute('r', 'Tipo');
   _via_redraw_reg_canvas();
   _via_reg_canvas.focus();
 });
@@ -1960,10 +1959,10 @@ _via_reg_canvas.addEventListener('mousemove', function(e) {
   _via_current_x = e.offsetX; _via_current_y = e.offsetY;
     //posible
   if ( _via_is_region_selected ) {
-
-    if ( !_via_is_user_resizing_region ) {
-       update_attribute_value();
+    add_new_attribute('r', 'Tipo');
+           update_attribute_value();
       _via_is_region_selected = false;
+    if ( !_via_is_user_resizing_region ) {
       // check if user moved mouse cursor to region boundary
       // which indicates an intention to resize the region
 
@@ -2895,8 +2894,7 @@ window.addEventListener('keydown', function(e) {
     if ( _via_is_region_selected ) {
 
       // clear all region selections
-          update_attribute_value();
-      _via_is_region_selected = false;
+
       _via_user_sel_region_id = -1;
 
       toggle_all_regions_selection(false);
