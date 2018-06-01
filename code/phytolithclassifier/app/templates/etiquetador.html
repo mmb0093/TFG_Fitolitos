@@ -41,7 +41,7 @@
     </div> <!-- endof #top_panel -->
     <p></p>
   <form  method="post" enctype="multipart/form-data" >
-    <div class="col-lg-6 col-sm-6 " >
+    <div class="col-md-6" >
         <h6>Selecciona las imágenes que quieras etiquetar:</h6>
            <div class="input-group">
                 <label class="btn btn-dark" >
@@ -50,15 +50,16 @@
                 </label>
 
                 <input type="text" class="form-control"  readonly="readonly">
-               <button type="submit" class="btn btn-secundary" onclick="download_all_region_data('json')">Guardar</button>
 
             </div>
+
         <p></p>
         <div id="msg"></div>
         <p></p>
     <p></p>
 
     </div>
+
        <div class="col-lg-8 " >
           <p></p>
       <button type="button" onclick=" via_update_attribute_value('Bilobate')" class="btn btn-dark">Bilobate</button>
@@ -69,7 +70,12 @@
       <button type="button" onclick=" via_update_attribute_value('Spherical')"  class="btn btn-dark">Spherical</button>
       <button type="button" onclick=" via_update_attribute_value('Trichomas')"  class="btn btn-dark">Trichomas</button>
 
+
           </div>
+      <p></p>
+         <div class="col-md-8" >
+                <button type="button" class="btn btn-secundary" onclick="download_all_region_data('json')">Guardar Etiquetas</button>
+                    </div>
 
 
  </form>
