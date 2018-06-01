@@ -61,13 +61,14 @@
     </div>
        <div class="col-lg-8 " >
           <p></p>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Bilobate')" class="btn btn-dark">Bilobate</button>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Bulliform')"  class="btn btn-dark">Bulliform</button>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Cyperaceae')"  class="btn btn-dark">Cyperaceae</button>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Rondel')"  class="btn btn-dark">Rondel</button>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Saddle')"  class="btn btn-dark">Saddle</button>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Spherical')"  class="btn btn-dark">Spherical</button>
-      <button type="button" onclick=" add_new_attribute('r', 'Tipo'), via_update_attribute_value('Trichomas')"  class="btn btn-dark">Trichomas</button>
+           <button type="button" onclick=" add_new_attribute('r', 'Tipo')"  class="btn btn-dark">tipo</button>
+      <button type="button" onclick=" via_update_attribute_value('Bilobate')" class="btn btn-dark">Bilobate</button>
+      <button type="button" onclick=" via_update_attribute_value('Bulliform')"  class="btn btn-dark">Bulliform</button>
+      <button type="button" onclick=" via_update_attribute_value('Cyperaceae')"  class="btn btn-dark">Cyperaceae</button>
+      <button type="button" onclick=" via_update_attribute_value('Rondel')"  class="btn btn-dark">Rondel</button>
+      <button type="button" onclick=" via_update_attribute_value('Saddle')"  class="btn btn-dark">Saddle</button>
+      <button type="button" onclick=" via_update_attribute_value('Spherical')"  class="btn btn-dark">Spherical</button>
+      <button type="button" onclick=" via_update_attribute_value('Trichomas')"  class="btn btn-dark">Trichomas</button>
 
           </div>
 
@@ -141,7 +142,7 @@
 
     <div id="attributes_panel">
       <div id="attributes_panel_toolbar">
-        <div onclick="toggle_attributes_input_panel(),update_attribute_value()" class="attributes_panel_button">&times;</div>
+        <div onclick="toggle_attributes_input_panel()" class="attributes_panel_button">&times;</div>
       </div>
       <table id="attributes_panel_table"></table>
     </div>
@@ -1404,6 +1405,7 @@ function count_missing_file_attr(img_id) {
 
 function toggle_all_regions_selection(is_selected) {
   for (var i=0; i<_via_canvas_regions.length; ++i) {
+
     _via_canvas_regions[i].is_user_selected = is_selected;
     _via_img_metadata[_via_image_id].regions[i].is_user_selected = is_selected;
   }
@@ -1416,6 +1418,7 @@ function select_only_region(region_id) {
   _via_user_sel_region_id = region_id;
 }
 function set_region_select_state(region_id, is_selected) {
+
   _via_canvas_regions[region_id].is_user_selected = is_selected;
   _via_img_metadata[_via_image_id].regions[region_id].is_user_selected = is_selected;
 }
@@ -1474,13 +1477,16 @@ _via_reg_canvas.addEventListener('dblclick', function(e) {
 
 // user clicks on the canvas
 _via_reg_canvas.addEventListener('mousedown', function(e) {
+
   _via_click_x0 = e.offsetX; _via_click_y0 = e.offsetY;
   _via_region_edge = is_on_region_corner(_via_click_x0, _via_click_y0);
   var region_id = is_inside_region(_via_click_x0, _via_click_y0);
 
   if ( _via_is_region_selected ) {
+
     // check if user clicked on the region boundary
     if ( _via_region_edge[1] > 0 ) {
+
       if ( !_via_is_user_resizing_region ) {
         // resize region
         if ( _via_region_edge[0] !== _via_user_sel_region_id ) {
@@ -1501,6 +1507,7 @@ _via_reg_canvas.addEventListener('mousedown', function(e) {
       }
       if ( region_id === -1 ) {
         // mousedown on outside any region
+
         _via_is_user_drawing_region = true;
         // unselect all regions
         _via_is_region_selected = false;
@@ -1511,15 +1518,20 @@ _via_reg_canvas.addEventListener('mousedown', function(e) {
   } else {
     if ( region_id === -1 ) {
       // mousedown outside a region
+
       if (_via_current_shape !== VIA_REGION_SHAPE.POLYGON &&
           _via_current_shape !== VIA_REGION_SHAPE.POINT) {
         // this is a bounding box drawing event
+
         _via_is_user_drawing_region = true;
+
       }
     } else {
       // mousedown inside a region
       // this could lead to (1) region selection or (2) region drawing
       _via_is_user_drawing_region = true;
+
+
     }
   }
   e.preventDefault();
@@ -1538,6 +1550,7 @@ _via_reg_canvas.addEventListener('mouseup', function(e) {
   if ( _via_is_user_moving_region ) {
     _via_is_user_moving_region = false;
     _via_reg_canvas.style.cursor = "default";
+
 
     var move_x = Math.round(_via_click_x1 - _via_region_click_x);
     var move_y = Math.round(_via_click_y1 - _via_region_click_y);
@@ -1621,8 +1634,10 @@ _via_reg_canvas.addEventListener('mouseup', function(e) {
     _via_is_user_resizing_region = false;
     _via_reg_canvas.style.cursor = "default";
 
+
     // update the region
     var region_id = _via_region_edge[0];
+
     var image_attr = _via_img_metadata[_via_image_id].regions[region_id].shape_attributes;
     var canvas_attr = _via_canvas_regions[region_id].shape_attributes;
 
@@ -1808,7 +1823,7 @@ _via_reg_canvas.addEventListener('mouseup', function(e) {
           _via_is_region_selected     = false;
           toggle_all_regions_selection(false);
 
-          update_attributes_panel();
+
         } else {
           switch (_via_current_shape) {
           case VIA_REGION_SHAPE.POLYGON:
@@ -1846,13 +1861,14 @@ _via_reg_canvas.addEventListener('mouseup', function(e) {
     }
     _via_redraw_reg_canvas();
     _via_reg_canvas.focus();
+
     return;
   }
 
   // indicates that user has finished drawing a new region
   if ( _via_is_user_drawing_region ) {
-
     _via_is_user_drawing_region = false;
+
 
     var region_x0, region_y0, region_x1, region_y1;
     // ensure that (x0,y0) is top-left and (x1,y1) is bottom-right
@@ -1879,10 +1895,12 @@ _via_reg_canvas.addEventListener('mouseup', function(e) {
 
     // newly drawn region is automatically selected
     toggle_all_regions_selection(false);
+
     original_img_region.is_user_selected = true;
     canvas_img_region.is_user_selected = true;
     _via_is_region_selected = true;
     _via_user_sel_region_id = _via_canvas_regions.length; // new region's id
+
 
     if ( region_dx > VIA_REGION_MIN_DIM ||
          region_dy > VIA_REGION_MIN_DIM ) { // avoid regions with 0 dim
@@ -1906,59 +1924,20 @@ _via_reg_canvas.addEventListener('mouseup', function(e) {
 
           _via_img_metadata[_via_image_id].regions.push(original_img_region);
           _via_canvas_regions.push(canvas_img_region);
-          break;
 
-        case VIA_REGION_SHAPE.CIRCLE:
-          var cx = Math.round(region_x0 * _via_canvas_scale);
-          var cy = Math.round(region_y0 * _via_canvas_scale);
-          var r  = Math.round( Math.sqrt(region_dx*region_dx + region_dy*region_dy) * _via_canvas_scale );
-
-          original_img_region.shape_attributes['name'] = 'circle';
-          original_img_region.shape_attributes['cx'] = cx;
-          original_img_region.shape_attributes['cy'] = cy;
-          original_img_region.shape_attributes['r'] = r;
-
-          canvas_img_region.shape_attributes['name'] = 'circle';
-          canvas_img_region.shape_attributes['cx'] = Math.round( cx / _via_canvas_scale );
-          canvas_img_region.shape_attributes['cy'] = Math.round( cy / _via_canvas_scale );
-          canvas_img_region.shape_attributes['r'] = Math.round( r / _via_canvas_scale );
-
-          _via_img_metadata[_via_image_id].regions.push(original_img_region);
-          _via_canvas_regions.push(canvas_img_region);
-          break;
-
-        case VIA_REGION_SHAPE.ELLIPSE:
-          var cx = Math.round(region_x0 * _via_canvas_scale);
-          var cy = Math.round(region_y0 * _via_canvas_scale);
-          var rx = Math.round(region_dx * _via_canvas_scale);
-          var ry = Math.round(region_dy * _via_canvas_scale);
-
-          original_img_region.shape_attributes['name'] = 'ellipse';
-          original_img_region.shape_attributes['cx'] = cx;
-          original_img_region.shape_attributes['cy'] = cy;
-          original_img_region.shape_attributes['rx'] = rx;
-          original_img_region.shape_attributes['ry'] = ry;
-
-          canvas_img_region.shape_attributes['name'] = 'ellipse';
-          canvas_img_region.shape_attributes['cx'] = Math.round( cx / _via_canvas_scale );
-          canvas_img_region.shape_attributes['cy'] = Math.round( cy / _via_canvas_scale );
-          canvas_img_region.shape_attributes['rx'] = Math.round( rx / _via_canvas_scale );
-          canvas_img_region.shape_attributes['ry'] = Math.round( ry / _via_canvas_scale );
-
-          _via_img_metadata[_via_image_id].regions.push(original_img_region);
-          _via_canvas_regions.push(canvas_img_region);
-          break;
-
-        case VIA_REGION_SHAPE.POLYGON:
-          // handled by _via_is_user_drawing polygon
           break;
         }
     } else {
       show_message('Cannot add such a small region');
     }
-    update_attributes_panel();
+
+
+
     _via_redraw_reg_canvas();
+
     _via_reg_canvas.focus();
+
+//hola
 
     save_current_data_to_browser_cache();
     return;
@@ -1968,6 +1947,7 @@ _via_reg_canvas.addEventListener('mouseup', function(e) {
 
 _via_reg_canvas.addEventListener("mouseover", function(e) {
   // change the mouse cursor icon
+
   _via_redraw_reg_canvas();
   _via_reg_canvas.focus();
 });
@@ -1978,10 +1958,12 @@ _via_reg_canvas.addEventListener('mousemove', function(e) {
   }
 
   _via_current_x = e.offsetX; _via_current_y = e.offsetY;
-
+    //posible
   if ( _via_is_region_selected ) {
-  update_attribute_value();
+
     if ( !_via_is_user_resizing_region ) {
+       update_attribute_value();
+      _via_is_region_selected = false;
       // check if user moved mouse cursor to region boundary
       // which indicates an intention to resize the region
 
@@ -1989,6 +1971,7 @@ _via_reg_canvas.addEventListener('mousemove', function(e) {
 
       if ( _via_region_edge[0] === _via_user_sel_region_id ) {
         switch(_via_region_edge[1]) {
+
           // rect
         case 1: // Fall-through // top-left corner of rect
         case 3: // bottom-right corner of rect
@@ -2036,7 +2019,8 @@ _via_reg_canvas.addEventListener('mousemove', function(e) {
     } else {
       // first region being drawn, just clear the full region canvas
       _via_reg_ctx.clearRect(0, 0, _via_reg_canvas.width, _via_reg_canvas.height);
-      update_attribute_value();
+
+
     }
 
     var region_x0, region_y0;
@@ -2339,6 +2323,7 @@ function _via_draw_control_point(cx, cy) {
 
 function _via_draw_rect_region(x, y, w, h, is_selected) {
   if (is_selected) {
+
     _via_draw_rect(x, y, w, h);
 
     _via_reg_ctx.strokeStyle = VIA_THEME_SEL_REGION_FILL_BOUNDARY_COLOR;
@@ -2354,6 +2339,7 @@ function _via_draw_rect_region(x, y, w, h, is_selected) {
     _via_draw_control_point(x+w, y+h);
     _via_draw_control_point(x  , y+h);
     _via_draw_control_point(x+w,   y);
+
   } else {
     // draw a fill line
     _via_reg_ctx.strokeStyle = VIA_THEME_BOUNDARY_FILL_COLOR;
@@ -2377,209 +2363,23 @@ function _via_draw_rect_region(x, y, w, h, is_selected) {
                      w - VIA_THEME_REGION_BOUNDARY_WIDTH,
                      h - VIA_THEME_REGION_BOUNDARY_WIDTH);
       _via_reg_ctx.stroke();
+
     }
   }
 }
 
 function _via_draw_rect(x, y, w, h) {
+
   _via_reg_ctx.beginPath();
   _via_reg_ctx.moveTo(x  , y);
   _via_reg_ctx.lineTo(x+w, y);
   _via_reg_ctx.lineTo(x+w, y+h);
   _via_reg_ctx.lineTo(x  , y+h);
   _via_reg_ctx.closePath();
-}
-
-function _via_draw_circle_region(cx, cy, r, is_selected) {
-  if (is_selected) {
-    _via_draw_circle(cx, cy, r);
-
-    _via_reg_ctx.strokeStyle = VIA_THEME_SEL_REGION_FILL_BOUNDARY_COLOR;
-    _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/2;
-    _via_reg_ctx.stroke();
-
-    _via_reg_ctx.fillStyle   = VIA_THEME_SEL_REGION_FILL_COLOR;
-    _via_reg_ctx.globalAlpha = VIA_THEME_SEL_REGION_OPACITY;
-    _via_reg_ctx.fill();
-    _via_reg_ctx.globalAlpha = 1.0;
-
-    _via_draw_control_point(cx + r, cy);
-  } else {
-    // draw a fill line
-    _via_reg_ctx.strokeStyle = VIA_THEME_BOUNDARY_FILL_COLOR;
-    _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/2;
-    _via_draw_circle(cx, cy, r);
-    _via_reg_ctx.stroke();
-
-    if ( r > VIA_THEME_REGION_BOUNDARY_WIDTH ) {
-      // draw a boundary line on both sides of the fill line
-      _via_reg_ctx.strokeStyle = VIA_THEME_BOUNDARY_LINE_COLOR;
-      _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/4;
-      _via_draw_circle(cx, cy,
-                       r - VIA_THEME_REGION_BOUNDARY_WIDTH/2);
-      _via_reg_ctx.stroke();
-      _via_draw_circle(cx, cy,
-                       r + VIA_THEME_REGION_BOUNDARY_WIDTH/2);
-      _via_reg_ctx.stroke();
-    }
-  }
-}
-
-function _via_draw_circle(cx, cy, r) {
-  _via_reg_ctx.beginPath();
-  _via_reg_ctx.arc(cx, cy, r, 0, 2*Math.PI, false);
-  _via_reg_ctx.closePath();
-}
-
-function _via_draw_ellipse_region(cx, cy, rx, ry, is_selected) {
-  if (is_selected) {
-    _via_draw_ellipse(cx, cy, rx, ry);
-
-    _via_reg_ctx.strokeStyle = VIA_THEME_SEL_REGION_FILL_BOUNDARY_COLOR;
-    _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/2;
-    _via_reg_ctx.stroke();
-
-    _via_reg_ctx.fillStyle   = VIA_THEME_SEL_REGION_FILL_COLOR;
-    _via_reg_ctx.globalAlpha = VIA_THEME_SEL_REGION_OPACITY;
-    _via_reg_ctx.fill();
-    _via_reg_ctx.globalAlpha = 1.0;
-
-    _via_draw_control_point(cx + rx, cy);
-    _via_draw_control_point(cx     , cy - ry);
-  } else {
-    // draw a fill line
-    _via_reg_ctx.strokeStyle = VIA_THEME_BOUNDARY_FILL_COLOR;
-    _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/2;
-    _via_draw_ellipse(cx, cy, rx, ry);
-    _via_reg_ctx.stroke();
-
-    if ( rx > VIA_THEME_REGION_BOUNDARY_WIDTH &&
-         ry > VIA_THEME_REGION_BOUNDARY_WIDTH ) {
-      // draw a boundary line on both sides of the fill line
-      _via_reg_ctx.strokeStyle = VIA_THEME_BOUNDARY_LINE_COLOR;
-      _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/4;
-      _via_draw_ellipse(cx, cy,
-                        rx + VIA_THEME_REGION_BOUNDARY_WIDTH/2,
-                        ry + VIA_THEME_REGION_BOUNDARY_WIDTH/2);
-      _via_reg_ctx.stroke();
-      _via_draw_ellipse(cx, cy,
-                        rx - VIA_THEME_REGION_BOUNDARY_WIDTH/2,
-                        ry - VIA_THEME_REGION_BOUNDARY_WIDTH/2);
-      _via_reg_ctx.stroke();
-    }
-  }
-}
-
-function _via_draw_ellipse(cx, cy, rx, ry) {
-  _via_reg_ctx.save();
-
-  _via_reg_ctx.beginPath();
-  _via_reg_ctx.translate(cx-rx, cy-ry);
-  _via_reg_ctx.scale(rx, ry);
-  _via_reg_ctx.arc(1, 1, 1, 0, 2 * Math.PI, false);
-
-  _via_reg_ctx.restore(); // restore to original state
-  _via_reg_ctx.closePath();
 
 }
 
-function _via_draw_polygon_region(all_points_x, all_points_y, is_selected) {
-  if ( is_selected ) {
-    _via_reg_ctx.beginPath();
-    _via_reg_ctx.moveTo(all_points_x[0], all_points_y[0]);
-    for ( var i=1; i < all_points_x.length; ++i ) {
-      _via_reg_ctx.lineTo(all_points_x[i], all_points_y[i]);
-    }
-    _via_reg_ctx.strokeStyle = VIA_THEME_SEL_REGION_FILL_BOUNDARY_COLOR;
-    _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/2;
-    _via_reg_ctx.stroke();
 
-    _via_reg_ctx.fillStyle   = VIA_THEME_SEL_REGION_FILL_COLOR;
-    _via_reg_ctx.globalAlpha = VIA_THEME_SEL_REGION_OPACITY;
-    _via_reg_ctx.fill();
-    _via_reg_ctx.globalAlpha = 1.0;
-
-    for ( var i=1; i < all_points_x.length; ++i ) {
-      _via_draw_control_point(all_points_x[i], all_points_y[i]);
-    }
-  } else {
-    for ( var i=1; i < all_points_x.length; ++i ) {
-      // draw a fill line
-      _via_reg_ctx.strokeStyle = VIA_THEME_BOUNDARY_FILL_COLOR;
-      _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/2;
-      _via_reg_ctx.beginPath();
-      _via_reg_ctx.moveTo(all_points_x[i-1], all_points_y[i-1]);
-      _via_reg_ctx.lineTo(all_points_x[i]  , all_points_y[i]);
-      _via_reg_ctx.stroke();
-
-      var slope_i = (all_points_y[i] - all_points_y[i-1]) / (all_points_x[i] - all_points_x[i-1]);
-      if ( slope_i > 0 ) {
-        // draw a boundary line on both sides
-        _via_reg_ctx.strokeStyle = VIA_THEME_BOUNDARY_LINE_COLOR;
-        _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/4;
-        _via_reg_ctx.beginPath();
-        _via_reg_ctx.moveTo(parseInt(all_points_x[i-1]) - parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4),
-                            parseInt(all_points_y[i-1]) + parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4));
-        _via_reg_ctx.lineTo(parseInt(all_points_x[i]) - parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4),
-                            parseInt(all_points_y[i]) + parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4));
-        _via_reg_ctx.stroke();
-        _via_reg_ctx.beginPath();
-        _via_reg_ctx.moveTo(parseInt(all_points_x[i-1]) + parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4),
-                            parseInt(all_points_y[i-1]) - parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4));
-        _via_reg_ctx.lineTo(parseInt(all_points_x[i]) + parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4),
-                            parseInt(all_points_y[i]) - parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4));
-        _via_reg_ctx.stroke();
-      } else {
-        // draw a boundary line on both sides
-        _via_reg_ctx.strokeStyle = VIA_THEME_BOUNDARY_LINE_COLOR;
-        _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/4;
-        _via_reg_ctx.beginPath();
-        _via_reg_ctx.moveTo(parseInt(all_points_x[i-1]) + parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4),
-                            parseInt(all_points_y[i-1]) + parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4));
-        _via_reg_ctx.lineTo(parseInt(all_points_x[i]) + parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4),
-                            parseInt(all_points_y[i]) + parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4));
-        _via_reg_ctx.stroke();
-        _via_reg_ctx.beginPath();
-        _via_reg_ctx.moveTo(parseInt(all_points_x[i-1]) - parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4),
-                            parseInt(all_points_y[i-1]) - parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4));
-        _via_reg_ctx.lineTo(parseInt(all_points_x[i]) - parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4),
-                            parseInt(all_points_y[i]) - parseInt(VIA_THEME_REGION_BOUNDARY_WIDTH/4));
-        _via_reg_ctx.stroke();
-      }
-    }
-  }
-}
-
-function _via_draw_point_region(cx, cy, is_selected) {
-  if (is_selected) {
-    _via_draw_point(cx, cy, VIA_REGION_POINT_RADIUS);
-
-    _via_reg_ctx.strokeStyle = VIA_THEME_SEL_REGION_FILL_BOUNDARY_COLOR;
-    _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/2;
-    _via_reg_ctx.stroke();
-
-    _via_reg_ctx.fillStyle   = VIA_THEME_SEL_REGION_FILL_COLOR;
-    _via_reg_ctx.globalAlpha = VIA_THEME_SEL_REGION_OPACITY;
-    _via_reg_ctx.fill();
-    _via_reg_ctx.globalAlpha = 1.0;
-  } else {
-    // draw a fill line
-    _via_reg_ctx.strokeStyle = VIA_THEME_BOUNDARY_FILL_COLOR;
-    _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/2;
-    _via_draw_point(cx, cy, VIA_REGION_POINT_RADIUS);
-    _via_reg_ctx.stroke();
-
-    // draw a boundary line on both sides of the fill line
-    _via_reg_ctx.strokeStyle = VIA_THEME_BOUNDARY_LINE_COLOR;
-    _via_reg_ctx.lineWidth   = VIA_THEME_REGION_BOUNDARY_WIDTH/4;
-    _via_draw_point(cx, cy,
-                    VIA_REGION_POINT_RADIUS - VIA_THEME_REGION_BOUNDARY_WIDTH/2);
-    _via_reg_ctx.stroke();
-    _via_draw_point(cx, cy,
-                    VIA_REGION_POINT_RADIUS + VIA_THEME_REGION_BOUNDARY_WIDTH/2);
-    _via_reg_ctx.stroke();
-  }
-}
 
 function _via_draw_point(cx, cy, r) {
   _via_reg_ctx.beginPath();
@@ -2787,11 +2587,7 @@ function is_inside_this_region(px, py, region_id) {
   return result;
 }
 
-function is_inside_circle(cx, cy, r, px, py) {
-  var dx = px - cx;
-  var dy = py - cy;
-  return (dx * dx + dy * dy) < r * r;
-}
+
 
 function is_inside_rect(x, y, w, h, px, py) {
   return px > x &&
@@ -2800,48 +2596,6 @@ function is_inside_rect(x, y, w, h, px, py) {
     py < (y + h);
 }
 
-function is_inside_ellipse(cx, cy, rx, ry, px, py) {
-  var dx = (cx - px);
-  var dy = (cy - py);
-  return ((dx * dx) / (rx * rx)) + ((dy * dy) / (ry * ry)) < 1;
-}
-
-// returns 0 when (px,py) is outside the polygon
-// source: http://geomalgorithms.com/a03-_inclusion.html
-function is_inside_polygon(all_points_x, all_points_y, px, py) {
-  var wn = 0;    // the  winding number counter
-
-  // loop through all edges of the polygon
-  for ( var i = 0; i < all_points_x.length-1; ++i ) {   // edge from V[i] to  V[i+1]
-    var is_left_value = is_left( all_points_x[i], all_points_y[i],
-                                 all_points_x[i+1], all_points_y[i+1],
-                                 px, py);
-
-    if (all_points_y[i] <= py) {
-      if (all_points_y[i+1]  > py && is_left_value > 0) {
-        ++wn;
-      }
-    }
-    else {
-      if (all_points_y[i+1]  <= py && is_left_value < 0) {
-        --wn;
-      }
-    }
-  }
-  if ( wn === 0 ) {
-    return 0;
-  }
-  else {
-    return 1;
-  }
-}
-
-function is_inside_point(cx, cy, px, py) {
-  var dx = px - cx;
-  var dy = py - cy;
-  var r2 = VIA_POLYGON_VERTEX_MATCH_TOL * VIA_POLYGON_VERTEX_MATCH_TOL;
-  return (dx * dx + dy * dy) < r2;
-}
 
 // returns
 // >0 if (x2,y2) lies on the left side of line joining (x0,y0) and (x1,y1)
@@ -2932,66 +2686,6 @@ function is_on_rect_edge(x, y, w, h, px, py) {
   return 0;
 }
 
-function is_on_circle_edge(cx, cy, r, px, py) {
-  var dx = cx - px;
-  var dy = cy - py;
-  if ( Math.abs(Math.sqrt( dx*dx + dy*dy ) - r) < VIA_REGION_EDGE_TOL ) {
-    var theta = Math.atan2( py - cy, px - cx );
-    if ( Math.abs(theta - (Math.PI/2)) < VIA_THETA_TOL ||
-         Math.abs(theta + (Math.PI/2)) < VIA_THETA_TOL) {
-      return 5;
-    }
-    if ( Math.abs(theta) < VIA_THETA_TOL ||
-         Math.abs(Math.abs(theta) - Math.PI) < VIA_THETA_TOL) {
-      return 6;
-    }
-
-    if ( theta > 0 && theta < (Math.PI/2) ) {
-      return 1;
-    }
-    if ( theta > (Math.PI/2) && theta < (Math.PI) ) {
-      return 4;
-    }
-    if ( theta < 0 && theta > -(Math.PI/2) ) {
-      return 2;
-    }
-    if ( theta < -(Math.PI/2) && theta > -Math.PI ) {
-      return 3;
-    }
-  } else {
-    return 0;
-  }
-}
-
-function is_on_ellipse_edge(cx, cy, rx, ry, px, py) {
-  var dx = (cx - px)/rx;
-  var dy = (cy - py)/ry;
-
-  if ( Math.abs(Math.sqrt( dx*dx + dy*dy ) - 1) < VIA_ELLIPSE_EDGE_TOL ) {
-    var theta = Math.atan2( py - cy, px - cx );
-    if ( Math.abs(theta - (Math.PI/2)) < VIA_THETA_TOL ||
-         Math.abs(theta + (Math.PI/2)) < VIA_THETA_TOL) {
-      return 5;
-    }
-    if ( Math.abs(theta) < VIA_THETA_TOL ||
-         Math.abs(Math.abs(theta) - Math.PI) < VIA_THETA_TOL) {
-      return 6;
-    }
-  } else {
-    return 0;
-  }
-}
-
-function is_on_polygon_vertex(all_points_x, all_points_y, px, py) {
-  var n = all_points_x.length;
-  for (var i=0; i<n; ++i) {
-    if ( Math.abs(all_points_x[i] - px) < VIA_POLYGON_VERTEX_MATCH_TOL &&
-         Math.abs(all_points_y[i] - py) < VIA_POLYGON_VERTEX_MATCH_TOL ) {
-      return (VIA_POLYGON_RESIZE_VERTEX_OFFSET+i);
-    }
-  }
-  return 0;
-}
 
 function rect_standardize_coordinates(d) {
   // d[x0,y0,x1,y1]
@@ -3130,6 +2824,7 @@ window.addEventListener('keydown', function(e) {
     if ( e.which === 67 ) { // Ctrl + c
       if (_via_is_region_selected ||
           _via_is_all_region_selected) {
+
         copy_sel_regions();
         e.preventDefault();
       }
@@ -3198,9 +2893,12 @@ window.addEventListener('keydown', function(e) {
     }
 
     if ( _via_is_region_selected ) {
+
       // clear all region selections
+          update_attribute_value();
       _via_is_region_selected = false;
       _via_user_sel_region_id = -1;
+
       toggle_all_regions_selection(false);
     }
 
@@ -3266,7 +2964,6 @@ window.addEventListener('wheel', function(e) {
 
 function del_sel_regions() {
   if ( !_via_current_image_loaded ) {
-    show_message('First load some images!');
     return;
   }
 
@@ -3303,7 +3000,6 @@ function del_sel_regions() {
     _via_redraw_reg_canvas();
   }
   _via_reg_canvas.focus();
-  update_attributes_panel();
   save_current_data_to_browser_cache();
 
   show_message('Deleted ' + del_region_count + ' selected regions');
@@ -3538,6 +3234,7 @@ function attr_input_focus(i) {
   if ( _via_is_reg_attr_panel_visible ) {
     select_only_region(i);
     _via_redraw_reg_canvas();
+
   }
   _via_is_user_updating_attribute_value=true;
 }
@@ -3563,7 +3260,7 @@ function init_spreadsheet_input(type, col_headers, data, row_names) {
   var attrname = '';
   switch(type) {
   case 'region_attributes':
-    attrname = 'Region Attributes';
+    attrname = '';
     break;
 
   case 'file_attributes':
@@ -3583,12 +3280,7 @@ function init_spreadsheet_input(type, col_headers, data, row_names) {
   for (var col_header in col_headers) {
     firstrow.insertCell(-1).innerHTML = '<b>' + col_header + '</b>';
   }
-  // allow adding new attributes
-  firstrow.insertCell(-1).innerHTML = '<input type="text"' +
-    ' onchange="add_new_attribute(\'' + type[0] + '\', this.value)"' +
-    ' value = "Tipo"' +
-    ' onblur="_via_is_user_adding_attribute_name=false; this.value = \'\';"' +
-    ' onfocus="_via_is_user_adding_attribute_name=true; this.value = \'\';"/>';
+
 
   // if multiple regions are selected, show the selected regions first
   var sel_reg_list       = [];
@@ -3600,6 +3292,7 @@ function init_spreadsheet_input(type, col_headers, data, row_names) {
     for ( var i = 0; i < data.length; ++i ) {
       all_reg_list.push(i);
       if ( data[i].is_user_selected ) {
+
         sel_reg_list.push(i);
       } else {
         remaining_reg_list.push(i);
@@ -3664,21 +3357,15 @@ function init_spreadsheet_input(type, col_headers, data, row_names) {
     attributes_panel.scrollTop = 0;
   }
 }
-var ide = null;
-function pide_id(ide){
-    return ide;
-}
-var valor = null;
-function pide_valor(valor){
-    var ide_ojo = pide_id(ide);
-    update_attribute_value(id_ojo, valor);
-}
+
 
 function update_attributes_panel(type) {
   if (_via_current_image_loaded &&
       _via_is_attributes_panel_visible) {
     if (_via_is_reg_attr_panel_visible) {
+
       update_region_attributes_input_panel();
+
     }
 
     if ( _via_is_file_attr_panel_visible ) {
@@ -3689,6 +3376,7 @@ function update_attributes_panel(type) {
 }
 
 function update_region_attributes_input_panel() {
+
   init_spreadsheet_input('region_attributes',
                          _via_region_attributes,
                          _via_img_metadata[_via_image_id].regions);
@@ -3784,15 +3472,13 @@ function update_vertical_space() {
   panel.style.height = attributes_panel.offsetHeight+'px';
 }
 
-var valor = null;
 
-function recive_id(val){
-valor = val;
-return valor;
-}
+
 function via_update_attribute_value(value){
-valor = value;
+    valor = value;
 }
+
+
 function update_attribute_value() {
   var attribute_name ="tipo";
   var region_id = id_fila;
@@ -3808,6 +3494,8 @@ function update_attribute_value() {
 }
 
 function add_new_attribute(type, attribute_name) {
+
+
   switch(type) {
   case 'r': // region attribute
     if ( !_via_region_attributes.hasOwnProperty(attribute_name) ) {
