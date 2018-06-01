@@ -40,7 +40,7 @@
       <input type="file"  multiple name="files[]" style="display:none">
     </div> <!-- endof #top_panel -->
     <p></p>
-  <form  method="post" onclick="myFunction()" enctype="multipart/form-data" >
+  <form  method="post" enctype="multipart/form-data" >
     <div class="col-lg-6 col-sm-6 " >
         <h6>Selecciona las imágenes que quieras etiquetar:</h6>
            <div class="input-group">
@@ -224,7 +224,7 @@ var VIA_CSV_KEYVAL_SEP = ':';
 var VIA_IMPORT_CSV_COMMENT_CHAR = '#';
 
 var id_fila = "";
-var valor = "";
+var valor = "Bilobate";
 var _via_img_metadata = {};   // data structure to store loaded images metadata
 var _via_img_count    = 0;    // count of the loaded images
 var _via_canvas_regions = []; // image regions spec. in canvas space
@@ -1540,6 +1540,7 @@ _via_reg_canvas.addEventListener('mousedown', function(e) {
 //  - new region drawing (including polygon)
 //  - moving/resizing/select/unselect existing region
 _via_reg_canvas.addEventListener('mouseup', function(e) {
+console.log("arrastrar");
   _via_click_x1 = e.offsetX; _via_click_y1 = e.offsetY;
 
   var click_dx = Math.abs(_via_click_x1 - _via_click_x0);
@@ -1923,8 +1924,9 @@ _via_reg_canvas.addEventListener('mouseup', function(e) {
 
           _via_img_metadata[_via_image_id].regions.push(original_img_region);
           _via_canvas_regions.push(canvas_img_region);
-
           break;
+
+
         }
     } else {
       show_message('Cannot add such a small region');
@@ -1944,14 +1946,19 @@ _via_reg_canvas.addEventListener('mouseup', function(e) {
 
 });
 
-_via_reg_canvas.addEventListener("mouseover", function(e) {
-  // change the mouse cursor icon
+_via_reg_canvas.addEventListener('mouseup', function(e) {
+console.log("soltar");
+if ( _via_is_region_selected ) {
     add_new_attribute('r', 'Tipo');
-  _via_redraw_reg_canvas();
-  _via_reg_canvas.focus();
+           update_attribute_value();
+      //_via_is_region_selected = false;
+      _via_redraw_reg_canvas();
+      }
+
 });
 
 _via_reg_canvas.addEventListener('mousemove', function(e) {
+
   if ( !_via_current_image_loaded ) {
     return;
   }
@@ -1959,10 +1966,10 @@ _via_reg_canvas.addEventListener('mousemove', function(e) {
   _via_current_x = e.offsetX; _via_current_y = e.offsetY;
     //posible
   if ( _via_is_region_selected ) {
-    add_new_attribute('r', 'Tipo');
-           update_attribute_value();
-      _via_is_region_selected = false;
+
+     console.log("redimensiona");
     if ( !_via_is_user_resizing_region ) {
+    console.log("redimensiona");
       // check if user moved mouse cursor to region boundary
       // which indicates an intention to resize the region
 
@@ -2974,6 +2981,7 @@ function del_sel_regions() {
     var sorted_sel_reg_id = [];
     for ( var i = 0; i < _via_canvas_regions.length; ++i ) {
       if ( _via_canvas_regions[i].is_user_selected ) {
+
         sorted_sel_reg_id.push(i);
       }
     }
@@ -3028,6 +3036,7 @@ function copy_sel_regions() {
       var canvas_region = _via_canvas_regions[i];
       if ( canvas_region.is_user_selected ) {
         _via_copied_image_regions.push( clone_image_region(img_region) );
+
       }
     }
     show_message('Copied ' + _via_copied_image_regions.length +
@@ -3253,12 +3262,15 @@ function init_spreadsheet_input(type, col_headers, data, row_names) {
     var row_names = [];
     for ( var i = 0; i < data.length; ++i ) {
       row_names[i] = i+1;
+
     }
   }
   var attrname = '';
   switch(type) {
   case 'region_attributes':
+    attrname = 'Region Attributes';
     attrname = '';
+
     break;
 
   case 'file_attributes':
@@ -3279,6 +3291,12 @@ function init_spreadsheet_input(type, col_headers, data, row_names) {
     firstrow.insertCell(-1).innerHTML = '<b>' + col_header + '</b>';
   }
 
+  // allow adding new attributes
+  firstrow.insertCell(-1).innerHTML = '<input type="text"' +
+    ' onchange="add_new_attribute(\'' + type[0] + '\', this.value)"' +
+    ' value = "Tipo"' +
+    ' onblur="_via_is_user_adding_attribute_name=false; this.value = \'\';"' +
+    ' onfocus="_via_is_user_adding_attribute_name=true; this.value = \'\';"/>';
 
   // if multiple regions are selected, show the selected regions first
   var sel_reg_list       = [];
@@ -3290,7 +3308,6 @@ function init_spreadsheet_input(type, col_headers, data, row_names) {
     for ( var i = 0; i < data.length; ++i ) {
       all_reg_list.push(i);
       if ( data[i].is_user_selected ) {
-
         sel_reg_list.push(i);
       } else {
         remaining_reg_list.push(i);
@@ -3331,6 +3348,8 @@ function init_spreadsheet_input(type, col_headers, data, row_names) {
       row.style.backgroundColor = '#f2f2f2';
       sel_rows.push(row);
       id_fila  = row_i;
+
+
 
       //////////////////////////aqui///////////////////////////////////////////////////
     }
@@ -3486,7 +3505,6 @@ function update_attribute_value() {
   if (_via_is_reg_attr_panel_visible) {
     set_region_select_state(region_id, false);
   }
-  _viupdate_attribute_vaa_redraw_reg_canvas();
   _via_is_user_updating_attribute_value = false;
   save_current_data_to_browser_cache();
 }
