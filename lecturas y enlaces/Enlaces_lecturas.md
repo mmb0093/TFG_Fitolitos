@@ -32,3 +32,8 @@ no necesita instalacíón pero necesita dos plugins.
 https://msdn.microsoft.com/es-es/library/dd409432.aspx
 
 https://creately.com/blog/diagrams/use-case-diagram-relationships/
+
+### Clasificador
+
+https://towardsdatascience.com/how-to-train-your-own-object-detector-with-tensorflows-object-detector-api-bec72ecfe1d9
+https://www.youtube.com/watch?v=Rgpfk6eYxJA
