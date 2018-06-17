@@ -74,7 +74,7 @@
           </div>
       <p></p>
          <div class="col-md-8" >
-                <button type="button" class="btn btn-secundary" onclick="download_all_region_data('json')">Guardar Etiquetas</button>
+                <button type="button" class="btn btn-secundary" onclick="download_all_region_data('csv')">Guardar Etiquetas</button>
                     </div>
 
 
@@ -1192,45 +1192,6 @@ function _via_load_canvas_regions() {
       _via_canvas_regions[i].shape_attributes['width'] = Math.round(width);
       _via_canvas_regions[i].shape_attributes['height'] = Math.round(height);
       break;
-
-    case VIA_REGION_SHAPE.CIRCLE:
-      var cx = regions[i].shape_attributes['cx'] / _via_canvas_scale;
-      var cy = regions[i].shape_attributes['cy'] / _via_canvas_scale;
-      var r  = regions[i].shape_attributes['r']  / _via_canvas_scale;
-      _via_canvas_regions[i].shape_attributes['cx'] = Math.round(cx);
-      _via_canvas_regions[i].shape_attributes['cy'] = Math.round(cy);
-      _via_canvas_regions[i].shape_attributes['r'] = Math.round(r);
-      break;
-
-    case VIA_REGION_SHAPE.ELLIPSE:
-      var cx = regions[i].shape_attributes['cx'] / _via_canvas_scale;
-      var cy = regions[i].shape_attributes['cy'] / _via_canvas_scale;
-      var rx = regions[i].shape_attributes['rx'] / _via_canvas_scale;
-      var ry = regions[i].shape_attributes['ry'] / _via_canvas_scale;
-      _via_canvas_regions[i].shape_attributes['cx'] = Math.round(cx);
-      _via_canvas_regions[i].shape_attributes['cy'] = Math.round(cy);
-      _via_canvas_regions[i].shape_attributes['rx'] = Math.round(rx);
-      _via_canvas_regions[i].shape_attributes['ry'] = Math.round(ry);
-      break;
-
-    case VIA_REGION_SHAPE.POLYGON:
-      var all_points_x = regions[i].shape_attributes['all_points_x'].slice(0);
-      var all_points_y = regions[i].shape_attributes['all_points_y'].slice(0);
-      for (var j=0; j<all_points_x.length; ++j) {
-        all_points_x[j] = Math.round(all_points_x[j] / _via_canvas_scale);
-        all_points_y[j] = Math.round(all_points_y[j] / _via_canvas_scale);
-      }
-      _via_canvas_regions[i].shape_attributes['all_points_x'] = all_points_x;
-      _via_canvas_regions[i].shape_attributes['all_points_y'] = all_points_y;
-      break;
-
-    case VIA_REGION_SHAPE.POINT:
-      var cx = regions[i].shape_attributes['cx'] / _via_canvas_scale;
-      var cy = regions[i].shape_attributes['cy'] / _via_canvas_scale;
-
-      _via_canvas_regions[i].shape_attributes['cx'] = Math.round(cx);
-      _via_canvas_regions[i].shape_attributes['cy'] = Math.round(cy);
-      break;
     }
   }
 }
@@ -1248,23 +1209,6 @@ function select_region_shape(sel_shape_name) {
 
   switch(_via_current_shape) {
   case VIA_REGION_SHAPE.RECT: // Fall-through
-  case VIA_REGION_SHAPE.CIRCLE: // Fall-through
-  case VIA_REGION_SHAPE.ELLIPSE:
-    show_message('Press single click and drag mouse to draw ' +
-                 _via_current_shape + ' region');
-    break;
-
-  case VIA_REGION_SHAPE.POLYGON:
-    _via_is_user_drawing_polygon = false;
-    _via_current_polygon_region_id = -1;
-
-    show_message('Press single click to define polygon vertices and ' +
-                 'click first vertex to close path');
-    break;
-
-  case VIA_REGION_SHAPE.POINT:
-    show_message('Press single click to define points (or landmarks)');
-    break;
 
   default:
     show_message('Unknown shape selected!');
@@ -1543,7 +1487,7 @@ _via_reg_canvas.addEventListener('mousedown', function(e) {
 }, false);
 
 // implements the following functionalities:
-//  - new region drawing (including polygon)
+
 //  - moving/resizing/select/unselect existing region
 _via_reg_canvas.addEventListener('mouseup', function(e) {
 console.log("arrastrar");
@@ -1576,34 +1520,6 @@ console.log("arrastrar");
 
         canvas_attr['x'] = Math.round( image_attr['x'] / _via_canvas_scale);
         canvas_attr['y'] = Math.round( image_attr['y'] / _via_canvas_scale);
-        break;
-
-      case VIA_REGION_SHAPE.CIRCLE: // Fall-through
-      case VIA_REGION_SHAPE.ELLIPSE: // Fall-through
-      case VIA_REGION_SHAPE.POINT:
-        var cxnew = image_attr['cx'] + Math.round(move_x * _via_canvas_scale);
-        var cynew = image_attr['cy'] + Math.round(move_y * _via_canvas_scale);
-        image_attr['cx'] = cxnew;
-        image_attr['cy'] = cynew;
-
-        canvas_attr['cx'] = Math.round( image_attr['cx'] / _via_canvas_scale);
-        canvas_attr['cy'] = Math.round( image_attr['cy'] / _via_canvas_scale);
-        break;
-
-      case VIA_REGION_SHAPE.POLYGON:
-        var img_px = image_attr['all_points_x'];
-        var img_py = image_attr['all_points_y'];
-        for (var i=0; i<img_px.length; ++i) {
-          img_px[i] = img_px[i] + Math.round(move_x * _via_canvas_scale);
-          img_py[i] = img_py[i] + Math.round(move_y * _via_canvas_scale);
-        }
-
-        var canvas_px = canvas_attr['all_points_x'];
-        var canvas_py = canvas_attr['all_points_y'];
-        for (var i=0; i<canvas_px.length; ++i) {
-          canvas_px[i] = Math.round( img_px[i] / _via_canvas_scale );
-          canvas_py[i] = Math.round( img_py[i] / _via_canvas_scale );
-        }
         break;
       }
     } else {
@@ -1679,63 +1595,10 @@ console.log("arrastrar");
       canvas_attr['height'] = Math.round( image_attr['height'] / _via_canvas_scale);
       break;
 
-    case VIA_REGION_SHAPE.CIRCLE:
-      var dx = Math.abs(canvas_attr['cx'] - _via_current_x);
-      var dy = Math.abs(canvas_attr['cy'] - _via_current_y);
-      var new_r = Math.sqrt( dx*dx + dy*dy );
-
       image_attr['r'] = Math.round(new_r * _via_canvas_scale);
       canvas_attr['r'] = Math.round( image_attr['r'] / _via_canvas_scale);
       break;
 
-    case VIA_REGION_SHAPE.ELLIPSE:
-      var new_rx = canvas_attr['rx'];
-      var new_ry = canvas_attr['ry'];
-      var dx = Math.abs(canvas_attr['cx'] - _via_current_x);
-      var dy = Math.abs(canvas_attr['cy'] - _via_current_y);
-
-      switch(_via_region_edge[1]) {
-      case 5:
-        new_ry = dy;
-        break;
-
-      case 6:
-        new_rx = dx;
-        break;
-
-      default:
-        new_rx = dx;
-        new_ry = dy;
-        break;
-      }
-
-      image_attr['rx'] = Math.round(new_rx * _via_canvas_scale);
-      image_attr['ry'] = Math.round(new_ry * _via_canvas_scale);
-
-      canvas_attr['rx'] = Math.round(image_attr['rx'] / _via_canvas_scale);
-      canvas_attr['ry'] = Math.round(image_attr['ry'] / _via_canvas_scale);
-      break;
-
-    case VIA_REGION_SHAPE.POLYGON:
-      var moved_vertex_id = _via_region_edge[1] - VIA_POLYGON_RESIZE_VERTEX_OFFSET;
-
-      var imx = Math.round(_via_current_x * _via_canvas_scale);
-      var imy = Math.round(_via_current_y * _via_canvas_scale);
-      image_attr['all_points_x'][moved_vertex_id] = imx;
-      image_attr['all_points_y'][moved_vertex_id] = imy;
-      canvas_attr['all_points_x'][moved_vertex_id] = Math.round( imx / _via_canvas_scale );
-      canvas_attr['all_points_y'][moved_vertex_id] = Math.round( imy / _via_canvas_scale );
-
-      if (moved_vertex_id === 0) {
-        // move both first and last vertex because we
-        // the initial point at the end to close path
-        var n = canvas_attr['all_points_x'].length;
-        image_attr['all_points_x'][n-1] = imx;
-        image_attr['all_points_y'][n-1] = imy;
-        canvas_attr['all_points_x'][n-1] = Math.round( imx / _via_canvas_scale );
-        canvas_attr['all_points_y'][n-1] = Math.round( imy / _via_canvas_scale );
-      }
-      break;
     }
 
     _via_redraw_reg_canvas();
@@ -2062,20 +1925,6 @@ _via_reg_canvas.addEventListener('mousemove', function(e) {
     case VIA_REGION_SHAPE.RECT:
       _via_draw_rect_region(region_x0, region_y0, dx, dy, false);
       break;
-
-    case VIA_REGION_SHAPE.CIRCLE:
-      var circle_radius = Math.round(Math.sqrt( dx*dx + dy*dy ));
-      _via_draw_circle_region(region_x0, region_y0, circle_radius, false);
-      break;
-
-    case VIA_REGION_SHAPE.ELLIPSE:
-      _via_draw_ellipse_region(region_x0, region_y0, dx, dy, false);
-      break;
-
-    case VIA_REGION_SHAPE.POLYGON:
-      // this is handled by the if ( _via_is_user_drawing_polygon ) { ... }
-      // see below
-      break;
     }
     _via_reg_canvas.focus();
   }
@@ -2116,61 +1965,6 @@ _via_reg_canvas.addEventListener('mousemove', function(e) {
       _via_draw_rect_region(d[0], d[1], w, h, true);
       break;
 
-    case VIA_REGION_SHAPE.CIRCLE:
-      var dx = Math.abs(attr['cx'] - _via_current_x);
-      var dy = Math.abs(attr['cy'] - _via_current_y);
-      var new_r = Math.sqrt( dx*dx + dy*dy );
-      _via_draw_circle_region(attr['cx'],
-                              attr['cy'],
-                              new_r,
-                              true);
-      break;
-
-    case VIA_REGION_SHAPE.ELLIPSE:
-      var new_rx = attr['rx'];
-      var new_ry = attr['ry'];
-      var dx = Math.abs(attr['cx'] - _via_current_x);
-      var dy = Math.abs(attr['cy'] - _via_current_y);
-      switch(_via_region_edge[1]) {
-      case 5:
-        new_ry = dy;
-        break;
-
-      case 6:
-        new_rx = dx;
-        break;
-
-      default:
-        new_rx = dx;
-        new_ry = dy;
-        break;
-      }
-      _via_draw_ellipse_region(attr['cx'],
-                               attr['cy'],
-                               new_rx,
-                               new_ry,
-                               true);
-      break;
-
-    case VIA_REGION_SHAPE.POLYGON:
-      var moved_all_points_x = attr['all_points_x'].slice(0);
-      var moved_all_points_y = attr['all_points_y'].slice(0);
-      var moved_vertex_id = _via_region_edge[1] - VIA_POLYGON_RESIZE_VERTEX_OFFSET;
-
-      moved_all_points_x[moved_vertex_id] = _via_current_x;
-      moved_all_points_y[moved_vertex_id] = _via_current_y;
-
-      if (moved_vertex_id === 0) {
-        // move both first and last vertex because we
-        // the initial point at the end to close path
-        moved_all_points_x[moved_all_points_x.length-1] = _via_current_x;
-        moved_all_points_y[moved_all_points_y.length-1] = _via_current_y;
-      }
-
-      _via_draw_polygon_region(moved_all_points_x,
-                               moved_all_points_y,
-                               true);
-      break;
     }
     _via_reg_canvas.focus();
   }
@@ -2196,54 +1990,9 @@ _via_reg_canvas.addEventListener('mousemove', function(e) {
                             attr['height'],
                             true);
       break;
-
-    case VIA_REGION_SHAPE.CIRCLE:
-      _via_draw_circle_region(attr['cx'] + move_x,
-                              attr['cy'] + move_y,
-                              attr['r'],
-                              true);
-      break;
-
-    case VIA_REGION_SHAPE.ELLIPSE:
-      _via_draw_ellipse_region(attr['cx'] + move_x,
-                               attr['cy'] + move_y,
-                               attr['rx'],
-                               attr['ry'],
-                               true);
-      break;
-
-    case VIA_REGION_SHAPE.POLYGON:
-      var moved_all_points_x = attr['all_points_x'].slice(0);
-      var moved_all_points_y = attr['all_points_y'].slice(0);
-      for (var i=0; i<moved_all_points_x.length; ++i) {
-        moved_all_points_x[i] += move_x;
-        moved_all_points_y[i] += move_y;
-      }
-      _via_draw_polygon_region(moved_all_points_x,
-                               moved_all_points_y,
-                               true);
-      break;
-
-    case VIA_REGION_SHAPE.POINT:
-      _via_draw_point_region(attr['cx'] + move_x,
-                             attr['cy'] + move_y,
-                             true);
-      break;
     }
     _via_reg_canvas.focus();
     return;
-  }
-
-  if ( _via_is_user_drawing_polygon ) {
-    _via_redraw_reg_canvas();
-    var attr = _via_canvas_regions[_via_current_polygon_region_id].shape_attributes;
-    var all_points_x = attr['all_points_x'];
-    var all_points_y = attr['all_points_y'];
-    var npts = all_points_x.length;
-
-    var line_x = [all_points_x.slice(npts-1), _via_current_x];
-    var line_y = [all_points_y.slice(npts-1), _via_current_y];
-    _via_draw_polygon_region(line_x, line_y, false);
   }
 });
 
@@ -2290,33 +2039,6 @@ function draw_all_regions() {
                             attr['width'],
                             attr['height'],
                             is_selected);
-      break;
-
-    case VIA_REGION_SHAPE.CIRCLE:
-      _via_draw_circle_region(attr['cx'],
-                              attr['cy'],
-                              attr['r'],
-                              is_selected);
-      break;
-
-    case VIA_REGION_SHAPE.ELLIPSE:
-      _via_draw_ellipse_region(attr['cx'],
-                               attr['cy'],
-                               attr['rx'],
-                               attr['ry'],
-                               is_selected);
-      break;
-
-    case VIA_REGION_SHAPE.POLYGON:
-      _via_draw_polygon_region(attr['all_points_x'],
-                               attr['all_points_y'],
-                               is_selected);
-      break;
-
-    case VIA_REGION_SHAPE.POINT:
-      _via_draw_point_region(attr['cx'],
-                             attr['cy'],
-                             is_selected);
       break;
     }
   }
@@ -2473,54 +2195,6 @@ function get_region_bounding_box(region) {
     bbox[3] = d['y'] + d['height'];
     break;
 
-  case 'circle':
-    bbox[0] = d['cx'] - d['r'];
-    bbox[1] = d['cy'] - d['r'];
-    bbox[2] = d['cx'] + d['r'];
-    bbox[3] = d['cy'] + d['r'];
-    break;
-
-  case 'ellipse':
-    bbox[0] = d['cx'] - d['rx'];
-    bbox[1] = d['cy'] - d['ry'];
-    bbox[2] = d['cx'] + d['rx'];
-    bbox[3] = d['cy'] + d['ry'];
-    break;
-
-  case 'polygon':
-    var all_points_x = d['all_points_x'];
-    var all_points_y = d['all_points_y'];
-
-    var minx = Number.MAX_SAFE_INTEGER;
-    var miny = Number.MAX_SAFE_INTEGER;
-    var maxx = 0;
-    var maxy = 0;
-    for ( var i=0; i < all_points_x.length; ++i ) {
-      if ( all_points_x[i] < minx ) {
-        minx = all_points_x[i];
-      }
-      if ( all_points_x[i] > maxx ) {
-        maxx = all_points_x[i];
-      }
-      if ( all_points_y[i] < miny ) {
-        miny = all_points_y[i];
-      }
-      if ( all_points_y[i] > maxy ) {
-        maxy = all_points_y[i];
-      }
-    }
-    bbox[0] = minx;
-    bbox[1] = miny;
-    bbox[2] = maxx;
-    bbox[3] = maxy;
-    break;
-
-  case 'point':
-    bbox[0] = d['cx'] - VIA_REGION_POINT_RADIUS;
-    bbox[1] = d['cy'] - VIA_REGION_POINT_RADIUS;
-    bbox[2] = d['cx'] + VIA_REGION_POINT_RADIUS;
-    bbox[3] = d['cy'] + VIA_REGION_POINT_RADIUS;
-    break;
   }
   return bbox;
 }
@@ -2568,33 +2242,6 @@ function is_inside_this_region(px, py, region_id) {
                             attr['height'],
                             px, py);
     break;
-
-  case VIA_REGION_SHAPE.CIRCLE:
-    result = is_inside_circle(attr['cx'],
-                              attr['cy'],
-                              attr['r'],
-                              px, py);
-    break;
-
-  case VIA_REGION_SHAPE.ELLIPSE:
-    result = is_inside_ellipse(attr['cx'],
-                               attr['cy'],
-                               attr['rx'],
-                               attr['ry'],
-                               px, py);
-    break;
-
-  case VIA_REGION_SHAPE.POLYGON:
-    result = is_inside_polygon(attr['all_points_x'],
-                               attr['all_points_y'],
-                               px, py);
-    break;
-
-  case VIA_REGION_SHAPE.POINT:
-    result = is_inside_point(attr['cx'],
-                             attr['cy'],
-                             px, py);
-    break;
   }
   return result;
 }
@@ -2633,32 +2280,6 @@ function is_on_region_corner(px, py) {
                                attr['width'],
                                attr['height'],
                                px, py);
-      break;
-
-    case VIA_REGION_SHAPE.CIRCLE:
-      result = is_on_circle_edge(attr['cx'],
-                                 attr['cy'],
-                                 attr['r'],
-                                 px, py);
-      break;
-
-    case VIA_REGION_SHAPE.ELLIPSE:
-      result = is_on_ellipse_edge(attr['cx'],
-                                  attr['cy'],
-                                  attr['rx'],
-                                  attr['ry'],
-                                  px, py);
-      break;
-
-    case VIA_REGION_SHAPE.POLYGON:
-      result = is_on_polygon_vertex(attr['all_points_x'],
-                                    attr['all_points_y'],
-                                    px, py);
-      break;
-
-    case VIA_REGION_SHAPE.POINT:
-      // since there are no edges of a point
-      result = 0;
       break;
     }
 
