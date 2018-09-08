@@ -354,7 +354,7 @@ function ImageRegion() {
 // Initialization routine
 //
 function _via_init() {
-  console.log(VIA_NAME);
+
   show_message(VIA_NAME + ' (' + VIA_SHORT_NAME + ') version ' + VIA_VERSION +
                '. Ready !', 2*VIA_THEME_MESSAGE_TIMEOUT_MS);
   show_home_panel();
@@ -1797,16 +1797,11 @@ console.log("arrastrar");
 
         }
     } else {
-      show_message('Cannot add such a small region');
+      show_message('No puedes añadir una región más pequeña');
     }
-
-
-
     _via_redraw_reg_canvas();
 
     _via_reg_canvas.focus();
-
-//hola
 
     save_current_data_to_browser_cache();
     return;
@@ -1815,13 +1810,14 @@ console.log("arrastrar");
 });
 
 _via_reg_canvas.addEventListener('mouseup', function(e) {
+var count = 0;
 console.log("soltar");
-if ( _via_is_region_selected ) {
+if ( _via_is_region_selected && count==0) {
     add_new_attribute('r', 'Tipo');
-           update_attribute_value();
-      //_via_is_region_selected = false;
+    update_attribute_value();
       _via_redraw_reg_canvas();
-      }
+    count = 1;
+    }
 
 });
 
@@ -1833,11 +1829,10 @@ _via_reg_canvas.addEventListener('mousemove', function(e) {
 
   _via_current_x = e.offsetX; _via_current_y = e.offsetY;
     //posible
-  if ( _via_is_region_selected ) {
+  if ( _via_is_user_drawing_region ) {
 
-     console.log("redimensiona");
     if ( !_via_is_user_resizing_region ) {
-    console.log("redimensiona");
+
       // check if user moved mouse cursor to region boundary
       // which indicates an intention to resize the region
 
@@ -3142,18 +3137,25 @@ function via_update_attribute_value(value){
     valor = value;
 }
 
-
 function update_attribute_value() {
   var attribute_name ="tipo";
   var region_id = id_fila;
-    _via_img_metadata[_via_image_id].regions[region_id].region_attributes[attribute_name] = valor;
-    update_region_attributes_input_panel();
-
-  if (_via_is_reg_attr_panel_visible) {
-    set_region_select_state(region_id, false);
+  if(_via_img_metadata[_via_image_id].regions[region_id].region_attributes[attribute_name] != "Bilobate" &&
+  _via_img_metadata[_via_image_id].regions[region_id].region_attributes[attribute_name] != "Bulliform" &&
+  _via_img_metadata[_via_image_id].regions[region_id].region_attributes[attribute_name] != "Cyperaceae" &&
+  _via_img_metadata[_via_image_id].regions[region_id].region_attributes[attribute_name] != "Rondel" &&
+  _via_img_metadata[_via_image_id].regions[region_id].region_attributes[attribute_name] != "Saddle" &&
+  _via_img_metadata[_via_image_id].regions[region_id].region_attributes[attribute_name] != "Spherical" &&
+  _via_img_metadata[_via_image_id].regions[region_id].region_attributes[attribute_name] != "Trichomas" ) {
+      _via_img_metadata[_via_image_id].regions[region_id].region_attributes[attribute_name] = valor;
+      console.log(valor)
+      update_region_attributes_input_panel();
+      if (_via_is_reg_attr_panel_visible) {
+          set_region_select_state(region_id, false);
+      }
+      _via_is_user_updating_attribute_value = false;
+      save_current_data_to_browser_cache();
   }
-  _via_is_user_updating_attribute_value = false;
-  save_current_data_to_browser_cache();
 }
 
 function add_new_attribute(type, attribute_name) {
