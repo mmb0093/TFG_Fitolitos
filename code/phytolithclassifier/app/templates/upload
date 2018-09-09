@@ -17,6 +17,7 @@
 
 
   </head>
+  <body style="background-color:#C6D9CF;">
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color: #4a3b78;">
       <a class="navbar-brand" href="{{url_for('index')}}">Inicio</a>
       <a class="navbar-brand" href="{{url_for('annotator')}}">Etiquetador</a>
