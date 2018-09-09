@@ -16,7 +16,7 @@
   </head>
   <body>
       <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="background-color: #4a3b78;">
-      <a class="navbar-brand" href="{{url_for('index')}}">Home</a>
+      <a class="navbar-brand" href="{{url_for('index')}}">Inicio</a>
       <a class="navbar-brand" href="{{url_for('annotator')}}">Etiquetador</a>
       <a class="navbar-brand" href="#">Clasificador</a>
       <a class="navbar-brand" href="{{url_for('upfiles')}}">Galería</a>
@@ -31,6 +31,7 @@
             <div class="jumbotron" style="background-color:  #83c9b6 ;">
                 <h1>Hola :)</h1>
                 <h2> {{email}} </h2>
+                <h4>  <a href="{{url_for('google.login')}}">Cerrar sesión</a></h4>
             </div>
 </div> </div>
 <nav class="navbar fixed-bottom bg-dark navbar-dark">

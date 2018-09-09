@@ -40,7 +40,6 @@ def index():
 def upfiles():
     target = os.path.join(UPLOAD_FOLDER, 'images/')
     image_names = os.listdir(target)
-    print(image_names)
     return render_template("upload",image_names=image_names )
 
 
