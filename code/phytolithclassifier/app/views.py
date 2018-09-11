@@ -16,7 +16,8 @@ app.secret_key = "supersekrit"
 blueprint = make_google_blueprint(
     client_id = "927801431905-5kajpv4ihkctidgn1p5l4ctkfmrepnq6.apps.googleusercontent.com",
     client_secret = "sTqxZsqTWgDj7oMTISS_FuUn",
-    scope = ["profile", "email"],
+    scope=["https://www.googleapis.com/auth/plus.me",
+        "https://www.googleapis.com/auth/userinfo.email", ],
     reprompt_consent=True,
 )
 app.register_blueprint(blueprint, url_prefix="/login")
@@ -39,7 +40,6 @@ def index():
 def upfiles():
     target = os.path.join(UPLOAD_FOLDER, 'images/')
     image_names = os.listdir(target)
-    print(image_names)
     return render_template("upload",image_names=image_names )
 
 
