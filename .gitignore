@@ -118,4 +118,17 @@ Docs/tex/E_Manual_usuario\.aux
 
 *.aux
 
-Docs/anexos\.pdf
+
+Docs/anexos\.bbl
+
+Docs/memoria\.bbl
+
+Docs/memoria\.lof
+
+Docs/memoria\.lot
+
+Docs/memoria\.out
+
+Docs/memoria\.synctex\.gz
+
+Docs/memoria\.toc
