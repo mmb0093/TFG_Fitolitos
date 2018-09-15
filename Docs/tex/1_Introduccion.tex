@@ -1,3 +1,24 @@
 \capitulo{1}{Introducción}
+Los fitolitos son un tipo de células vegetales que se encuentran en estado de fosilización debido a los procesos metabólicos que realiza. Este estado de fosilización permite que se pueda extraer mucha información de ellas.
 
-Descripción del contenido del trabajo y del estructura de la memoria y del resto de materiales entregados.
+Actualmete existe un número muy limitado de expertos que sepan reconocer con claridad los distintos fitolitos que pueden aparecer en una muestra.
+
+Los fitolitos son un células tridimensionales, que al ser tratadas como imágenes de dos dimensiones pueden variar la forma en la que los percibimos. Esta ambigüedad hace que el coste de tener a un ser humano etiquetando no sea beneficioso.
+
+A día de hoy es fácil encontrar sistemas de detección y clasificación en muchos ámbitos laborales.
+
+Hay ocasiones en las que se necesita precisión y los sistemas de detección automáticos. Actualmente se utilizan este tipo de sistemas para diagnóstico médico, detección de alimentos en mal estado, piezas defectuosas en una cadena de producción.
+
+En este proyecto se abordan dos frentes diferenciados: La recogida e interpretación de datos y el despliegue de esta herramienta en un servidor de producción. 
+\begin{itemize}
+	\item \textbf{Etiquetador:} se trata de una herramienta especializada mediante la cual se puden etiquetar siete tipos predefinidos de fitolitos. Su finalidad es la de facilitar la recogida de datos de entrenamiento, haciéndola más transparente para los expertos que van a general el conjunto de datos de entrenamiento y más accesible para recoger dichos datos y manipularlos posteriormente.
+
+	\item \textbf{Despliegue:} Las herramientas que se creen en este proyecto serán alojadas en un servidor de producción\footnote{Enlace de acceso: \url{http://martamonjeblanco.pythonanywhere.com/}}. 
+	De esta forma hacemos que la aplicación sea más accesible para los usuarios	evitando instalaciones intermedias además de facilitar el paso de la información desde el etiquetador a la posterior interpretación y uso de los datos.
+	
+\end{itemize}
+
+Parte del objetivo de este proyecto era la de crear un clasificador que detectase los fitolitos de forma automática y que los clasificase según su tipo, aunque por diversas razones, explicadas en el apartado de \ref{c.5}, no ha sido posible.
+
+ La idea principal de este proyecto empieza en el etiquetado. El etiquetador genera conjuntos de etiquetas seguros gracias a la limitación en la nomenclatura de las etiquetas. Estas etiquetas, junto a las imágenes que son usadas para el etiquetado, son recogidos del servidor y se usan para generar la información necesaria para el entrenamiento de un modelo.
+

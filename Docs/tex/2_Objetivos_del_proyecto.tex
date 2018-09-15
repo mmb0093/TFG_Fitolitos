@@ -1,3 +1,35 @@
 \capitulo{2}{Objetivos del proyecto}
 
-Este apartado explica de forma precisa y concisa cuales son los objetivos que se persiguen con la realización del proyecto. Se puede distinguir entre los objetivos marcados por los requisitos del software a construir y los objetivos de carácter técnico que plantea a la hora de llevar a la práctica el proyecto.
+\section{Objetivos globales}
+
+Como conjunto de proyecto se presentan los siguientes objetivos:
+
+\begin{itemize}
+	\item Crear un etiquetador que genere un conjunto de entrenamiento recogiendo la información necesaria y estructurándola de forma funcional para su posterior lectura, interpretación y manipulación por parte de un modelo.
+	
+	\item Alojar la aplicación en servidor de producción desde el que se pueda trabajar cómodamente y generando el mínimo conflicto entre los usuarios que etiquetan y los que entrenan el modelo. Se realizará un estudio comparativo entre las distintas opciones de despliegue que han sido probadas
+	
+	\item Conocer y comprender el funcionamiento de librerías para generar aprendizaje automático como Tensorflow y su relación con CUDA.
+	
+	\item Probar y estudiar diferentes prototipos para la futura detección y clasificación de fitolitos.
+\end{itemize}
+
+\section{Objetivos técnicos}
+
+El uso de distintos elementos técnicos tiene como objetivo dentro de este proyecto los siguientes puntos:
+
+\begin{itemize}
+	\item Utilizar \textit{HTML} y \textit{Javascript} para elaborar la parte del cliente, en este caso, los elementos que conforman el entorno web del proyecto.
+	
+	\item El uso de \textit{Python} y de \textit{Flask} para operar en la parte del servidor. \textit{Flask} va a actuar como un intermediario entre las partes de la lógica escrita en \textit{Python} y la parte del cliente explicada en el punto anterior.
+	
+	\item Despliegue en \textit{Pythonanywhere}, para el cual se ha necesita conocimientos de \textit{git}. Este tipo de servicio solo permite hostear aplicaciones escritas en \textit{Python}.
+	
+	\item Proporcionar un servidor seguro que permita una interacción transparente por parte del usuario. Básicamente que el usuario no tenga que instalarse. Que todo los que se haga
+	
+	\item Uso de control de versiones mediante \textit{git} y y un servicio central, en este caso \textit{GitHub}.
+	
+	\item Se va a seguir la metodología de Scrum, haciendo reuniones semanales correspondiente a los sprints que se planteen. 
+	
+	\item La organización de las \textit{issues} dentro del proyecto se hará mediante \textit{ZenHub} que nos proporcionará un tablero para ordenar las actividades en función de su estado y prioridad.
+\end{itemize}

@@ -1,18 +1,108 @@
 \capitulo{4}{Técnicas y herramientas}
+\label{c.4}
+
+A lo largo del desarrollo del proyecto se han hecho uso de técnicas y de herramientas que han ayudado en mayor o menor medida.
 
 \section{Etiquetador}
+Para poder generar el conjunto de entrenamiento necesitamos un etiquetador que nos proporcione una salida interpretable. Preferiblemente se quería que el formato de salida fuese un \textit{.csv} o en todo caso un \textit{.json}. 
 
+Al principio del proyecto se pensó en encontrar un etiquetador que estuviese a parte del proyecto, es decir, que fuese una aplicación distinta y que el usuario que quiera etiquetar imágenes usase dicha aplicación, para que más adelante pudiésemos entrenar el modelo y que este fuese lo único que hubiese en el servidor.
+
+Más tarde se optó por embeber un etiquetador dentro de la aplicación para facilitar al usuario el etiquetado y evitar posibles problemas con la posterior lectura. 
+
+Previamente a la elección del etiquetdor que se ba a usar se exploraron tras opciones:
 
 \begin{itemize}
-	\item \href{https://sweppner.github.io/labeld/}{LabelID}:Escritorio
-	\item \href{http://www.cvlibs.net/software/liblabel/}{LibLabel}: 3D, matlab, escritorio (?)
-	\item \href{https://cvhci.anthropomatik.kit.edu/~baeuml/projects/a-universal-labeling-tool-for-computer-vision-sloth/}{Sloth}
-	\item \href{https://github.com/tzutalin/labelImg}{LabelImg}
+	\item \textbf{LabelID:}\footnote{enlace a la páina de LabelID:\url{https://sweppner.github.io/labeld/}}:Es una aplicación de escritorio. En un principio parecía atractiva pero debido a la poca documentación que tenía y a la forma en la que recogía los datos, se descartó.
+
+	\item \textbf{LabelImg:} \footnote{Enlace a la página de LabelImg: \url{https://github.com/tzutalin/labelImg}} Personalmente, a pesar de no haber escogido este, es probablemente el que mejor devuelva los datos. Si bien es cierto que es difícil de integrar en el proyecto, Hay mucha documentación a cerca de como entrenar modelos de Tensorflow con este etiquetador, lo cual es un punto a favor porque no tienes que manipular los datos de salida demasiado, asi que es más difícil corromperlos.
+	
+	\item \textbf{VGG Image Annotator (VIA):}\footnote{Enlace para acceder a VGG Image Annotator (VIA)\url{http://www.robots.ox.ac.uk/\%7Evgg/software/via/}} este etiquetador el de software libre, por lo que es fácil de integrar y de modificar dentro del proyecto. Devuelve los datos en \textit{.csv} y en \textit{.json} y la recogida de estos se puede manipular para amoldarla a la que necesite el modelo para ser entrenado.
+	
+	Al final fue la herramienta que se escogió y en base a la que se ha construido el etiquetador (Ver imagen \ref{fig:etiqueta}). El resultado final del etiquetador el funcional y seguro para que no se manipulen los daos de forma externa.
+	
+	\imagen{etiqueta}{Vista del etiquetador una vez a sido integrado en el proyecto.} 
 \end{itemize}
 
 \section{Despliegue}
 \subsection{Framework : \textit{Flask}}
-Para desarrollar una aplicación web necesitamos antes de nada un framework que nos provea de las utilidades propias y un esquema de trabajo. Existen diferentes alternativas, en este caso desarrollados sobre Python, como podrían ser \textit{Flask}, \textit{Pyramid} o \textit{Django}. Fuera de contexto ninguna es mejor que otra, pero desde el punto de vista de la aplicación y el mío propio es adecuado hacer un pequeño análisis de elección.
-La decisión está entre\textit{ Django} y \textit{Flask}, por la documentación y los tutoriales existentes, no obstante, aunque \textit{Django} sea más completo, también es menos flexible. Por otro lado \textit{Flask} te permite instalar diferentes utilidades a medida que las vayas necesitando, además de que aunque tiene una documentación más reducida que \textit{Django}, esto la hace más práctica y útil dado que es lo suficientemente completa. \textit{Flask} también es más rápida que \textit{Django} y más sencilla de aprender, por lo tanto emplearemos \textit{Flask}\footnote{Ver documentación de Flask : \url{http://flask.pocoo.org/}}.
+Para desarrollar una aplicación web necesitamos antes de nada un framework que nos provea de las utilidades propias y un esquema de trabajo. Existen diferentes alternativas, en este caso desarrollados sobre \textit{Python}, como podrían ser \textit{Flask}, \textit{Pyramid} o \textit{Django}. Fuera de contexto ninguna es mejor que otra, pero desde el punto de vista de la aplicación y el mío propio es adecuado hacer un pequeño análisis de elección.
+
+La decisión está entre\textit{ Django} y \textit{Flask}, por la documentación y los tutoriales existentes, no obstante, aunque \textit{Django} sea más completo, también es menos flexible. Por otro lado \textit{Flask} te permite instalar diferentes utilidades a medida que las vayas necesitando, además de que aunque tiene una documentación más reducida que \textit{Django}, esto la hace más práctica y útil dado que es lo suficientemente completa.
+
+ \textit{Flask} también es más rápida que \textit{Django} y más sencilla de aprender, por lo tanto emplearemos \textit{Flask}\footnote{Ver documentación de Flask : \url{http://flask.pocoo.org/}}.
+
 \subsection{Nanobox}
 \textit{Nanobox}\footnote{Documentación de Nanobox : \url{https://docs.nanobox.io/}} es un servicio que emplea Virtual Box y Docker para crear entornos de desarrollo virtuales dentro de la máquina local. Se configura a través de un fichero yaml llamado \textit{boxfile.yml}, en el cual especificaremos la configuración de los recursos que vayamos a necesitar tanto localmente como en producción. 
+
+Tiene una interfaz muy amigable pero la instalación de las dependencias es bastante pesada. Permite desplegar nuevas versiones de forma muy sencilla y transparente para el programador. Tiene muchas funcionalidades de control de memoria, consola para monitorizar los procesos y aunque es de pago, con el paquete de estudiantes se puede probar gratis durante unos meses.
+
+Se descartó porque no me permitía acceder a los permisos de las carpetas que creaba en el servidor, más adelante, hablaremos de ello y de las soluciones que se dieron.
+
+\subsection{Pythonanywhere}
+\textit{Pythonanywhere} \footnote{Página principal de Pythonanywhere: \url{https://www.pythonanywhere.com/}} es un servidor web, dedicado exclusiamente a hostear aplicaciones escritas en \textit{Python}. Su interfaz es bastante fácil de entender. Es exclusiva para \textit{Python}, por lo que viene bien ya que \textit{Flask} es \textit{Python}.
+
+Este hosting nos ofrece dos consolas de \textit{Python} con las que poder interactuar con el proyecto. Se necesita tener el proyecto en un repositorio público y hay que utilizar git para llevarse dicho proyecto al servidor. Una vez clonado el proyecto solo habrá que sincronizarlo y relanzarlo cada vez que queramos un cambio en la aplicación.
+
+\imagen{py}{Interfaz de PYthonanywhere}
+
+\section{Lenguaje de programación}
+\subsection{Python}
+Se ha usado \textit{Python} en su versión más reciente, la 3.7.0 \cite{python}.
+
+Es un lenguaje muy extendido por ser de código abierto, fácil de leer e interpretar.
+Es de propósito general, lo que significa que puede abordar muchos frentes en el desarrollo. Es un lenguaje interpretado, multiparadigma (orientación a objetos, programación funcional y programación imperativa), es de tipado dinámico y es independiente de la plataforma en la que se ejecute.
+
+Presenta múltiples ventajas frente a otros lenguajes, entre ellos la gran cantidad de librerías de licencia gratuita que tiene, las funcionalidades que ofrece y la versatilidad de sus funcionalidades.
+
+En este caso es interesante para el proyecto por dos aspectos: 
+\begin{itemize}
+	\item El despliegue de la aplicación, para el que utilizaremos \textit{Flask} como framework 
+	\item \textit{Tensorflow}\footnote{Enlace para el repositorio de Tensorflow: \url{https://github.com/tensorflow}} y lectura de datos. \textit{Python} facilita la lectura de archivos con los que vamos a trabajar en este caso: csv y json.
+\end{itemize}
+\subsubsection{\textit{Anaconda}}
+\textit{Anaconda} es una distribución de licencia libre de \textit{Python} y R. \cite{ana}.
+
+Las ventajas del uso de \textit{Anaconda} empiezan desde la gestión de paquetes y librerías para \textit{Python}, gracias a su sistema de administración de paquetes \textbf{Conda} \footnote{Para conocer un pococ más conda: \url{https://es.wikipedia.org/wiki/Sistema_de_gesti\%C3\%B3n_de_paquetes}}
+lo cual nos facilitará mucho usar librerías enfocadas al procesamiento de datos y en el aprendizaje automático, como Tensorflow, Scikit-team y SciPy.
+
+
+\subsection{Desarrollo web: \textit{HTML y bootstrap}}
+\textbf{HTML} es un lenguaje de marcado, cuyas siglas en inglés son \textit{HyperText Markup Language}\cite{html}, es decir, lenguaje de marcas de hypertexto.
+
+Se utiliza para confeccionar paginas web. Es un lenguaje basado en la diferenciación, es decir, separar aquellos elementos externos (\textit{Javasecript, CSS}, imágenes, enlaces...) llamándolos a través de referencias a su ubicación.
+
+Con \textit{HTML} se busca que una página escrita en este lenguaje tenga el mismo aspecto y funcionalidad en cualquier buscador en el que se ejecute.
+
+Por otro lado \textbf{Bootstrap}, es un  framework web multiplataforma que contiene plantillas para diseñar páginas web de forma más estética.\cite{bootstrap}.
+
+Gracias a estas librerías la página se verá más limpia y profesional sin la necesidad de añadir muchas líneas de \textit{CSS} o \textit{Javascript}.
+ 
+
+\subsection{Gestión del proyecto}
+\subsubsection{Control de versiones, repositorio de GitHub}
+
+Debido a que a lo largo de la carrera nos hemos decantado por el uso de esta herramienta y ya estaba familiarizada con ella será lo que vayamos a utilizar para alojar el proyecto en un repositorio y poder acceder a él de forma controlada por medio de un cliente de \textit{git}.
+
+\subsubsection{ZenHub}
+Es una extensión del navegador que se integra con GitHub para poder controlar las tareas que hay que llevar a cabo en el proyecto de forma ágil y rápida de ver.
+\imagen{zenhub}{Vista del tablero que nos ofrece la herramienta de ZenHub}
+
+\subsection{Documntación con \LaTeX{}}
+\LaTeX{}\cite{tex} es un lenguaje de marcado mediante el cual escribiremos la memoria y los anexos de la documentación del proyecto.
+
+Es fácil de usar y nos ofrece bastantes ventajas frente a otros editores de texto en cuanto a la personalización. 
+
+Por otro lado la curvatura de aprendizaje de \LaTeX{} puede ser pronunciada al principio.
+
+El entorno en el que se va a editar con \LaTeX{} es \textit{Texstudio}. \footnote{Enlace a la página de Texstudio \url{https://www.texstudio.org/}}
+
+\subsection{Otras librerías}
+
+\subsubsection{Flask Dance}
+Para hacer el login se ha usado una librería de Flask que te permite generar un control de acceso mediante otras aplicaciones como \textit{GitHub}, \textit{Twitter} o \textit{Facebook} \cite{dance}.
+Se genera un cliente en la API\footnote{La API de Google con la que se ha generado el usuario para la aplicación: \url{https://www.googleapis.com/auth/userinfo.profile}} de Google y se añade para qué direcciones se quiere restringir el acceso, es decir, hay que asociarle las rutas del proyecto.
+
+
+
+

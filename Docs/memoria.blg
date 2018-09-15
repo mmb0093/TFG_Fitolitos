@@ -1,0 +1,43 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: memoria.aux
+A level-1 auxiliary file: ./tex/1_Introduccion.aux
+A level-1 auxiliary file: ./tex/2_Objetivos_del_proyecto.aux
+A level-1 auxiliary file: ./tex/3_Conceptos_teoricos.aux
+A level-1 auxiliary file: ./tex/4_Tecnicas_y_herramientas.aux
+A level-1 auxiliary file: ./tex/5_Aspectos_relevantes_del_desarrollo_del_proyecto.aux
+A level-1 auxiliary file: ./tex/6_Trabajos_relacionados.aux
+A level-1 auxiliary file: ./tex/7_Conclusiones_Lineas_de_trabajo_futuras.aux
+The style file: plain.bst
+Database file #1: bibliografia.bib
+Warning--entry type for "fito" isn't style-file defined
+--line 7 of file bibliografia.bib
+Warning--entry type for "cliente" isn't style-file defined
+--line 14 of file bibliografia.bib
+Warning--entry type for "servidor" isn't style-file defined
+--line 21 of file bibliografia.bib
+Warning--entry type for "redes" isn't style-file defined
+--line 37 of file bibliografia.bib
+Warning--entry type for "neurona" isn't style-file defined
+--line 45 of file bibliografia.bib
+Warning--entry type for "html" isn't style-file defined
+--line 60 of file bibliografia.bib
+Warning--entry type for "bootstrap" isn't style-file defined
+--line 67 of file bibliografia.bib
+Warning--entry type for "ana" isn't style-file defined
+--line 74 of file bibliografia.bib
+Warning--entry type for "tex" isn't style-file defined
+--line 81 of file bibliografia.bib
+Warning--entry type for "dance" isn't style-file defined
+--line 88 of file bibliografia.bib
+Warning--entry type for "fitolito" isn't style-file defined
+--line 103 of file bibliografia.bib
+Warning--entry type for "ten" isn't style-file defined
+--line 110 of file bibliografia.bib
+Warning--entry type for "jaime" isn't style-file defined
+--line 118 of file bibliografia.bib
+Warning--to sort, need author or key in redes
+Warning--to sort, need author, organization, or key in python
+Warning--empty journal in archeo
+Warning--empty year in archeo
+Warning--empty journal in ai
+Warning--empty year in ai
+(There were 19 warnings)

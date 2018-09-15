@@ -1,3 +1,16 @@
 \capitulo{6}{Trabajos relacionados}
 
-Este apartado sería parecido a un estado del arte de una tesis o tesina. En un trabajo final grado no parece obligada su presencia, aunque se puede dejar a juicio del tutor el incluir un pequeño resumen comentado de los trabajos y proyectos ya realizados en el campo del proyecto en curso. 
+En cuanto a reconocimiento automático de fitolitos o cualquier otro proyecto que intente solventar la misma problemática, el más cercano es el trabajo final de grado realizado por Jaime Sagüillo \cite{jaime}.
+
+Su trabajo se llama \textit{Sistema de reconocimieto automático en arqueobotánica} y se centra en la construción de un sistema de reconocimiento automático de fitolitos.
+
+Su proyecto distingue entre fitolito y no fitolito  y trata de solucionar la problemática que se presenta al analizar las muestras de forma manual. Hace uso de la ventana deslizante para la subdivisión de las imágenes en varios recortes que serán los que el clasificador identifique como fitolito o no fitolito.
+
+El mayor problema al que se ha enfrentado en dicho proyecto es el de la falta de imágenes pero lo solventa haciendo uso de técnicas de data augmentation, para generar conjuntos más grandes a partir de otros más pequeños e insuficientes.
+
+Cuando empecé yo el proyecto comprobamos previamente mediante un pequeño script si las etiquetas que devolvía su clasificador eran correctas, pero rara vez coincidían, seguramente debido al problema que hubo con la falta de imágenes de muestra.
+
+Para generar el conjunto de datos de entrenamiento (aunque no haya podido hacer uso de él) usé parte de las imágenes que el generó gracias a las técnicas de data augmentation.
+
+Gracias a su trabajo he logrado comprender muchos conceptos previos al inicio del mío.
+

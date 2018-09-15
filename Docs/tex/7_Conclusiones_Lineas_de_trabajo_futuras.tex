@@ -1,4 +1,33 @@
 \capitulo{7}{Conclusiones y Líneas de trabajo futuras}
 
-Todo proyecto debe incluir las conclusiones que se derivan de su desarrollo. Éstas pueden ser de diferente índole, dependiendo de la tipología del proyecto, pero normalmente van a estar presentes un conjunto de conclusiones relacionadas con los resultados del proyecto y un conjunto de conclusiones técnicas. 
-Además, resulta muy útil realizar un informe crítico indicando cómo se puede mejorar el proyecto, o cómo se puede continuar trabajando en la línea del proyecto realizado. 
+\section{Conclusiones}
+Se han presentado muchos problemas desde el inicio del proyecto en casi todos los aspectos técnicos que he tenido que afrontar.
+El primer problema al que me tuve que enfrentar fue al planteamiento de un etiquetador que recogiese de forma segura todo los datos en el formato correcto. Después de probar e investigar al final se decidió personalizar uno y dejarlo funcional.
+
+Otro de los problemas estuvo presente durante el despliegue de la aplicación con Nanobox, desde la instalación de los requisitos hasta los permisos de acceso a las carpetas una vez estuvo hosteado. Al final la solución consistió en cambiar de método de despliegue.
+
+El mas pesado de los obstáculos ha sido sin ninguna duda el clasificador. Si bien es cierto que he aprendido a reducir un error, a reconocerlo y a diagnosticarlo, me hubiese gustado sacarlo adelante.
+
+Por otro lado he aprendido mucho a cerca de la arquitectura cliente-servidor, he adquirido conocimientos en \textit{HTML} y en \textit{JavaScript}, nuevas librerías de \textit{Python}, y aunque me hubiese gustado aprender más, también he aprendido algo de \textit{Tensorflow}.
+
+A nivel técnico he aprendido bastantes cosas, pero personalmente creo que la más importante ha sido a gestionar mi tiempo y conocer mi ritmo de trabajo.
+
+Ha supuesto todo un reto para mí compaginarlo con el resto del curso, las labores de delegación y ya en verano, con las práctica extracurriculares. 
+
+Aunque sigo sin estar satisfecha con el resultado práctico del trabajo y siendo consciente de que hay muchas cosas mejorables, sí que estoy satisfecha con el hecho de haber puesto a prueba los conocimientos obtenidos a lo largo de la carrera y por supuesto, con todos los conocimientos nuevos que he adquirido.
+
+
+\section{Líneas de trabajo futuras}
+
+La principal línea de trabajo que veo es la conseguir entrenar al clasificador y ponerlo en producción en el servidor.
+Si se sigue usando Tensorflow como lo estaba haciendo yo, ya se dispondría del material necesario para el entrenamiento (en el caso de que el material sea bueno).
+
+Aunque probablemente sea mejor explorar otros tipos de frentes. Existen más librerías a parte de TensorFlow, por ejemplo Keras.
+
+El etiquetador es mejorable, estéticamente no me gusta como escala cuando la imagen que le pasas es demasiado grande.
+Sería deseable que se añadiese una opción para poder subir imágenes y etiquetas, a veces el conjunto es muy grande y el usuario puede decidir guardar los cambios y seguir en otro momento.
+
+Quizá sería buena idea plantear un sistema de proyectos para que el usuario pueda guardar diferentes conjuntos de entrenamiento clasificar diferentes conjuntos de imágenes. En ese caso lo más seguro es que hubiese que cambiar de servidor a otro con mayor capacidad.
+
+La galería es una parte de mi aplicación en la que considero que se pueden meter muchas más cosas de caracter funcional, como por ejemplo, eliminar fotos.
+

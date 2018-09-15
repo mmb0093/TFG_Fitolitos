@@ -328,7 +328,7 @@
     \begin{minipage}{.8\textwidth}
       \vspace{.5cm}\Large
       \begin{center}
-      \textbf{TFG del Grado en Ingeniería Informática}\vspace{.6cm}\\
+      \textbf{TFG del grado en Ingeniería Informática}\vspace{.6cm}\\
       \textbf{\LARGE\@title{}}
       \end{center}
       \vspace{.2cm}
@@ -345,7 +345,7 @@
     \noindent\LARGE
     Presentado por \@author{}\\ 
     en Universidad de Burgos --- \@date{}\\
-    Tutor: \@tutor{}\\
+    Tutores: \@tutor{}\\
   }%
   \end{center}%
   \null
@@ -353,12 +353,12 @@
   }
 \makeatother
 
-\newcommand{\nombre}{Nombre del alumno} %%% cambio de comando
+\newcommand{\nombre}{Marta Monje Blanco} %%% cambio de comando
 
 % Datos de portada
-\title{título del TFG}
+\title{Sistema de etiquetado de Fitolitos Online}
 \author{\nombre}
-\tutor{nombre tutor}
+\tutor{Dr. Alvar Arnaiz González y Dr. José Francisco Díez Pastor}
 \date{\today}
 
 \begin{document}
@@ -375,11 +375,11 @@
 
 \noindent\includegraphics[width=\textwidth]{cabecera}\vspace{1cm}
 
-\noindent D. nombre tutor, profesor del departamento de nombre departamento, área de nombre área.
+\noindent Dr. Alvar Arnaiz González y Dr. José Francisco Díez Pastor, profesores del departamento de Ingeniería Civil, área de Lenguajes y Sistemas Informáticos.
 
-\noindent Expone:
+\noindent Exponen:
 
-\noindent Que el alumno D. \nombre, con DNI dni, ha realizado el Trabajo final de Grado en Ingeniería Informática titulado título de TFG. 
+\noindent Que la alumna D.ª \nombre, con DNI 71312200X, ha realizado el Trabajo final de Grado en Ingeniería Informática titulado título de TFG. 
 
 \noindent Y que dicho trabajo ha sido realizado por el alumno bajo la dirección del que suscribe, en virtud de lo cual se autoriza su presentación y defensa.
 
@@ -393,14 +393,14 @@ En Burgos, {\large \today}
 \begin{minipage}{0.45\textwidth}
 \begin{flushleft} %\large
 Vº. Bº. del Tutor:\\[2cm]
-D. nombre tutor
+Dr. Alvar Arnaiz González
 \end{flushleft}
 \end{minipage}
 \hfill
 \begin{minipage}{0.45\textwidth}
 \begin{flushleft} %\large
 Vº. Bº. del co-tutor:\\[2cm]
-D. nombre co-tutor
+Dr. José Francisco Díez Pastor
 \end{flushleft}
 \end{minipage}
 \hfill
@@ -423,13 +423,13 @@ D. nombre co-tutor
 % Abstract en castellano
 \renewcommand*\abstractname{Resumen}
 \begin{abstract}
-La arqueobotánica es la sub-rama de la arqueología que estudia la relación entre plantas y humanos en el pasado mediante el análisis de restos vegetales hayados en un contexto arqueológico. Su objetivo es de dar a conocer qué técnicas de agricultura y de cosecha se usaban, en qué condiciones paleoambientales subsistían y el uso que se les daba en función de la antigüedad de las muestras.
+La arqueobotánica es la sub-rama de la arqueología que estudia la relación entre plantas y humanos en el pasado mediante el análisis de restos vegetales hayados en un contexto arqueológico. Su objetivo es de dar a conocer qué técnicas de agricultura y de cosecha se usaban, en qué condiciones paleoambientales subsistían y la finalidad para las que las cultivaban (fines médicos, alimenticios...) en función de la antigüedad y el estado de las muestras.
 
-En este proyecto se va a trabajar con la detección y clasificación de micro-restos, más concretamente de fitolitos. Los fitolitos son células de origen vegetal las cuales han sufrido un proceso de biomineralización debido a la actividad metabólica.
+En este proyecto se va a trabajar con la recogida de datos y en el prototipado de modelos para la futura detección y clasificación de micro-restos, más concretamente de fitolitos. Los fitolitos son células de origen vegetal las cuales han sufrido un proceso de biomineralización debido a la actividad metabólica.
 
-El objetivo de este proyecto es abordar la clasificación de distintas muestras fotográficas de micro-restos tomadas en laboratorio, tratando de reconocer fitolitos y clasificándolos en siete clases diferentes.
+La finalidad de este proyecto es la de proporcionar un conjunto de herramientas y de prototipos que permitan la futura integración de un sistema de clasificación automática de fitolitos, clasificándolos en siete clases diferentes.
 
-Con la finalidad de facilitar la recogida de datos para el entrenamiento del modelo se ha utilizado un sistema de cliente servidor en el cual se proporciona un etiquetador especializado con el cual los expertos podrán subir sus propias imágenes y eiquetarlas. Una vez se tuviera un conjunto razonablemente grande se emplearía para entrenar el clasificador.
+Con el fin de facilitar la recogida de datos para el entrenamiento del modelo se ha utilizado un sistema de cliente servidor en el cual se proporciona un etiquetador especializado con el cual los expertos podrán subir sus propias imágenes y eiquetarlas. Una vez se tuviera un conjunto razonablemente grande se emplearía para entrenar el clasificador.
 
 Actualmente dicho servicio está desplegado en un servidor para ofrecer una mejor comunicación entre los expertos en arqueobotánica y la gestión del entrenamiento del clasificador. 
 \end{abstract}
@@ -445,11 +445,12 @@ Servidor web, Reconocimiento y clasificación de imágenes, Arqueobotánica, Fit
 \renewcommand*\abstractname{Abstract}
 \begin{abstract}Archaeobotany is the sub-branch of archeology that studies the relation between plants and humans in the past by analyzing plant residues in an archaelogical context. Its objective is to reveal what agriculture and harvesting techniques were used, in what paleoenvironmental conditions subsisted and how they were used based on the age of the samples.
 	
-In this project we will work with the detection and classification of micro-remains, more specifically phytoliths. Phytoliths are cells of plant origin which have undergone a process of biomineralization due to metabolic activity.
+
+In this project we will work with data collection and prototyping of models for the future detection and classification of micro-residues, more specifically phytoliths. Phytoliths are cells of plant origin which have undergone a process of biomineralization due to metabolic activity.
 
 The objective of this project is to approach the classification of different photographic samples of micro-residues taken in the laboratory, trying to recognize phytoliths and classifying them into seven different classes.
 
-In order to facilitate the collection of data for the training of the model, a server client system has been used in which a specialized labelling tool is provided with which experts can upload their own images and label them. Once a reasonably large set was available, it would be used to train the classifier.
+In order to facilitate the collection of training data of the model, a client-server system has been used in which a specialized labelling tool is provided with which experts can upload their own images and label them. Once a reasonably large set was available, it would be used to train the classifier.
 
 Currently, this service is deployed on a server to offer better communication among experts in archaeobotany and the management of classifier training.
 \end{abstract}

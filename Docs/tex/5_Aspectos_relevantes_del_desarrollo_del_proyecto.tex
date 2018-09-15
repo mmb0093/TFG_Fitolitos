@@ -1,7 +1,155 @@
-\capitulo{5}{Aspectos relevantes del desarrollo del proyecto}
+\capitulo{5}{Aspectos relevantes del desarrollo del proyecto}\label{c.5}
 
-Este apartado pretende recoger los aspectos más interesantes del desarrollo del proyecto, comentados por los autores del mismo.
-Debe incluir desde la exposición del ciclo de vida utilizado, hasta los detalles de mayor relevancia de las fases de análisis, diseño e implementación.
-Se busca que no sea una mera operación de copiar y pegar diagramas y extractos del código fuente, sino que realmente se justifiquen los caminos de solución que se han tomado, especialmente aquellos que no sean triviales.
-Puede ser el lugar más adecuado para documentar los aspectos más interesantes del diseño y de la implementación, con un mayor hincapié en aspectos tales como el tipo de arquitectura elegido, los índices de las tablas de la base de datos, normalización y desnormalización, distribución en ficheros3, reglas de negocio dentro de las bases de datos (EDVHV GH GDWRV DFWLYDV), aspectos de desarrollo relacionados con el WWW...
-Este apartado, debe convertirse en el resumen de la experiencia práctica del proyecto, y por sí mismo justifica que la memoria se convierta en un documento útil, fuente de referencia para los autores, los tutores y futuros alumnos.
+\section{Elección del etiquetador}
+
+Al principio del proyecto se pensó en dividir la funcionalidad del etiquetador de la del clasificador, por lo que una de las primeras tareas fue la de buscar uno que fuese fácil de documentar, fácil de entender por el usuario que vaya a generar las etiquetas, fácil de instalar y que devolviese el conjunto de datos de tal forma que la lectura sea sencilla de hacer desde un script de python.
+
+Después de investigar qe etiquetaro era e más decuado para esta tarea, se optó por una llamada \textit{Alp's Labeling Tools for Deep Learning}\footnote{Enlace para ver la documentación del etiquetador \url{https://alpslabel.wordpress.com/}}
+Al final se tomó la decisión de preparar una máquina virtual con el etiquetador instalado y hacer un tutorial por escrito para que el usuario aprendiese a generar las etiquetas.ver imagen \ref{fig:etiquetapingu}
+
+\imagen{etiquetapingu}{Vista del primer prototipo del etiquetador}
+
+La idea terminó desechándose una vez estuvo finalizada porque la entrada de datos y la nomenclatura de las etiquetas podría ser propensa a errores debido a que depende mucho de que el usuario que etiquete no se equivoque escribiendo el nombre de la etiqueta, además de que la labor llegaba a ser muy pesada.
+
+Esto podría traer problemas con la lectura de datos en el futuro además de pérdida de información.
+
+Llegado a este punto se optó por ofrecer un etiquetador personalizado dentro de la aplicación el cual se puede ver en la imagen \ref{fig:etiquetad}
+\imagen{etiquetad}{Vista del etiquetador personalizado.} 
+
+\subsection{Problemas con el etiquetador}
+El etiquetador que se proporciona en la aplcación está basado en otro de código abierto llamado \textit{VGG Image Annotator (VIA)}. 
+
+Se escogió porque ofrecía muchas opciones de carga y descarga y modificar la salida de datos para que el \textit{csv} fuese compatible con el clasificador y porque estaba escrito en \textit{JavaScript} completamente. Esto de que estuviese en \textit{JavaScript} era importante porque ha facilitado su integración en el proyecto, no obstante hubo una serie de obstáculos a mencionar:
+
+\begin{enumerate}
+	\item En primer lugar, se trata de una aplicación muy grande y con muchas funcionalidades que a priori no se necesitaban, lo cual complicaba la comprensión del código.
+	
+	\item No había a penas comentarios en todo el código, había muchas funciones que no se utilizaban y los nombres de las variables, en muchas ocasiones, eran poco o nada descriptivas. 
+	
+	El código del etiquetador es correcto, pero tiene lagunas funcionales que se han tenido que solucionar.
+	
+	\item A la hora de introducir las etiquetas, el etiquetador original necesita que las introduzcas a mano, pero es precisamente esto de lo que huíamos la última vez, así que se optó por ponerle botones con el nombre ya predefinido de los fitolitos de interés para ahorrarnos erores futuros.
+	
+	\item Redimensionamiento de las etiquetas. Para recoger los datos en el \textit{csv} existía una problemática porque si cambiabas una etiqueta de tamaño el valor no se actualizaba correctamente el archivo donde serecogían las coordenadas de la etiqueta.
+	
+	Para solucionar esto se detecto el problema mediante pruebas de etiquetado y se arregló permitiendo que se actualizasen los valores.
+	
+	\item La falta de experiencia por mi parte en lenguajes como \textit{JavaScript} y \textit{HTML} hizo mella en los tiempos dedicados al etiquetador. Por suerte la curva de aprendizaje es ligera.
+	
+	\item El diseño de la interfaz. Fue un problema porque al principio hubo problemas con el despliegue, como más adelante explicaremos, y al no poder acceder a los permisos de las carpetas, no podíamos gusrdar los datos en el servidor, así que para que esto no fuese un impedimento a la hora de obtener las etiquetas, hicimos que no se guardasen en el servidor ni las etiquetas ni las imágenes, pero estas no las descargábamos porque el usuario las subía desde su propio ordenador, por lo que es innecesario.
+\end{enumerate}
+
+Al final el etiquetador funciona como se esperaba que lo hiciese.
+
+\section{Problemas en el depliegue}
+
+La primera opción que se usó para alojar la aplicación fue  \textit{Nanobox}. La conforman un conjunto de herramientas que facilitan el mantenimiento de la aplicación. En mi caso generó problemas desde el principio.
+
+\subsection{\textit{Nanobox}: Instalación de \textit{Docker}}
+\textit{Nanobox} requiere de un grupo de docker al que se le otorgan privilegios para manipular carpetas. En mi caso no hubo forma de otorgárselos a la primera.Traté de hacerlo por consola pero tampoco los aceptaba.
+
+Borré toda la instalación que había hecha hasta el momento de \textit{Nanobox} y la reinstalé, y conseguí alojar la aplicación, aun así, los permisos de las carpetas en los que se querían guardar las imágenes y etiquetas seguían siendo insuficientes y no hubo forma de cambiarlo.
+
+La siguiente opción fue la dejarlo en local para la presentación, así al menos se verán sus funcionalidades al completo sn depender de permisos en carpetas que no podemos controlar.
+
+En retrospectiva esto fue bueno en varios sentidos:
+
+\begin{itemize}
+	\item El primero es que este servidor solo era gratuito porque contaba con un paquete de ayuda para usuarios estudiantes lo que significaba que en octubre caducaba y empezaría a ser de pago sin previo aviso, por lo que en el fondo lo considero una preocupación menos.
+	
+	\item El Hosting por el que opté después es mucho más cómodo y rápido y aunque tenga menos opciones de mantenimiento y depuración, la prefiero por la simpleza de su mecanismo basado en \textit{Git}.
+	
+	\item He tenido la oportunidad de probar dos opciones distintas para el despliegue lo cual me ha ayudado a ser más crítica con qué herramientas he de tener en consideración y hsta qué punto es necesario gastar tiempo en ellas.
+	
+	\item Evito las incompatividilades del fichero  \textit{yml} y los ficheros de configuración del despliegue, que se quedan en el repositorio. 
+\end{itemize}
+
+También ha tenido sus inconvenientes:
+
+\begin{itemize}
+	\item Se ha perdido mucho tiempo en algo que sí que aporta valor al proyecto pero no a costa de perder tanto el tiempo en ello. Lo mejor huvise sido haber dejado de lado esta forma de intentar desplegar y haber pasado a la sigiente, para no obcecarme.
+	
+	\item Se han perdido todas las opciones de mantenimiento, depuración y control de recursos que ofrecía \textit{nanobox}, que no son necesarios a priori, pero no estaba de más cuando había errores o cuando se quería gestionar los recursos que consumía la aplicación.
+\end{itemize}
+
+\subsection{Solución: Cambio a \textit{Pythonanywhere}}
+
+Después de mucho tiempo perdido en el despliegue, se decidió que de momento trabajaría en local para poder avanzar. 
+
+Estando más avanzado el proyecto, y con el fin de dejarlo alojado en un servidor, se tomó la decisión de probar otra forma de despliegue.
+
+Pythonanywhere ofreció un despliegue sencillo mediante una consola de bash que hace uso de git.
+
+El despliegue estuvo listo en una tarde.
+
+\subsection{Comparación entre \textit{Pythonanywhere} y \textit{Nanobox}}
+En este apartado se va a hacer una comparativa entre \textit{Pythonanywhere} y \textit{Nanobox} con el fin de argumentar mi decisión final de decantarme por \textit{Pythonanywhere}:
+
+\begin{itemize}
+	\item \textbf{Interfaz:} Ambas son bastante intuitivas, pero la de \textit{Nanobox} tiene una interfaz más limpia y bonita a pesar de tener muchas más funcionalidades.
+	
+	\item \textbf{Precio:} \textit{Nanobox} es de pago y es caro y la preba gratis dura poco. \textit{Pythonanywhere} es gratuito para aplicaciones de poco tránsito.
+	
+	\item \textbf{Documentación:} \textit{Nanobox} tiene una extensa documentación plagada d ejemplos y tutoriales muy fáciles de seguir. \textit{Pythonanywhere} tiene mucha documentación propia pero su verdadero valor reside en la comunidad que lo usa.
+	
+	\item \textbf{Información externa a la aplicación:} \textit{Nonobox} no tiene a penas tutoriales externos ni una comunidad que le de un mínimo soporte y por otra parte \textit{Pythonanywhere} tiene una extensa comunidad que comenta dudas, hace tutoriales y por lo general mantienen con vida estas prácticas.
+	
+	\item \textbf{Funcionamiento:} Con\textit{Pythonanywhere} no tuve a penas problemas, y los que tuve fueron triviales y de fácil solución. Por otra parte \textit{Nanobox} no llegó a funcionarme completamente del todo.
+	
+\end{itemize}
+
+Mirando los puntos expuestos de forma global, el único que importa es el de \textbf{funcionamiento}, los demás son en mayor o menor medida complementarios.
+
+Por esta razón se ha escogido \textit{Pythonanywhere}.
+
+\section{El clasificador}
+
+Uno de los frentes abiertos del proyecto es la futura integración de un clasificador que permita al usuario subir imágenes que contengan fitolitos y que el sistema de devuelva las imágenes con las etiquetas correspondientes en los fitolitos.
+
+Se ha explorado la opción de hacerlo usando modelos ya hechos proporcionados por \textit{Tensorflow}.
+
+\section{Problemas con las versiones: CUDA, cuDNN y TensorFlow}
+Un requisito indispensable es instalar la librería   \textit{TensorFlow-GPU}, debido a que vamos a tratar con imágenes, irá más rápido que con CPU.
+
+Análogamente a esto Hay que tener instalado CUDA y cuDNN\footnote{Acceso a la página de nvidia: \url{https://developer.nvidia.com/cudnn}} teniendo cuidado con las versiones tanto de \textit{TensorFlow} como de estas dos anteriores. No es extraño que haya incompatibilidades entre las versiones más recientes. Es mejor informarse bien antes de instalar ninguno de estos elementos.
+
+Por lo general, en la página oficial de \textit{Tensorflow} te especifcan qué versiones son compatibles con qué otros sistemas\cite{ten}.
+
+\section{Entorno Virtual}
+Como seguramente haya que estar calibrando las versiones de las librerías que se vayan a instalar, es altamente recomendable crear un entorno virtual para que no haya problemas, ni el el proyecto en el que se está trabajando, ni en los proyectos ajenos a este.
+
+Por lo general, lo ideal es trabajar con versiones actualizadas, pero en este caso es mejor tener la documentación a mano y comprender qué necesidades tiene el clasificador que se quiere entrenar.
+
+\section{Repositorio de TensorFlow}
+En las pruebas que se han hecho se ha trabajado con el repositorio de \textit{GitHub} de \textit{TensorFlow}\footnote{Repositorio de TensorFlow: \url{https://github.com/tensorflow/models}}
+
+En él podemos encontrar todos los recursos necesarios para entrenar un modelo.
+Se puede clonar o descargar para poder hacer uso e sus funciones.
+
+\section{Modelos pre-entrenados}
+Se ha intentado entrenar al clasificador con dos tipos de modelos\footnote{Enlace para acceder a los modelos: \url{https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md}} distintos, pero realmente Tensorflow nos ofrece muchas alternativas, que pueden ser más o meno precisas y cuya velocidad de entrenamiento variará de unas a otras(ver imagen \ref{fig:tabla}).
+
+\imagen{tabla}{Modelos ya entrenados que TensorFlow pone a disposición pública}
+
+\section{Entrenamiento}
+Teniendo los conjuntos de imágenes ya etiquetadas y estando generados todos los recursos necesarios para empezar con el entrenamiento, el programa falla debido a una incompatibilidad entre los tipos de datos que se procesan.
+
+Existen varias posibilidades desde mi punto de vista:
+
+\begin{itemize}
+	\item Que el problema esté entre las versiones de las librerías de las que se hace uso. 
+	
+	\item Que el etiquetador esté recogiendo un tipo de dato que no es compatible.
+	
+	\item Que los modelos con los que se ha probado el entrenamiento procesen un tipo distinto de datos.
+	
+	\item Que me haya equivocado en cualquier parte del proceso previo al entrenamiento.
+	
+\end{itemize}
+
+En cualquier caso, el resultado ha sido que no ha podido entrenarse el modelo.
+
+Para poner un ejemplo ilustrativo a cerca de como debería haberse clasificado una imagen, podemos observar el de la imagen \ref{fig:negra}.
+
+Este clasificador ha sido entrenado con el modelo \textit{ssd mobilenet v1 coco}, uno de los más rápidos y que menos potencia necesita, pero también uno de los menos precisos.
+\imagen{negra}{Ficha negra clasificada correctamente con el clasificador}
