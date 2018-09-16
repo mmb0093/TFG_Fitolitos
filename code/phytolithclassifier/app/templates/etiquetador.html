@@ -5,6 +5,7 @@
     <title>Etiquetador</title>
     <meta name="author" content="Abhishek Dutta">
     <meta name="description" content="VIA is a standalone image annotator application packaged as a single HTML file (< 200 KB) that runs on most modern web browsers.">
+
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 
@@ -66,8 +67,10 @@
       <input type="file"  multiple name="files[]" style="display:none">
     </div> <!-- endof #top_panel -->
 
+
+
 <nav class="navbar fixed-bottom bg-dark navbar-dark">
- <font color="white" size=1>Autora: Marta Monje Blanco <br/>Tutores: Alvar Arnáiz González y José Fancisco Díez Pastor<br/>Universidad de Burgos</font>
+ <font color="white" size=1>Autora: Marta Monje Blanco <br/>Tutores: Álvar Arnaiz González y José Fancisco Díez Pastor<br/>Universidad de Burgos</font>
     <a href="https://github.com/mmb0093/TFG_Fitolitos" ><img src="https://image.flaticon.com/icons/svg/1051/1051275.svg" alt=" " title="Ir al repositorio en Github" width="48" height="48"/></a>
 </nav>
     <p></p>
@@ -77,11 +80,8 @@
            <div class="input-group">
                 <label class="btn btn-dark" >
                         Buscar&hellip; <input id="invisible_file_input" onclick="sel_local_images()" type="file" style="display: none;", name="file"  multiple>
-
                 </label>
-
                 <input type="text" class="form-control"  readonly="readonly">
-
             </div>
 
         <p></p>
@@ -101,12 +101,12 @@
       <button type="button" onclick=" via_update_attribute_value('Spherical')"  class="btn btn-dark">Spherical</button>
       <button type="button" onclick=" via_update_attribute_value('Trichomas')"  class="btn btn-dark">Trichomas</button>
 
-
           </div>
       <p></p>
          <div class="col-md-8" >
                 <button type="submit" class="btn btn-secundary" onclick="download_all_region_data('csv')">Guardar Etiquetas</button>
              <button type="submit" class="btn btn-secundary">Guardar Imagenes</button>
+
                     </div>
 
  </form>
@@ -198,7 +198,6 @@
     </script>
     <script type="text/javascript">
       //<!--AUTO_INSERT_VIA_JS_HERE-->
-
 
 "use strict";
 
