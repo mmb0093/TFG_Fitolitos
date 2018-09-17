@@ -8,25 +8,242 @@ Para manejar el proyecto bajo esta filosofía de trabajo y facilitar su gestión
 \subsection{Sprint 1}
 En este sprint se han cubierto las primeras tareas del proyecto. En este caso las tareas han estado relacionadas principalmente con la lectura y comprensión de la documentación previa del mismo trabajo.
 También se comenzó con la búsqueda de etiquetadores, para encontrar el más adecuado para el uso que le queremos dar.
+
+\imagen{bd1}{Gráfico \textit{Burndown del Sprint 1}}
+
+En la imagen \ref{fig:bd1} se puede ver el gráfico \textit{Burndown}  de este sprint.
+
 \subsection{Sprint 2}
 En este segundo sprint la actividad ha estado centrada en la elección del etiquetador y en el aprendizaje del mismo. Finalmente se tomó la decisión de utilizar \textit{Alp’s Labeling Tool (ALT)}. 
+
 Se ha generado la documentación del manual de usuario para la instalación y uso del etiquetador y se ha creado una máquina virtual para facilitar el uso de la misma, ya que evita el tener que realizar la instalación, la cual puede ser algo confusa.
+
+\imagen{bd2}{Gráfico \textit{Burndown del Sprint 2}}
+En la imagen \ref{fig:bd2} se puede ver el gráfico \textit{Burndown} 
+
 \subsection{Sprint 3}
 Se ha realizado un script para comprobar la corrección de las coordenadas sobre las imágenes. El anterior etiquetador no etiquetaba bien y por lo tanto no se van a poder emplear las imágenes previamente etiquetadas.
+
+\imagen{bd3}{Gráfico \textit{Burndown del Sprint 3}}
+En la imagen \ref{fig:bd3} se puede ver el gráfico \textit{Burndown} de este sprint.
 \subsection{Sprint 4}
 Se ha comenzado a investigar para realizar el despliegue de la aplicación. En un inicio se pensó en Heroku como servidor y Flask como framework y se han realizado pruebas para comprobar si es lo más adecuado. 
+\imagen{bd4}{Gráfico \textit{Burndown del Sprint 4}}
+En la imagen \ref{fig:bd4} se puede ver el gráfico \textit{Burndown} de este sprint.
 \subsection{Sprint 5}
-Se ha decidido cambiar el despliegue de Heroku a Digital Ocean con el uso de nanobox. En cuanto a los casos de uso del sistema, de momento, se va a usar la estructura empleada en la versión previa del proyecto.
+Se ha decidido cambiar el despliegue de Heroku a Digital Ocean con el uso de \textit{Nanobox}. En cuanto a los casos de uso del sistema, de momento, se va a usar la estructura empleada en la versión previa del proyecto.
+\imagen{bd5}{Gráfico \textit{Burndown del Sprint 5}}
+En la imagen \ref{fig:bd5} se puede ver el gráfico \textit{Burndown} de este sprint.
 \subsection{Sprint 6}
 En este sprint se ha realizado el login de la aplicación con Google y el uso de 'Flask-Dance'. Se pensó que sería buena idea, desde el punto de vista de la gestión de imágenes, hacer el login desde Dropbox, pero se descartó la idea durante la reunión y se decidió cambiarlo de nuevo a Google.
+
+\imagen{bd6}{Gráfico \textit{Burndown del Sprint 6}}
+
+En la imagen \ref{fig:bd6} se puede ver el gráfico \textit{Burndown} de este sprint.
 \subsection{Sprint 7}
+
 Durante el despliegue se han dado algunos errores que han estado relacionados con el fichero \textit{boxfile.yml}. Por lo general, en este fichero hemos de indicarle ciertos aspectos de la configuración que ha de seguirse para ubicar la aplicación funcional dentro del servidor. Esto es tarea de otros dos ficheros que existen dentro de la aplicación llamados \textit{gunicorn.py} y \textit{nginx.config}, ambos necesarios. El problema reside en que durante el despliegue, el fichero nginx no parece tener los permisos necesarios para hacer efectivo dicho despliegue. 
+En la imagen \ref{fig:bd7} se puede ver el gráfico \textit{Burndown} de este sprint.
+\imagen{bd7}{Gráfico \textit{Burndown del Sprint 7}}
+\subsection{Sprint 8}
+
+Para este srprint se han planteado tareas que conciernen al etiquetador. 
+
+Se ha introducido la fila de botones del etiquetador, las cuales resuelven la problemática de tener que escribirlos a mano cada vez que etiquetas algún elemento.
+
+En total se añadieron 7 botones con lo tipos de fitolitos definidos y se retocó dicho código para poder darles la funcionalidad que se deseaba.
+
+Análogamente se continuó trabajando con los errores del despliegue que se produjeron durante el anterior sprint.
+
+En la imagen \ref{fig:bd8} se puede ver el gráfico \textit{Burndown} de este sprint.
+\imagen{bd8}{Gráfico \textit{Burndown del Sprint 8}}
+\subsection{Sprint 9}
+
+Durante este sprint se continuó con las funcionalidades de los botones del etiquetador.
+
+Ya eran funcionales pero se quería que las etiquetas fuesen redimensionables y que se pudiesen mover.
+Se tomó la decisión de que hubiese un tipo de fitolito por defecto en el caso de que e usuario no hubiese seleccionado ninguna etiqueta antes de ponerse a dibujar etiquetas en las imágenes.
+
+Se añadió la opción de guardado mediante la cual sepueden guardar las imágenes con las que se ha trabajado, en el servidor. Debido a los problemas que hubo con el despliegue, el cual no me dejaba acceder al almacenaje en el servidor debido a la falta de permisos, se decidió mantener la opción y trabajar en local hasta solucionar este problema.
+
+En la imagen \ref{fig:bd9} se puede ver el gráfico \textit{Burndown} de este sprint.
+\imagen{bd9}{Gráfico \textit{Burndown del Sprint 9}}
+
+\subsection{Sprint 10}
+
+Durante este sprint se realizaron tareas de refactorización del código. Muchas de las funcionalidades de los botones de etiquetador, así como parte del sistema de generado de \textit{csv} con las etiquetas, habían dejado el código ilegible, así que se eliminaron las funciones que ya no eran necesarias, variables que no servían y código duplicado para que el mantenimiento del código se simplificase tanto como se pudiera.
+
+También se etiquetó un conjunto de imágenes de prueba para empezar a tener un conjunto de entrenamiento y poder usarlo cuando estuviese el clasificador.
+
+Por otra parte se empezó a investigar como se iba a hacer el clasificador, con que librerías y que modelos de entrenamiento. Complementario a esto, se buscó mucha información sobre los conceptos teóricos que concernían al entorno del reconocimiento y la inteligencia artificial(AI).
+
+En la imagen \ref{fig:bd10} se puede ver el gráfico \textit{Burndown} de este sprint
+\imagen{bd10}{Gráfico \textit{Burndown del Sprint 10}}
+\subsection{Sprint 11}
+
+En este sprint se redefinió la estructura de carpetas del proyecto para hacerla más comprensible, eficiente y fácil de usar.
+
+Se planteó y estudió la idea de meter un perfil para el administrador que va a estar al otro lad de la aplicación.
+
+Por otro lado se eliminó el despliegue realizado en \textit{Nanobox} \footnote{Página inicial de \textit{Nanobox}: \url{https://nanobox.io/} } y se empezó la búsqueda de otras alternativas que funcionasen mejor.
+Finalmente se optó por desplegar con \textit{Pythonanywhere} \footnote{Página de inicio de pythonanywhere} y funcionó perfectamente.
+
+En la imagen \ref{fig:bd11} se puede ver el gráfico \textit{Burndown} de este sprint
+\imagen{bd11}{Gráfico \textit{Burndown del Sprint 11}}
+\subsection{Sprint 12}
+
+Durante este sprint se modificó completamente la apariencia de la aplicación para darle un acabado más profesional.
+
+Además se volvió a incluir la opción de salir del perfil de la aplicación, ya de forma definitiva.
+Se añadieron los nombres de los tutores y el mío propio dentro del pie de página y se añadió un enlace al repositorio en \textit{GitHub}\footnote{Enlace para acceder al repositorio de la aplicación: \url{https://github.com/mmb0093/TFG_Fitolitos}}
+
+Por otra parte, se arregló, dentro del etiquetador, la funcionalidad de poder editar el tipo del fitolito, es decir, a qué clase pertenece. Se tomó la decisión de que si se desea cambiar el tipo del fitolito que se tuvieses marcado y  volverlo a dibujarlo en la imagen.
+En la imagen \ref{fig:bd12} se puede ver el gráfico \textit{Burndown} de este sprint
+\imagen{bd12}{Gráfico \textit{Burndown del Sprint 12}}
+\subsection{Sprint 13 Última semana}
+
+En este sprint nos estamos dedicando casi por completo a la documentación.
+
+Se va a intentar entrenar a un modelo por \textit{notebooks} de \textit{Jupiter} \footnote{página de documentación \url{https://ipython.org/notebook.html}} y mediante \textit{Google colab} \footnote{Página de documentación de google \url{https://colab.research.google.com/notebooks/welcome.ipynb}} para hacer pruebas con posibles etiquetadores.
+
+Se remataron pequeños detalles de la interfaz de la página del etiquetador.
+
+En la imagen \ref{fig:bd13} se puede ver el gráfico \textit{Burndown} de este sprint
+\imagen{bd13}{Gráfico \textit{Burndown del Sprint 13, últma semana}}
+
+\subsection{Gráficas globales}
+
+\textit{GitHub} nos ofrece gráficos que representan de forma global la interacción con el repositorio durante el proyecto. 
+
+\begin{itemize}
+	\item \textit{\textbf{Commits}}: Esta gráfica muestra, mediante un grafo, la cantidad de commits que se han hecho a lo largo de los meses de trabajo. 
+	
+	ver imagen \label{fig: grafo} 
+	
+	\imagen{grafo}{Grafo con la representación de los commits a los largo del proyecto}
+	
+	\item \textit{\textbf{Gráfica de elementos añadidos y elementos eliminados}}
+	
+		\imagen{code}{Gráfica de elementos añadidos(verde) y para los eliminados (rojo) a lo largo del proyecto}
+	En esta gráfica se muestra en verde la cantidad de objetos es añadida y lo rojo los elementos que se han borrado
+	
 
 
+	
+\end{itemize}
 \section{Estudio de viabilidad}
+En este apartado se va a estudiar si es factible tanto a nivel económico como legal, llevar a cabo el proyecto dentro de un entorno empresarial.
 
 \subsection{Viabilidad económica}
+En esta sección se analizarán los costes económicos que se hubieran dado en el supuesto desarrollo del proyecto a nivel empresarial.
+
+Para realizar este apartado se va a extraer la información necesaria de un artículo informativo escrito bajo la redacción actual vigente~\cite{cotizacion}.
+
+ 
+\subsubsection{Costes materiales e informáticos}
+
+\begin{itemize}
+	\item \textit{Hardware}: Para el desarrollo del proyecto, únicamente ha sido necesario un ordenador portátil valorado en 1250\euro{} que se amortizará en 4 años, el cual, ya incluye todo lo necesario. 
+	
+	\item \textit{Software}: Actualmente los costes del software que se han utilizado han sido gratuitos debido a las licencias de estudiantes que ofrecen las empresas a las que pertenecen. Como estamos tratando con un entorno empresarial, tendremos que tener en cuenta los costes del software destinados para este fin.
+	Se van a emplear el IDE de \textit{JetBrains Pycharm}\footnote{Enlace a la página principal de \textit{Pycharm}: \url{https://www.jetbrains.com/pycharm/}}.
+	
+	En la tabla \ref{tabla:costeshw} se pueden apreciar los costes y las amortizaciones\footnote{Amortizaciones en 8 meses, que es lo que está durando el proyecto.} de ambas partes. 
+\end{itemize}
+
+\tablaSmallSinColores{Costes Informáticos de \textit{hardware} y \textit{software}.} {p{4cm} p{.25cm} p{2.5cm} p{4cm}}{costeshw}{
+	\multicolumn{2}{p{3.5cm}}{\textbf{Costes Informáticos}} & \textbf{Coste total \euro{}} & \textbf{Amortización \euro{}}\\
+}
+{
+	Equipo(Ordenador portatil) & & \multicolumn{1}{r}{1250} & \multicolumn{1}{r}{208,32}\\
+	\textit{JetBrains PyCharm} & & \multicolumn{1}{r}{87,26} & \multicolumn{1}{r}{87,26}\\\hline
+	Total & & \multicolumn{1}{r}{1337,26} & \multicolumn{1}{r}{295,58}\\
+}
+
+\subsubsection{Costes de personal}
+
+Para este proyecto solo se ha necesitado un trabajador encargado del desarrollo, el cual ha trabajado a tiempo parcial. 
+
+Dicho empleado supondrá un coste para la empresa, el cual se calculará mediante la suma del salario bruto que este reciba, más la cotización de la seguridad social de la empresa.
+
+Para calcular la parte de la seguridad social hay que tener en cuenta los siguientes parámetros:
+\begin{itemize}
+	\item Contingencias comunes (empresa): 23,6\%
+	
+	\item Desempleo de tipo general (empresa): 5,5\%
+	
+	\item Formación Profesional (empresa): 0,6\%
+	
+	\item Fondo de Garantía Salarial (FOGASA): 0,2\%
+	
+\end{itemize}
+
+El total del porcentaje de la seguridad social por parte de la empresa es 29,9\%.
+
+Por otra parte hay que distinguir los gastos del propio empleado, que de acuerdo con la legislación vigente son los siguientes:
+\begin{itemize}
+	\item Contingencias comunes (trabajador): 4,7\%
+	\item Desempleo de tipo general (trabajador): 1,55\%
+	\item Formación profesional (trabajador): 0,1\%	
+\end{itemize}
+
+La suma de los costes del propio empleado asciende a 6,35\%.
+
+El total del porcentaje de la seguridad social es la suma de los dos porcentajes calculados, haciendo un total de 36,25\%.
+\tablaSmallSinColores{Costes de personal por parte de la empresa.}{p{6.4cm} p{2.15cm} p{8cm}}{costespersonal}{
+	\multicolumn{1}{p{4.5cm}}{\textbf{Costes de personal}} & \textbf{Importe \euro{}}\\
+}
+{
+	Salario mensual bruto  & \multicolumn{1}{r}{1.500}\\
+	Retención IRPF (15\%) & \multicolumn{1}{r}{225}\\
+	Seguridad social del empleado (6,35\%) & \multicolumn{1}{r}{95,25}\\
+	Salario mensual neto  & \multicolumn{1}{r}{1179,75}\\\hline
+	Salario total en 8 meses  & \multicolumn{1}{r}{9438}\\\hline
+	Seguridad social (Empresa) (29,9\%) & \multicolumn{1}{r}{762}\\\hline
+	Coste total mensual & \multicolumn{1}{r}{2821,96}\\\hline
+	Coste total & \multicolumn{1}{r}{22.575,7}\\
+}
+En la tabla~\ref{tabla:costespersonal} se van a emplear los anteriores porcentajes para calcular los hipotéticos gastos ocasionados por el personal que conforma la empresa, como si se tratase de un caso real.
+\subsubsection{Coste total: personal e informático}
+El coste a asumir en los 8 meses que dura el desarrollo, teniendo en cuenta al personal y el equipo informático, queda reflejado en la tabla \ref{tabla:total}.
+
+
+\tablaSmallSinColores{Suma de costes de personal y costes informáticos al final del proyecto.}{p{4cm} p{2cm} p{4.5cm}}{total}{
+	\multicolumn{1}{p{4cm}}{\textbf{Coste total}} & \textbf{Importe total \euro{}}\\
+}
+{
+	Coste de personal  & \multicolumn{1}{r}{9438}\\
+	Costes informáticos  & \multicolumn{1}{r}{295}\\\hline
+	Coste total & \multicolumn{1}{r}{9733}\\
+}
+
+
 
 \subsection{Viabilidad legal}
+
+\subsubsection{Licencia del proyecto}
+Este proyecto está publicado bajo licencia \textit{Apache 2.0}~\cite{apache}, que es actualmente una de las más usadas para proyectos porque es muy flexible y permisiva. Los derechos de autor de los proyectos amparados por esta licencia se deben de conservan tanto en el código fuente como en los archivos binarios.
+
+\subsubsection{Licencia de las librerías usadas}
+Se han usado varias librería a lo largo del proyecto, todas ellas en su versión más reciente, siendo todas de licencia libre. Se muestran todas en la tabla \ref{tabla:licenses}.
+
+ \begin{table}
+	\begin{center}
+		\begin{tabular}{p{3.5cm} p{1.5cm} p{2.5cm}}
+			\toprule
+			\textbf{Librería} & \textbf{Versión} & \textbf{Licencia} \\
+			\otoprule
+			Tensorflow & 1.0 & Apache 2.0 \\
+			Numpy & 1.10.2 & BSD \\
+			Bootstrap & 4.0.0 & MIT \\
+			Flask & 1.0 & BSD\\
+			Flask Dance & 1.0.0 & MIT \\
+			\bottomrule
+		\end{tabular}
+		\caption{Licencias de las librerías Usadas}
+		\label{tabla:licenses}
+	\end{center}
+\end{table}
+
 
 

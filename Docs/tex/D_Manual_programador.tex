@@ -1,11 +1,73 @@
 \apendice{Documentación técnica de programación}
 
 \section{Introducción}
-
+En estos anexos se van a explicar los requisitos y directorios del proyecto y la documentación para que otra persona retome el desarrollo.
 \section{Estructura de directorios}
+Las estructura de carpetas del proyecto se encuentra organizada en forma de árbol. En este apartado se explicarán brevemente.
 
+\begin{itemize}
+	\item \textbf{Directorio raíz}: En este directorio tenemos el \textit{.gitignore}, el \textit{README} y la licencia del proyecto.
+	\begin{itemize}
+		\item \textbf{code}: contiene los scripts con la mayor parte de la lógica de la aplicación.
+			\begin{itemize}
+				\item \textbf{notebook}: ontiene el \textit{notebook} con las comprobaciones de las etiquetas del proyecto anterior.
+				\item \textbf{pytolithclassifier}: en este directorio podemos encontrar el fichero \textit{boxfile.yml}, uno de los más importantes debido a que es necesario para el despliegue de la aplicación. También se encuentra el \textit{Procfile}, \textit{requirements.txt} con las librerías y las versiones que hay que instlar. El fichero \textit{run.py}, el cual hay que ejecutar para poner en marcha la aplicación y el \textit{runtime.txt}.
+				\begin{itemize}
+					\item \textbf{.idea}: Archivos referentes al delpliegue.
+					\item \textbf{app}: Contiene los ficheros en \textit{HTML, JavaScript y CSS} además de \textit{views.py}, que va a tener la librería de \textit{Flask} en uso y \textit{init.py} que se encarga de pasar los datos de ejecución al \textit{run.py}.
+					
+						\subitem \textbf{images}: contiene las imágenes que se han guardado en local.
+						\subitem \textbf{Static}: contiene dos carpetas llamadas \textit{js} y \textit{ css} y contienen los archivos en \textit{JavaScript} y \textit{css} respectivamente.
+						\subitem \textbf{templates}: contiene los ficheros \textit{HTML} 
+					
+					\item \textbf{etc}: contiene los ficheros \textit{gunicorn.py} y \textit{nginx.conf}, los cuales se usan en el despliegue.
+					\item \textbf{recursos del clasificador}: Contiene aquellos recursos que se pudieron conseguir en el avance con el clasificador, como los \textit{csv} de entrenamiento, los scripts de conversión, el mapa de etiquetas y diversos archivos de configuración.
+				\end{itemize}
+			\end{itemize}
+		\item \textbf{Docs}: Contiene la documentación del proyecto, anexos y memoria.
+		\begin{itemize}
+			\item \textbf{img}: contiene las imágenes empleadas en la documentación.
+			\item \textbf{tex}: contiene los diferentes apartados de anexos y memoria.
+		\end{itemize}
+		\item \textbf{Lecturas y enlaces}: contiene un fichero escrito en \textit{marckdown}\footnote{Está hecho en \textit{marckdown} porque se editaba desdeel repositorio de \textit{GitHub}. Para saber más de \textit{marckdown}: \url{https://es.wikipedia.org/wiki/Markdown}}
+	\end{itemize}
+\end{itemize}
 \section{Manual del programador}
+En este apartado se van a introducir aspectos importantes a tener en cuenta dentro de la continuación con el desarrollo.
 
+\subsection{Librerías usadas}
+Para facilitar la labor de instalar librerías se ha facilitado dentro de la carpeta de \textit{pytolithclassifier} un documento \textit{txt} con todas las librerías con las versiones especificadas. Si bien es cierto que es mejor trabajar con las librerías actualizadas, sería recomendable probar primero el proyecto con las versiones recomendadas y después ya pensar en actualizarlas.
+
+\subsection{\textit{titleFlask}}
+Esta librería es la más importante que se ha usado, ya que es la piedra angular que encaja la lógica escrita en \textit{Python} con la interfaz escrita en \textit{HTML, JavaScript y css}.
+
+\subsection{CUDA y \textit{Tensorflow}}
+Antes de intentar hacer nada del clasificador, es necesario aclarar que se van a necesitar tanto CUDA, para el procesamiento de imágenes, como \textit{Tensorflow} para entrenar al modelo.
+
+El problema está en que las versiones más nuevas de ambas son incompatibles\footnote{Hay muchos foros que tratan esta temática, pero en este hilo está muy bien explicado: \url{https://stackoverflow.com/questions/50622525/which-tensorflow-and-cuda-version-combinations-are-compatible}}.
+
+\subsection{Clasificador}
+Recomiendo seguir este tutorial~\cite{git} por varias razones.
+
+La primera razón es que, si no tienes ningún problema, la cantidad de trabajo requerida es poca, con lo cual, podrás aprender a crear un clasificador de imágenes en un tiempo reducido.
+
+Otra razón es que viene muy bien explicado, el instructor se preocupa porque cada explicación sea minuciosa, no hace algo sin contar porqué.
+
+Otra razón es que te deja disponible todos los recursos en un su repositorio y puedes seguir el tutorial por vídeo si así lo deseas, no obstante, recomiendo seguir el tutorial a través del repositorio, ya que se explican más cosas.
+
+Muchos de los recursos necesarios para este tutorial ya están hechos y guardados en la carpeta de \textit{recursos del clasificador}, lo cual puede o bien servir de ejemplo o ser usados.
 \section{Compilación, instalación y ejecución del proyecto}
+Si se quiere ejecutar en local, una vez se tenga bien adecuado el entorno de \textit{Python} hay que ejecutar el fichero \textit{run.py}, el cual se encuentra dentro de la carpeta \textit{code/pytolithclassifier}.
+
+No hay nada que instalar más allá de tener in IDE para \textit{Python} y un entorno de \textit{Python} adecuado, preferiblemente \textit{Anaconda}.
+
+El enlace de la página de la aplicación se encuentra en el repositorio, solo hay que pincharle para acceder.
 
 \section{Pruebas del sistema}
+A penas se han realizado pruebas a lo largo del proyecto debido a la falta de tiempo. Realmente cuando se está desarrollando un producto de software es decuado realizar pruebas desde los primeros pasos del desarrollo.
+
+Sí que se ha puesto a prueba el etiquetador con diferentes imágenes de distintos tamaños para comprobar que escalaba bien.
+
+Se hicieron pruebas en la subida de imágenes, para comprobar que solo se subían determinados formatos.
+
+Sería interesante plantear las pruebas en la siguiente parte del proyecto y utilizar alguna herramienta que lo automatice como \textit{Selenium}\footnote{Para la automatización de teses en páginas web: \url{https://www.seleniumhq.org/}}.

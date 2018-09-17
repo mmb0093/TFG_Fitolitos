@@ -1,11 +1,152 @@
 \apendice{Especificación de diseño}
 
 \section{Introducción}
+En este apartado se van a presentar los aspectos más relevantes dentro del software generado.
 
 \section{Diseño de datos}
+En este proyecto vamos a trabajar con distintos tipos de datos:
+\begin{itemize}
+	\item Ficheros en formato CSV, donde guardaremos las coordenadas y especificaciones de las etiquetas que se van a generar.
+	\item Formatos de imágenes JPG, JPEG o PNG.
+\end{itemize}
 
+Las imágenes y las etiquetas se van a guardar dentro del servidor en una carpeta llamada \textit{\\imágenes}. El nombre de esta carpeta se debe a que, al principio, se pensaba hacer el almacenaje de imágenes y etiquetas en carpetas separadas, pero al final no se hizo porque para hacer la recogida de los ficheros \textit{csv} y las propias imágenes, era más sencillo tenerlos ubicados en el mismo directorio.
+
+Cada conjunto de imágenes que es etiquetado genera un solo archivo \textit{csv} con el nombre de la imagen, el tipo de etiqueta, el tipo de fitolito y las coordenadas. En la imagen \ref{fig:csv} se muestra como se ven los datos si se abren con \textit{LibreOffice Calc}\footnote{Si se abre con \textit{Calc} se verán los datos como se muestran en la imagen, sin embargo, si se abren con \textit{Excel}, aunque la información sea la misma, los datos aparecen colocados de tal forma que son más difíciles de leer por un humano.}.
+\imagen{csv}{Ejemplo de datos recogidos en un \textit{csv}}
+
+Para dar una explicación más detallada sobre como están estructurados los datos del \textit{csv} me serviré de la i\ref{fig:csv}, previamente mencionada.
+
+La primera columna contiene el nombre de la imagen sobre la que se ha etiquetado, la segunda columna contiene el tamaño de la imagen, la tercera columna tiene el número de etiquetas que hay dentro de esa imagen, la cuarta columna tiene el identificador de la etiqueta dentro de la imagen, por ejemplo, si una imagen tiene dos etiquetas, la primera etiqueta tendrá el identificador 0 y a segunda el identificador 1. La quinta columna tienes las coordenadas \textit{x} e \textit{y} de la esquina inferior izquierda de la etiqueta y el ancho y largo que va a tener esta. Por último, en la sexta columna, se tiene el tipo de fitolito que recoge.
 \section{Diseño procedimental}
+En el proyecto hay tres procedimientos significativos a destacar, los cuales se explicarán a continuación.
 
+\subsection{Procedimiento de lectura de imágenes y etiquetas para comprobación}
+
+En el anterior proyecto de reconocimiento de fitolitos~\cite{jaime}, se generó un conjunto de etiquetas para un conjunto análogo de imágenes.
+Para comprobar si el clasificador hacía bien su trabajo, se hizo un script \footnote{Se utilizó un \textit{notebook} de \textit{Jupyter} para esta tarea por simplicidad.} para pintar las etiquetas sobre las imágenes.
+
+El \textbf{primer procedimiento} corresponde a la lectura de datos que se hizo para su posterior representación.
+El pseudocódigo de dicho procedimiento se puede ver en la siguiente figura \ref{alg:a1}.
+
+\begin{algorithm}
+	\ForEach{imagen en el directorio indicado}{%
+		\If{ tiene un fichero JSON con el mismo nombre que la imagen}
+		{
+			Mostramos las etiquetas pintadas la imagen.
+		}
+	}
+Comprobamos visualmente si alguna coincide con el resultado esperado.
+	\caption{Procedimiento para la comprobación del conjunto de etiquetas generado por el proyecto anterior.}
+	\label{alg:a1}
+\end{algorithm}
+
+\subsection{Pasar a la siguiente imagen en el etiquetador}
+Dentro de la aplicación, cuan estamos trabajando en el etiquetador, podemos tener cargado un conjunto con varias imágenes.
+Cuando las vamos etiquetando y pasando a las siguientes, las etiquetas se van guardando en un archivo temporal. En el caso de que se seleccionase una imagen en la que se hubiese dibujado alguna etiqueta, el etiquetador deberá pintar esas etiquetas sobre la imagen.
+El procedimiento para esta función se puede ver en la figura \ref{alg:a2}.
+
+
+\begin{algorithm}
+	\If{Se cambia de imagen seleccionada}
+	{
+		Se carga la imagen en el canvas.
+		
+		\If{Sobre esa imagen ya se han dibujado en esa sesión, previamente etiquetas.}
+		{
+			Se dibujan las etiquetas sobre la imagen
+			\If{Se modifica el conjunto de etiquetas}{
+			
+			Se actualizan los datos del conjunto de etiquetas.
+			
+			}
+		}
+		
+	}
+	\caption{Procedimiento para pasar a la siguiente imagen en el etiquetador}
+	\label{alg:a2}
+\end{algorithm}
+
+\subsection{Procedimiento para la selección del tipo de fitolito}
+
+Este procedimiento se da en el etiquetador dentro de la aplicación.
+Si cuando se tienen cargadas las imágenes, antes de ponerte a dibujar, no seleccionas ningún tipo de fitolito, el tipo por defecto será \textit{bilobate}.
+El funcionamiento de este procedimiento se puede ver en la imagen \ref{alg:a3}
+
+\begin{algorithm}
+
+		\If{Hay una imagen cargada en el canvas}
+		{
+			\If{No se selecciona ningún tipo de fitolito}{
+				\eIf{Se dibuja una etiqueta}{
+					Tipo de la etiqueta = \textit{bilobate}
+				}{
+				Tipo de fitolito = Tipo seleccionado
+			}	
+			}
+		}
+		
+	\caption{Procedimiento para seleccionar el tipo de fitolito de una etiqueta}
+	\label{alg:a3}
+\end{algorithm}
 \section{Diseño arquitectónico}
 
+En esta sección se van a explicar aquellos aspectos a destacar dentro del diseño de la arquitectura de la aplicación y la ordenación de los recursos usados.
+
+Para este proyecto se ha seguid
+o un diseño sencillo y accesible con dos finalidades:
+
+\begin{itemize}
+	\item La primera, por facilitar la navegación entre carpetas durante el desarrollo del proyecto. De esta manera es más sencillo llevar a cabo cualquier tarea de búsqueda.
+	
+	\item Hacer más cómodas las dependencias entre archivos. De esta forma se evitan llamadas excesivamente largas. Además, a la hora de darle mantenimiento es bastante más sencillo.
+\end{itemize}
+
+\subsection{Estructura de \textit{Flask}}
+
+Hemos trabajado con \textit{Flask} para realizar el despliegue de la aplicación en un servidor. \textit{Flask} nos permite usar el código escrito en \textit{Python} para realizar parte del desarrollo web.
+
+\imagen{struc}{Diagrama simplificado de la estructura funcional de la aplicación}
+Esta aplicación tiene dos partes diferentes (ver imagen \ref{fig:struc}):
+
+\begin{itemize}
+	\item Por un lado tenemos los componentes web de la aplicación (\textit{HTML},\textit{JavaScipt, css...}).
+	\item Y por otro lado tenemos los scripts de \textit{Python} con \textit{Flask} para el despliegue y para la comunicación con otros archivos escritos en \textit{Python} que vayan a otorgar funcionale a la aplicación web.
+\end{itemize}
+
+En la parte de aplicación web podemos encontrar:
+\begin{itemize}
+	\item La carpeta \textit{images}: Contiene las imágenes que se guardan en local.
+	\item La carpeta \textit{statis}: contiene los ficheros en \textit{JavaScript} y en \textit{css}, los cuales serán usados desde los archivos \textit{HTML}.
+	\item La carpeta \textit{templates}: la cual contiene los archivos \textit{HTML} en los cuales se define la interfaz de la aplicación.
+	\item \textit{views.py}: \textit{views.py} contiene la librería de \textit{Flask}, con la cual se realizan las tareas de despliegue y de juntar los archivos de \textit{Python} con el resto de la interfaz.
+\end{itemize}
+ 
+ Los Scripts de \textit{Python} son aquellos que corresponderían al clasificador.
+ 
+ El archivo \textit{run.py} es el único archivo de \textit{Python} que se mantiene alejado de la estructura y es debido a que es el script que se ejecutará cuando se quiera usar la aplicación. Previamente, esta información hemos de dársela a los archivos de configuración del despliegue, los cuales se encuentran en la carpeta \textit{etc}, y dentro del propio directorio \footnote{El fichero \textit{boxfile.yml} se encuentra en el mismo directorio que \textit{run.py}. Es imprtante porque contiene especificaciones del despliegue}.
+ 
+ \section{Diseño de interfces}
+ En este proyecto se ha desarrollado una página web, por lo que la interfaz es importante.
+ 
+ Para ello se ha hecho uso de \textit{HTML} con \textit{Bootstrap}, \textit{JavaScript} y \textit{css}.
+ 
+ La aplicación se ha dividido en cuatro secciones:
+ 
+ \begin{itemize}
+ 	\item \textbf{Inicio}: En él se muestra una breve introducción a las funcionalidades. Hay una barra de navegación en la parte superior con los diferentes botones que te llevan a las vistas correspondientes y una vista de la cuenta con la que se registrado para entrar y desde la cual se puede cerrar sesión.
+ 	 Dicha barra se mantendrá en todas las vistas y un pie de página con información del alumnos, de los tutores y el un enlace al repositorio, tal y como se muestra en la imagen \ref{fig:inicio}.
+ 	\imagen{inicio}{página de inicio de la aplicación.}
+ 	
+ 	\item \textbf{Etiquetador}: Desde el etiquetador se permite sibir imágenes, pintarles etiquetas y guardarlas en el servidor.
+ 	Los elementos como la barra de navegación y el pie de página sigun igual que en la página de inicio. La apariencia del etiquetador será como la mostrada en \ref{fig:eti}.
+ 	\imagen{eti}{Vista del etiquetador con imágenes cargadas y etiquetas dibujadas.}
+ 	\item \textbf{Clasificador}: debido a diversos problemas técnicos, no se ha podido tener un modelo entrenado que ubicar en la aplicación, pero está disponible para que en cuando se tenga algo se pueda subir.
+ 	
+ 	\item \textbf{Galería}: En la galería, los elementos estáticos que se mantenían en el resto de vistas, como el pie de página, seguirán siéndolo.
+ 	Esta vista muestra una galería con las imágenes que se subieron previamente al servidor. Su apariencia es como la mostrada en la imagen \ref{fig:galeria}.
+ 	\imagen{galeria}{Muestra de como se ven las imágenes dela galería.}
+ 	
+ \end{itemize}
+ 
 
