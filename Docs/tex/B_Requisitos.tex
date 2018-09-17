@@ -1,11 +1,310 @@
 \apendice{Especificación de Requisitos}
 
 \section{Introducción}
+En este anexo se van a especificar y formalizar los objetivos y requisitos del proyecto mediante tablas y diagramas.
 
 \section{Objetivos generales}
+Los objetivos globales de este proyecto son:
+\begin{itemize}
+	\item Confeccionar una herramienta que permita el etiquetado de distintos tipos de fitolitos.
+	
+	\item Ubicar dicha herramienta en un servidor web y añadir control de acceso.
+	
+	\item Que se puedan subir imágenes al servidor junto a la información que contengan las etiquetas para poder entrenar un modelo.
 
-\section{Catalogo de requisitos}
+\end{itemize}
+\section{Catálogo de requisitos}
+En función de los objetivos que se han especificado, se va a extraer el conjunto de requisitos, funcionales y no funcionales, para el diseño de la aplicación.
 
+\subsection{Requisitos funcionales}
+Se van a recoger los requisitos funcionales~\cite{fun}, que son aquellos que definen algún tipo de función, dentro de la aplicación.
+
+\begin{itemize}
+	\item \textbf{RF-1} Confeccionar una herramienta online que permita subir imágenes para ser etiquetadas.
+	\begin{itemize}
+		\item \textbf{RF-1.1}  Identificarse a través del login de \textit{Google}
+		 	\item \textbf{RF-1.2} En el caso de que los datos introducidos sean erróneos, impedir el acceso a la aplicación. 
+		 \item \textbf{RF-1.3} En el caso de que los datos sean correctos, permitir el acceso a la aplicación. 
+		 \item \textbf{RF-1.4} Una vez dentro de la aplicación, permitir cerrar la sesión.
+		 \item \textbf{RF-1.5} Una vez la sesión esté cerrada, que devuelva al usuario a la vista del login.
+		\item \textbf{RF-1.6} Escoger imágenes del equipo desde el que se esté trabajando.
+		\item \textbf{RF-1.7} Mostrar las imágenes en el etiquetador.
+	\end{itemize}
+	\item \textbf{RF-2}: Gestionar las etiquetas que se dibujan sobre las imágenes.
+	\begin{itemize}
+		\item \textbf{RF-2.1} Seleccionar el tipo de fitolito que se va a etiquetar.
+		\item \textbf{RF-2.2} Dibujar la etiqueta sobre la imagen.
+		\item \textbf{RF-2.3} Mover etiquetas previamente dibujadas.
+		\item \textbf{RF-2.4} Redimensionar etiquetas previamente dibujadas.
+		\item \textbf{RF-2.5} Borrar etiquetas previamente dibujadas.
+	\end{itemize}
+	\item \textbf{RF-3} Que se puedan subir imágenes al servidor junto a la información que contengan las etiquetas para poder entrenar un modelo. 
+	\begin{itemize}
+		\item \textbf{RF-3.1} Guardar las imágenes subidas en el servidor.
+			\item \textbf{RF-3.2} Generar la información de las etiquetas en formato csv.
+		\item \textbf{RF-3.3} Guardar las etiquetas generadas en el servidor y descargarlas en local.
+		\item \textbf{RF-3.4} Mostrar las imágenes en la galería cuando se suban al servidor.
+		\item \textbf{RF-3.5} Eliminar del etiquetador aquellas imágenes que se hayan guardado. 
+	\end{itemize}
+
+\end{itemize}
+\subsection{Requisitos no funcionales}
+Se van a recoger los requisitos no funcionales~\cite{nofun}, que son aquellos que especifican los \textit{atributos de calidad}~\cite{atributo}.
+
+\begin{itemize}
+	\item \textbf{RNF-1} La aplicación ha de ser fácil de usar e intuitiva para el usuario.
+\end{itemize}
 \section{Especificación de requisitos}
 
+En esta sección se va a especificar mediante diagramas de casos de uso en notación UML~\cite{uml}, los requisitos anteriormente definidos.
 
+\imagen{uml}{Diagrama UML general de casos de uso de la aplicación.}
+\imagen{uml2}{Diagrama UML desglosado del caso de uso 2: \textit{Etiquetar fitolitos}}
+En la imagen \ref{fig:uml} podemos ver el diagrama de casos general que vamos a tener. Las tablas que los formalizan son la \ref{tabla:b1}, que es del primer caso de uso, la \ref{tabla:b2}, correspondiente al segundo caso de uso  y la \ref{tabla:b3} que hará referencia al tercer caso de uso.
+
+ En la imagen \ref{fig:uml2} podemos ver extendido el segundo caso de uso del primer diagrama. A este le corresponderán las tablas \ref{tabla:b21} referente caso de uso 2.1, \ref{tabla:b22} referente al caso de uso 2.2 y la \ref{tabla:b23} a la que corresponde el caso de uso 2.3.
+ Del caso de uso 2.2, extienden otros tres casos de uso: \ref{tabla:b221} es la tabla de 2.2.1, la \ref{tabla:b222} la del caso de uso 2.2.2 y la del caso de uso 2.2.3 \ref{tabla:b223}.
+
+
+
+
+
+
+
+
+\tablaSmallSinColores{Caso de uso 1: Subir imágenes }{p{3cm} p{.75cm} p{9.5cm}}{b1}{
+	\multicolumn{3}{l}{Caso de uso 1:  Subir imágenes} \\
+}
+{
+	Descripción                            & \multicolumn{2}{p{10.25cm}}{El usuario puede subir imágenes que tenga en su equipo, puede seleccionar una o varias.} \\\hline
+	\multirow{2}{3.5cm}{Requisitos}  &\multicolumn{2}{p{10.25cm}}{RF-1} \\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-1.1} \\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-1.2}  \\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-1.3} 
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-1.4} 
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-1.5} 
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-1.6}
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-1.7}  
+	\\\hline
+	Precondiciones                         &   Ninguna   & 
+	\\\hline
+	\multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+	& 1    & El usuario pulsa el botón para subir imágenes. 
+	\\\cline{2-3}
+	& 2    & El usuario selecciona una imagen o conjunto de imágenes.
+	\\\cline{2-3}
+	& 3    & El usuario selecciona abrir imágenes.
+	\\\cline{2-3}
+	& 4    &  Se cargan la imagen o las imágenes en el etiquetador.                                 	 
+	\\\hline
+	Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{La imagen se muestra en el canvas del etiquetador.} \\\hline
+	Excepciones                        & \multicolumn{2}{p{10.25cm}}{Ninguna}\\\hline
+	Importancia                            & Alta \\\hline
+	Urgencia                               & Alta \\\hline
+	Comentarios                            & & \\
+}
+
+\tablaSmallSinColores{Caso de uso 2: Etiquetado de fitolitos }{p{3cm} p{.75cm} p{9.5cm}}{b2}{
+	\multicolumn{3}{l}{Caso de uso 2: Etiquetado de fitolitos} \\
+}
+{
+	Descripción                            & \multicolumn{2}{p{10.25cm}}{El usuario puede dibujar, borrar y modificar etiquetas sobre las imágenes que ha subido} \\\hline
+	\multirow{2}{3.5cm}{Requisitos}  &\multicolumn{2}{p{10.25cm}}{RF-2}
+    \\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-2.1} \\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-2.2}  \\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-2.3}
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-2.4}
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-2.5} 
+	\\\hline
+	Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Que haya imágenes subidas en el etiquetador}
+	\\\hline
+	\multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+	& 1    & El usuario selecciona una imagen subida.
+	\\\cline{2-3}
+	& 2    & El usuario selecciona un tipo de etiqueta
+	\\\cline{2-3}
+	& 3    & El usuario dibuja etiquetas
+	\\\cline{2-3}
+	& 4    &  El usuario modifica etiquetas.
+	\\\cline{2-3}
+	& 5    &   El usuario borra etiquetas.                             	 
+	\\\hline
+	Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{La imagen se muestra en el canvas del etiquetador.} \\\hline
+	Excepciones                        & \multicolumn{2}{p{10.25cm}}{No hay cargada en el etiquetador ninguna imagen.}\\\hline
+	Importancia                            & Alta \\\hline
+	Urgencia                               & Alta \\\hline
+	Comentarios                            & & \\
+}
+
+\tablaSmallSinColores{Caso de uso 3: Generar datos de entrenamiento }{p{3cm} p{.75cm} p{9.5cm}}{b3}{
+	\multicolumn{3}{l}{Caso de uso 3: Generar datos de entrenamiento} \\
+}
+{
+	Descripción                            & \multicolumn{2}{p{10.25cm}}{El usuario puede guardar las imágenes y las etiquetas} \\\hline
+	\multirow{2}{3.5cm}{Requisitos}  &\multicolumn{2}{p{10.25cm}}{RF-3}
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-3.1} \\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-3.2}  \\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-3.3}
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-3.4}
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-3.5} 
+	\\\hline
+	Precondiciones                         &  Ninguna &
+	\\\hline
+	\multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+	& 1    & El usuario guarda las etiquetas e imágenes.
+	\\\cline{2-3}
+	& 2    & El usuario ve dichas imágenes guardadas en la galería.
+                            	 
+	\\\hline
+	Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{Las imágenes desaparecen del etiquetdor.} \\\hline
+	Excepciones                        & \multicolumn{2}{p{10.25cm}}{No hay cargado en el etiquetador ninguna imagen.}\\\hline
+	Importancia                            & Alta \\\hline
+	Urgencia                               & Alta \\\hline
+	Comentarios                            & & \\
+}
+
+\tablaSmallSinColores{Caso de uso 2.1: Seleccionar imagen}{p{3cm} p{.75cm} p{9.5cm}}{b21}{
+	\multicolumn{3}{l}{Caso de uso 2.1: Seleccionar imagen} \\
+}
+{
+	Descripción                            & \multicolumn{2}{p{10.25cm}}{El usuario selecciona una de las imágenes que haya subido}\\\hline
+	\multirow{2}{3.5cm}{Requisitos}  &\multicolumn{2}{p{10.25cm}}{RF-2}\\\cline{2-3}
+		& \multicolumn{2}{p{10.25cm}}{RF-2.1}
+	\\\hline
+	Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Ninguna}
+	\\\hline
+	\multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+	& 1    & El usuario selecciona una imagen subida.                      	 
+	\\\hline
+	Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{La imagen se muestra en el canvas del etiquetador.} \\\hline
+	Excepciones                        & \multicolumn{2}{p{10.25cm}}{No hay cargado en el etiquetador ninguna imagen.}\\\hline
+	Importancia                            & Alta \\\hline
+	Urgencia                               & Alta \\\hline
+	Comentarios                            & & \\
+}
+
+\tablaSmallSinColores{Caso de uso 2.2: Seleccionar etiqueta }{p{3cm} p{.75cm} p{9.5cm}}{b22}{
+	\multicolumn{3}{l}{Caso de uso 2.2: Seleccionar etiqueta} \\
+}
+{
+	Descripción                            & \multicolumn{2}{p{10.25cm}}{El usuario selecciona una etiqueta de la botonera} \\\hline
+	\multirow{2}{3.5cm}{Requisitos}  &\multicolumn{2}{p{10.25cm}}{RF-2}
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-2.1}   
+	\\\hline
+	Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Que haya imágenes subidas en el etiquetador}
+	\\\hline
+	\multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción 
+	\\\cline{2-3}
+	& 1    & El usuario selecciona un tipo de etiqueta                 	 
+	\\\hline
+	Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{Hay una etiqueta seleccionada y será el tipo con el que se etiquete hasta que se cambie.} \\\hline
+	Excepciones                        & \multicolumn{2}{p{10.25cm}}{Ninguna}\\\hline
+	Importancia                            & Alta \\\hline
+	Urgencia                               & Alta \\\hline
+	Comentarios                            & & \\
+}
+
+\tablaSmallSinColores{Caso de uso 2.3: Guardar etiquetas }{p{3cm} p{.75cm} p{9.5cm}}{b23}{
+	\multicolumn{3}{l}{Caso de uso 2.3: Guardar etiquetas} \\
+}
+{
+	Descripción                            & \multicolumn{2}{p{10.25cm}}{Se generan los datos de las etiquetas} \\\hline
+	\multirow{2}{3.5cm}{Requisitos}  &\multicolumn{2}{p{10.25cm}}{RF-2}
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-2.1} \\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-2.2}  \\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-2.3}
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-2.4}
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-2.5} 
+	\\\hline
+	Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Que haya imágenes subidas en el etiquetador}
+	\\\hline
+	\multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+	& 1    & El usuario gestiona las etiquetas y la información se actualiza cuando deja de manipular cada etiqueta.                          	 
+	\\\hline
+	Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{Ninguna} \\\hline
+	Excepciones                        & \multicolumn{2}{p{10.25cm}}{Ninguna}\\\hline
+	Importancia                            & Alta \\\hline
+	Urgencia                               & Alta \\\hline
+	Comentarios                            & & \\
+}
+
+\tablaSmallSinColores{Caso de uso 2.2.1: Dibujar etiquetas }{p{3cm} p{.75cm} p{9.5cm}}{b221}{
+	\multicolumn{3}{l}{Caso de uso 2.2.1: Dibujar etiquetas } \\
+}
+{
+	Descripción                            & \multicolumn{2}{p{10.25cm}}{Se dibujan las etiquetas sobre las imágenes} \\\hline
+	\multirow{2}{3.5cm}{Requisitos}  &\multicolumn{2}{p{10.25cm}}{RF-2.2}
+	\\\cline{2-3}
+	\\\hline
+	Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Que haya imágenes subidas en el etiquetador}
+	\\\hline
+	\multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+	& 1    & El usuario dibuja las etiquetas sobre la imagen.                          	 
+	\\\hline
+	Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{Ninguna} \\\hline
+	Excepciones                        & \multicolumn{2}{p{10.25cm}}{Ninguna}\\\hline
+	Importancia                            & Alta \\\hline
+	Urgencia                               & Alta \\\hline
+	Comentarios                            & & \\
+}
+
+\tablaSmallSinColores{Caso de uso 2.2.2: Modificar etiquetas }{p{3cm} p{.75cm} p{9.5cm}}{b222}{
+	\multicolumn{3}{l}{Caso de uso 2.2.2: Modificar etiquetas } \\
+}
+{
+	Descripción                            & \multicolumn{2}{p{10.25cm}}{Se modifica el tamaño o la posición de las etiquetas} \\\hline
+	\multirow{2}{3.5cm}{Requisitos}  &\multicolumn{2}{p{10.25cm}}{RF-2.3}
+	\\\cline{2-3}
+	& \multicolumn{2}{p{10.25cm}}{RF-2.4}
+	\\\hline
+	Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Que haya una etiqueta dibujada previamente}
+	\\\hline
+	\multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+	& 1    & El usuario selecciona la etiquetas.
+	\\\cline{2-3}
+	& 2    & El usuario mueve la etiqueta de sitio. 
+		\\\cline{2-3}
+	& 3    & El usuario redimensiona la etiqueta pinchando en el borde.                         	 
+	\\\hline
+	Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{La etiqueta se ha movido o cambiado de tamaño} \\\hline
+	Excepciones                        & \multicolumn{2}{p{10.25cm}}{Ninguna}\\\hline
+	Importancia                            & Media \\\hline
+	Urgencia                               & Media \\\hline
+	Comentarios                            & & \\
+}
+
+\tablaSmallSinColores{Caso de uso 2.2.3: Borrar etiquetas }{p{3cm} p{.75cm} p{9.5cm}}{b223}{
+	\multicolumn{3}{l}{Caso de uso 2.2.3: Borrar etiquetas } \\
+}
+{
+	Descripción                            & \multicolumn{2}{p{10.25cm}}{El usuario elimina la etiqueta seleccionada} \\\hline
+	\multirow{2}{3.5cm}{Requisitos}  &\multicolumn{2}{p{10.25cm}}{RF-2.2}
+	\\\cline{2-3}
+	\\\hline
+	Precondiciones                         &  \multicolumn{2}{p{10.25cm}}{Que haya una etiqueta dibujada previamente}
+	\\\hline
+	\multirow{2}{3.5cm}{Secuencia normal}  & Paso & Acción \\\cline{2-3}
+	& 1    & El usuario selecciona la etiquetas.
+	\\\cline{2-3}
+	& 3    & El usuario presiona el botón de suprimir o borrar.                         	 
+	\\\hline
+	Postcondiciones                        & \multicolumn{2}{p{10.25cm}}{La etiqueta se ha eliminado} \\\hline
+	Excepciones                        & \multicolumn{2}{p{10.25cm}}{Ninguna}\\\hline
+	Importancia                            & Media \\\hline
+	Urgencia                               & Media \\\hline
+	Comentarios                            & & \\
+}

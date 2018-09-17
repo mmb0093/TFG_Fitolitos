@@ -1,95 +1,86 @@
 \apendice{Documentación de usuario}
 
 \section{Introducción}
-
+En este anexo se explicará de forma detalada como ejecutar la aplicación desde el punto de vista de un usuario medio.
 \section{Requisitos de usuarios}
-
+El único requisito que hay que tener en cuenta es que se necesita conexión a internet para ejecutar la aplicación.
 \section{Instalación}
+No precisa de instalación alguna\footnote{Es una de las razones por las que se decidió hacer online, porque no se necesita tener nada instalado y es más fácil para el usuario}, es online.
 
+Se puede acceder a la aplicación desde aquí: \url{
+	http://martamonjeblanco.pythonanywhere.com/}
 \section{Manual del usuario}
-\subsection{\textit{Alp’s Labeling Tool (ALT)}}
 
-Para hacer el etiquetado, se va a hacer uso de \textit{Alp’s Labeling Tool (ALT)}.
-Se trata de un etiquetador bastante sencillo, tanto de descargar como de usar.
-\subsubsection{Software necesario}
-Para poder etiquetar imágenes con esta herramienta vamos a necesitar 3 tipos de software:
-\begin{itemize}
-	\item Fiji \footnote{Descargar Fiji: http://fiji.sc/download}. Esta herramienta no precisa de instalación como tal, simplemente hay que descomprimir la carpeta que contiene la aplicación y ubicarla donde nos resulte más cómoda trabajar con ella.
-	Para descargarla solo es necesario escoger el sistema operativo sobre el que vamos a trabajar.
-	\item Action Bar \footnote{Descarga de Action Bar: https://goo.gl/dB6L1R}. Se trata de un plugin que hay que instalar directamente en la aplicación Fiji.
-	\item ALT \footnote{Descarga de ALT: https://goo.gl/JgekhA}. Este macro plugin nos va ha permitir cargar las imágenes, dibujar etiquetas sobre ellas, poner nombres a dichas etiquetas, guardar la información, volver a cargarla y devolver las coordenadas en formato .txt o .csv.
-\end{itemize}
-Considerando que ya se tiene todo el software especificado,
-la instalación de la aplicación se realizará siguiendo los siguientes pasos:
-\begin{enumerate}
-	\item Lo primero que se va a hacer es descomprimir la carpeta que contiene la aplicación de \textbf{Fiji} y ubicar dicha carpeta dónde nos sea más cómodo trabajar.
-	\item A continuación, descomprimimos el plugin de \textbf{Action Bar} y lo dejamos dónde lo podamos usar.
-	\item Vamos a iniciar la aplicación, la cual se encuentra dentro de la carpeta extraída. Veremos una barra de tareas como la mostrada en la imagen~\ref{fig:barra_de_tareas}
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.7\linewidth]{img/barra}
-		\caption{Barra de tareas de Fiji}
-		\label{fig:barra_de_tareas}
-	\end{figure}
-	
-	\item en la opción de menú "Plugins", vamos a seleccionar "Install Plugin..."	y tendremos que escoger el plugin "Action Bar" que habíamos descomprimido anteriormente. Tras esto reiniciamos la aplicación.
-	\item Ahora abrimos la carpeta que contiene la aplicación que contiene la aplicación Fiji y abrimos el .zip que contiene ALT, la última descarga que hemos hecho. 
-	\item Dentro del .zip de ALT hay una carpeta llamada "plugins". La seleccionamos y la arrastramos dentro de la carpeta de la aplicación.
-	\item Reiniciar la aplicación en el caso de que estuviera abierta.
-\end{enumerate}
-Todo este proceso de instalación se puede ver en \href{https://www.youtube.com/watch?v=G6ib950iDvQ}{videotutoriales} que el propio desarrollador ha subido a Youtube.
-\subsubsection{Uso de la aplicación}
-\begin{itemize}
-	\item \textbf{Uso de los plugins.} Una vez tenemos abierta la aplicación, nos dirigimos a la opción "Plugins" y en el desplegable y nos dirigimos al final de este. Seleccionamos "Alps Labeling Tool", como se muestra en la imagen \ref{fig:alpsltplugin}.
-	Se nos abrirá una nueva barra de tareas como en la que se muestra en la imagen \ref{fig:alt}, con la que vamos a trabajar para hacer el etiquetado.
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.7\linewidth]{img/alt}
-		\caption{Barra de trabajo de ALT}
-		\label{fig:alt}
-	\end{figure}
-	
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.7\linewidth]{img/AlpsLTPlugin}
-		\caption{Plugin Alps Labeling Tool}
-		\label{fig:alpsltplugin}
-	\end{figure}
-	Esta barra de trabajo contiene 6 funcionalidades básicas:
-	\begin{enumerate}
-		\item \textbf{OPEN IMAGES \& LABELS.} Con esta opción del menú vamos a seleccionar la imagen con la que vamos a trabajar. Lo ideal es seleccionar la primera imagen del directorio donde tengamos las imágenes para poder trabajar de forma ordenada, rápida y más segura.
-		\item \textbf{SAVE LABELS.} Una vez hayamos realizado el etiquetado sobre la imagen podremos guardar en un .txt con las coordenadas de cada etiqueta de la imagen.
-		\item \textbf{SAVE LABELS \& CLOSE.}Cuando ya hemos hecho el etiquetado sobre la imagen, si seleccionamos esta opción, nos permitirá guardar los datos de las etiquetas de la imagen y después cierra dicha imagen.
-		\item \textbf{SAVE LABELS \& IMAGE.} Con esta opción podemos guardar la imagen con la información en otro directorio.
-		\item \textbf{Flecha amarilla.} Nos carga la siguiente imagen del directorio.
-		\item \textbf{Información.} Es la ayuda de la aplicación.
-		
-	\end{enumerate}
-	
-	\item \textbf{Cargar Imágenes.} Para poder trabajar etiquetando las imágenes, antes tenemos que cargarlas para visualizarlas. Para ello seleccionamos la opción \textit{OPEN IMAGES \& LABELS.}. Nos va a permitir navegar entre directorios para seleccionar finalmente qué imagen queremos etiquetar.
-	Una vez esté la imagen abierta, la vista será similar a la mostrada en la imagen \ref{fig:etiquetado0}.
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.7\linewidth]{img/etiquetado0}
-		\caption{Estado de la aplicación antes del etiquetado}
-		\label{fig:etiquetado0}
-	\end{figure}
-	
-	\item \textbf{Etiquetado.} Para realizar el etiquetado dentro de una imagen que previamente hemos cargado tenemos que dibujar un rectángulo con el puntero sobre dicha imagen.
-	Vamos a ponerle nombre a la etiqueta que hemos dibujado, para ello, una vez dibujado el rectángulo, pulsamos \textit{Add New Sel} en la columna de botones que hay a la derecha de la imagen. Ver imagen \ref{fig:etiquetapingu}.
-	\begin{figure}
-		\centering
-		\includegraphics[width=0.7\linewidth]{img/etiquetapingu}
-		\caption{Nombrar una etiqueta}
-		\label{fig:etiquetapingu}
-	\end{figure}
-	
-	En el caso de que después necesitásemos saber el nombre de la etiqueta que hemos puesto, manteniendo la etiqueta seleccionada, le damos a \textit{Name of sel} y nos dirá el nombre.
-	\item \textbf{Guardar imágenes y etiquetas.} Una vez lo tenemos todo etiquetado dentro de la imagen tenemos que guardar la información generada por el etiquetado.
-	Para llevar esto a cabo tenemos tres opciones: Guardar sólo las etiquetas y continuar etiquetando, guardar etiquetas y salir o guardar etiquetas e imágenes.
-	Preferiblemente vamos a darle a la opción (en el menú ALT) de guardar etiquetas e imágenes y guardar todas las etiquetas en la misma carpeta de resultados para trabajar mejor con ellas.
-	\item \textbf{Generar datos.}
-	
-\end{itemize}
-\subsubsection{Recomendaciones}
-He subido una máquina virtual a One Drive para que no sea necesario hacer ninguna instalación. Se puede acceder a la descarga desde \href{https://universidaddeburgos-my.sharepoint.com/:f:/g/personal/mmb0093_alu_ubu_es/EmokrIxFowNKvCanhqclkqkB90ruM7w-TPeXQS1MQQNmCQ?e=HMXXW4}{aquí}.
+En este apartado se van a explicar los pasos a seguir para usar la aplicación.
+
+\subsection{Identificación de usuario}
+Antes de entrar a la aplicación, se e solicitará al usuario acceder a través de una cuenta de \textit{Google} tal y como se muestra en la imagen \ref{fig:login}.
+\imagen{login}{Identificación de usuarios po medio de \textit{Google}}
+
+\subsection{Navegación}
+Para cambiar de una vista a otra solo hay que seleccionar a que vista se quiere acceder.
+
+La barra de navegación aparece en la parte superior de la pantalla y se ve como en la imagen \ref{fig:navar}
+\imagen{navar}{Barra de navegación de la aplicacón}
+
+\subsection{Inicio}
+La pantalla de inicio se verá así \ref{fig:inicio}.
+
+En ella el usuario podrá cerrar sesión como se muestra en la imagen \ref{fig:logout}
+
+Viene una pequeña descripción de la aplicación.
+
+\imagen{logout}{Opción de cerrar sesión en el caso de que se desee salir o cambiar de cuenta.}
+
+\subsection{Etiquetador}
+Cuando se accede al etiquetador la vista que se tiene de él es como la de la imagen \ref{fig:vacio}.
+
+\subsubsection{Buscar imágenes}
+Hay que pinchar sobre el botón de \textit{Buscar...} ubicado en la parte superior a la izquierda (ver imagen \ref{fig:buscar}).
+\imagen{buscar}{Botón de buscar imágenes en el equipo.}
+
+\subsubsection{Seleccionar imágenes}
+Cuando se pincha en el botón \textit{Buscar...}, se abre una ventana mostrando los archivos de tipo imagen que tenemos en nuestro dispositivo tal y como se muestra en la imagen \ref{fig:seleccionar}. \imagen{seleccionar}{Seleccionar la imagen o el conjunto de imágenes que se desee.}
+
+Solo se pueden seleccionar archivos de tipo imagen, para evitar posibles errores.
+\imagen{vacio}{Etiquetador sin imágenes cargadas}
+
+Una vez estén elegidas as imágenes, hay que darle al botón de \textit{Abrir} y automáticamente cargará las imágenes en la aplicación y cerrara la ventana de selección de imágenes.
+\subsubsection{Imágenes cargadas}
+Las imágenes cargadas se van a mostrar en el lateral izquierdo como se ve en la imagen \ref{fig:imgguardadas}
+\imagen{imgguardadas}{Imágenes que se han cargado en la aplicación pero que aún no se han subido}
+\subsubsection{Botones de etiquetas}
+
+Antes de ponerse a etiquetar hay que seleccionar el tipo de fitolito en la botonera (ver imagen \ref{fig:botones}) de la parte superior.
+\imagen{botones}{Botonera para seleccionar el tipo de fitolito que se va a etiquetar.}
+
+Si no seleccionase ninguno se establecería el \textit{bilobate} como el fitolito por defecto.
+
+\subsubsection{Dibujar etiquetas}
+Para dibujar etiquetas tenemos que tener una imagen cargada en el canvas. Se pincha y se arrastra para generar una etiqueta restangular sobre la imagen y se le asignará el tipo de fitolito que se haya elegido.
+
+\subsubsection{Modificar etiquetas}
+Para modificar una etiqueta podemos cambiarla de sitio dentro de la imagen o redimensionarla.
+
+Para cambiarla de sitio hay que seleccionar la imagen, como se ve en la imagen \ref{fig:seleccionada} y pinchar sin soltar hasta que se esté conforme con la nueva ubicación
+\imagen{seleccionada}{Etiqueta seleccionada}
+
+Si se quisiera redimensionar, se tendría que seleccionar la etiqueta y pinchar en el borde o esquina que se quiera cambiar.
+
+\subsubsection{Copiar}
+Si se desea copia una etiqueta, con el tipo de fitolito incluido, solo hay que seleccionar una etiqueta y hacer \textit{ctrl + c}
+\textit{ctrl + v} ya ya se tiene una copia.
+\subsubsection{Eliminar etiquetas}
+Para elimirar las etiquetas que no se quieran en la imagen o porque se ha cometido un error, Hay que seleccionar la etiqueta y darle al botón de \textit{suprimir} o al de \textit{borrar}.
+\subsubsection{Guardar etiquetas}
+Una vez se ha acabado de etiquetar las imágenes podemos guardar las etiquetas y las imágenes para su posterior uso.
+
+Hay que pulsar el botón de \textit{Guardar imágenes y etiquetas} que se ve como se muestra en la imagen \ref{fig:guardar}.
+\imagen{guardar}{Botón de guardado de imágenes y etiquetas.}
+
+Se guardaran las etiquetas en descargas.
+\subsection{Galería}
+
+La opción de la galería es meramente informativa. En ella se muestran las imágenes que se muestran las imágenes que se han subido al servidor como se ve en la imagen \ref{fig:galeria}
+\imagen{galeria}{Vista de la galería con las imágenes del servidor}
+\subsubsection{title}
