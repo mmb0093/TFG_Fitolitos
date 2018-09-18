@@ -45,6 +45,7 @@ def upfiles():
 
 @app.route('/etiquetador', methods=['GET', 'POST'])
 def annotator():
+    resp = google.get("/oauth2/v2/userinfo")
     target = os.path.join(UPLOAD_FOLDER, 'images/')
     if not os.path.isdir(target):
         os.mkdir(target)
@@ -55,9 +56,12 @@ def annotator():
         upload.save(destination)
     image_names = os.listdir(target)
     print(image_names)
-    return render_template("etiquetador.html", image_names=image_names)
+    return render_template("etiquetador.html", image_names=image_names, email=resp.json()["email"])
+
 
 @app.route('/upload-files/<filename>')
 def send_image(filename):
+    resp = google.get("/oauth2/v2/userinfo")
     return send_from_directory("images", filename)
+    return render_template('upload.html', email=resp.json()["email"])
 

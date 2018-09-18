@@ -27,9 +27,6 @@
       <a class="navbar-brand" href="{{url_for('annotator')}}">Etiquetador</a>
     </li>
           </li>
-    <li class="nav-item">
-     <a class="navbar-brand" href="#">Clasificador</a>
-    </li>
           </li>
     <li class="nav-item">
       <a class="navbar-brand" href="{{url_for('upfiles')}}">Galería</a>
@@ -51,18 +48,15 @@
 </nav>
       <div class="jumbotron jumbotron-fluid" style="background-color:  #83c9b6 ; opacity: 0.8;">
   <div class="container">
-    <h1 class="display-4">Clasificador de fitolitos</h1>
-    <h3>Etiquetador</h3>
+    <h1 class="display-4">Clasificador de fitolitos </h1>
+    <h3  href="{{url_for('annotator')}}">Etiquetador</h3>
       <h2 class="lead">Sube imágenes de fitolitos y etiqueta mediante esta funcionalidad para generar un dataset de entrenamiento para el modelo</h2>
-    <h3>Clasificador </h3>
-      <h2 class="lead">Sube imágenes en las que quieras detectar fitolitos y el modelo se encargará de clasificarlos y devolver las etiquetas</h3>
-       <h3>Galería </h3>
       <h4 class="lead">Aquí se mostrarán las imágenes con las que previamente se ha entrenado un modelo</h4>
   </div>
 </div>
 <nav class="navbar fixed-bottom bg-dark navbar-dark">
- <font color="white" size=1>Autora: Marta Monje Blanco <br/>Tutores: Alvar Arnáiz González y José Fancisco Díez Pastor<br/>Universidad de Burgos</font>
-    <a href="https://github.com/mmb0093/TFG_Fitolitos" ><img src="https://cdn.icon-icons.com/icons2/856/PNG/512/github_social_media_corporate_logo_icon-icons.com_67711.png" alt=" " title="Ir al repositorio en Github" width="48" height="48"/></a>
+ <font color="white" size=1>Autora: Marta Monje Blanco <br/>Tutores: Álvar Arnaiz González y José Fancisco Díez Pastor<br/>Universidad de Burgos</font>
+    <a href="https://github.com/mmb0093/TFG_Fitolitos" ><img src="https://image.flaticon.com/icons/svg/1051/1051275.svg" alt=" " title="Ir al repositorio en Github" width="48" height="48"/></a>
 </nav>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>

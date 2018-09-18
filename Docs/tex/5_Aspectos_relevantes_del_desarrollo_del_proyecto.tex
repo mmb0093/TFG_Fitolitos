@@ -107,7 +107,7 @@ Se puede clonar o descargar para poder hacer uso de sus funciones.
 En este repositorio hay ejemplos de uso para las diferentes funcionalidades que ofrece, por lo que es recomendable saber de antemano qué recursos necesitas para la finalidad que se desea.
 
 \section{Modelos pre-entrenados}
-Se ha intentado entrenar al clasificador con dos tipos de modelos\footnote{Enlace para acceder a los modelos: \url{https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md}} distintos, pero realmente Tensorflow nos ofrece muchas alternativas, que pueden ser más o meno precisas y cuya velocidad de entrenamiento variará de unas a otras(ver imagen \ref{fig:tabla}).
+Se ha intentado entrenar al clasificador con dos tipos de modelos\footnote{Enlace para acceder a los modelos: \url{https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md}} distintos, pero realmente Tensorflow nos ofrece muchas alternativas, que pueden ser más o meno precisas y cuya velocidad de entrenamiento variará de unas a otras (ver imagen \ref{fig:tabla}).
 
 \imagen{tabla}{Modelos ya entrenados que TensorFlow pone a disposición pública}
 
@@ -130,6 +130,5 @@ Existen varias posibilidades desde mi punto de vista:
 En cualquier caso, el resultado ha sido que no ha podido entrenarse el modelo.
 
 Para poner un ejemplo ilustrativo a cerca de como debería haberse clasificado una imagen, podemos observar el de la imagen \ref{fig:negra}.
-
 Este clasificador ha sido entrenado con el modelo \textit{ssd mobilenet v1 coco}, uno de los más rápidos y que menos potencia necesita, pero también uno de los menos precisos.
 \imagen{negra}{Ficha negra clasificada correctamente con el clasificador}

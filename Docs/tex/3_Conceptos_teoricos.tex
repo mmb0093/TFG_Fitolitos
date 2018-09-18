@@ -1,20 +1,20 @@
 \capitulo{3}{Conceptos teóricos}
 
-Para la comprensión del proyecto es necesario introducir aquellos conceptos inherentes al desarrollo y a la temática que aborda. 
+Para la comprensión del proyecto es necesario introducir aquellos conceptos inherentes al desarrollo, como el tipo de arquitectura cliente servidor y aquellos términos referentes a la inteligencia artificial y por otro lado, a la arqueobotánica y los fitolitos.
 
 \section{Arqueobotánica y Fitolitos}
-Como ya se explicó en la introducción, la Arqueobotánica\cite{archeo} es una rama de la arqueología que se encarga de estudiar la relación que existía entre las plantas y los humanos en diferentes momentos de la historia. Pretende conocer qué técnicas se usaban para el cultivo, recolección, y que usos le daban después, si lo usaban de alimento, para fines médicos y curativos, para rituales y ofrendas...
+Como ya se explicó en la introducción, la arqueobotánica~\cite{archeo} es una rama de la arqueología que se encarga de estudiar la relación que existía entre las plantas y los humanos en diferentes momentos de la historia. Pretende conocer qué técnicas se usaban para el cultivo, recolección, y que usos le daban después, si lo usaban de alimento, para fines médicos y curativos, para rituales y ofrendas...
 
 Toda esta información se extrae de restos de plantas hallados en contextos arqueológicos y pueden enriquecer nuestro conocimiento sobre culturas antiguas.
 
 \subsection{Fitolitos}
-Los fitolitos\cite{fitolito} forman parte de los restos de plantas que son analizados, más concretamente pertenecen al tipo de micro-restos, es decir, aquellos que solo pueden ser apreciados con la ayuda de un microscopio.\cite{fito} 
+Los fitolitos~\cite{fitolito} forman parte de los restos de plantas que son analizados, más concretamente pertenecen al tipo de micro-restos, es decir, aquellos que solo pueden ser apreciados con la ayuda de un microscopio~\cite{fito}.
 
 Se trata de células de origen vegetal que han sufrido una biomineralización debido a procesos propios del ciclo de vida de estas. Gracias a las características físicas de la célula, este proceso de micro-fosilización es fácil de lograr y se conserva muy bien a lo largo del tiempo, además se produce en abundancia y existe una gran variedad.
 
 Existen muchas formas de clasificar fitolitos, pero la que proporciona más uniformidad es la que lo hace basándose en su morfología. 
 
- Dependiendo de en qué zona se hallen, los fitolitos pueden adquirir distintas formas, colores o tamaños debido a la diversidad vegetal propia de la zona.
+ Dependiendo de en qué zona se hallen o a qué especie de planta pertenezcan, los fitolitos pueden adquirir distintas formas, colores o tamaños debido a la diversidad vegetal propia de la zona.
 
 Para simplificar el proyecto, tanto al nivel del etiquetador como el planteamiento del clasificador, vamos a distinguir entre siete de las formas más comunes que adoptan los fitolitos:
 
@@ -30,9 +30,9 @@ Para simplificar el proyecto, tanto al nivel del etiquetador como el planteamien
 
 \imagen{bilobate3}{Ejemplo de Bilobate etiquetado mediante el etiquetador}
 
-Las formas que presentan estos fitolitos son lo suficiéntemente diferentes entre sí como para que la tarea del etiquetado no sea excesivamente complicada si se tienen los conocimientos necesarios para identificarlos.
+Aunque hay más tipos de fitolitos, las formas que presentan los que hemos presentado son lo suficientemente diferentes entre sí como para que la tarea del etiquetado no sea excesivamente complicada si se tienen los conocimientos necesarios para identificarlos, aun así se requieren de expertos para ello.
 
-En muchas ocasiones las imágenes con los fitolitos vienen con un exceso de \textit{ruido}(ver imagen \ref{fig:ruido}) de fondo. Esto quiere decir que en las imágenes que se van a usar para el etiquetado no solo hay fitolitos, hay más elementos microscópicos que pueden obstaculizar la tarea del etiquetado.
+En muchas ocasiones las imágenes con los fitolitos vienen con un exceso de \textit{ruido} de fondo como se puede apreciar en la imagen \ref{fig:ruido}. Esto quiere decir que en las imágenes que se van a usar para el etiquetado no solo hay fitolitos, hay más elementos microscópicos que pueden obstaculizar la tarea del etiquetado.
 
 \imagen{ruido}{Imagen que presenta mucho ruido, es decir, elementos que no son fitolitos y pueden llevar a error.}
 
@@ -40,48 +40,52 @@ En muchas ocasiones las imágenes con los fitolitos vienen con un exceso de \tex
 
 La aplicación está alojada en un servidor para que se pueda trabajar con ella de forma más sencilla.
 
-La arquitectura que sigue es la de cliente-servidor (Ver imagen \ref{fig:cliente}). Se trata de una arquitectura software que separa los recursos y/o servicios que se van a proporcionar desde el servidor, de los clientes que van a hacer uso de la aplicación bajo demanda.\cite{cliente}
+La arquitectura que sigue es la de cliente-servidor (Ver imagen \ref{fig:cliente}). Se trata de una arquitectura software que separa los recursos y/o servicios que se van a proporcionar desde el servidor, de los clientes que van a hacer uso de la aplicación bajo demanda~\cite{cliente}.
 
-\imagen{cliente}{Esquema básico de la arquitectura cliente-servidor}
+\imagen{cliente}{Esquema básico de la arquitectura cliente-servidor.}{Imagen extraída de \url{https://es.wikipedia.org/wiki/Cliente-servidor}}
 
-La aplicación se ha desplegado en un Pythonanywhere \footnote{Dirección de la página principal: \url{https://www.pythonanywhere.com/}}, un servidor especializado en aplicaciones escritas en \textit{Python}. \cite{servidor}
 
-En este servidor se alojará la aplicación y las imágenes con las que se desee trabajar dentro de ella. Hablaremos más adelante de esta herramienta y de porque se escogió trabajar con ella en el capítulo de Técnicas y herramientas \ref{c.4}.
+
+La aplicación se ha desplegado en un Pythonanywhere, un servidor especializado en aplicaciones escritas en \textit{Python}~\cite{servidor}.
+
+En este servidor se alojará la aplicación y las imágenes con las que se desee trabajar dentro de ella. Hablaremos más adelante de esta herramienta y de por qué se escogió trabajar con ella en el capítulo de Técnicas y herramientas~\ref{c.4}.
 
 
 \section{Inteligencia Artificial (AI)}
 
-La Inteligencia artificial se define como la simulación de los procesos cognitivos propios de los humanos reproducidos en máquinas. Hacen uso del aprendizaje y la autocorreción para emular el razonamiento tal y como lo entendemos y resolver problemas.\cite{ai} 
+La Inteligencia artificial se define como la técnica de simulación de los procesos cognitivos propios de los humanos reproducidos en máquinas. Hacen uso del aprendizaje y la autocorreción para emular el razonamiento tal y como lo entendemos y resolver problemas~\cite{ai}. 
 
 Actualmente la definición de inteligencia artificial cobra diferentes significados en función del autor que la defina. Si bien por una parte se busca lograr que una máquina razone o resuelva problemas como un ser humano, en otras ocasiones lo que se busca es que las capacidades cognitivas desarrolladas por la máquina sean superiores a las de un ser humano. 
 
 En el caso de esta aplicación la idea era que la el mediante un modelo se pudiesen \textbf{reconocer objetos} dentro de una imagen, en este caso de fitolitos y devolver la clase a la que pertenecen junto a un porcentaje de confianza.
 
-El \textbf{porcentaje de confianza} es un indicador de la precisión de la predicción que ha realizado el modelo. Por ejemplo el modelo puede etiquetar un bilobate al 98\% de confianza,lo que nos indica como de seguro es el clasificador cuando hace una predicción.
+El \textbf{porcentaje de confianza} es un indicador de la precisión de la predicción que ha realizado el modelo. Por ejemplo el modelo puede etiquetar un bilobate al 98\% de confianza, lo que nos indica como de seguro es el clasificador cuando hace una predicción.
 \section{Detección y clasificación de objetos}
 
-La \textbf{detección de objetos} dentro de una imagen consiste en localizar las coordenadas de donde se encuentra cualquiera de los tipos de objetos que se estén tratando de extraer. Esto llevado a la aplicación, consistiría en identificar y señalar todos los fitolitos, independientemente del tipo, y devolver las coordenadas de estos. 
+La \textbf{detección de objetos} dentro de una imagen consiste en localizar las coordenadas en donde se encuentra cualquiera de los tipos de objetos que se estén tratando de extraer. Esto llevado a la aplicación, consistiría en identificar y señalar todos los fitolitos, independientemente del tipo, y devolver las coordenadas de estos. 
 
-Por otra parte la \textbf{clasificación de objetos} se encarga de identificar qué tipo de objetos, en este caso que tipo de fitolito se a detectado. Como anteriormente ya se había comentado, dentro de la clasificación es donde obtendremos el porcentaje de confianza de la etiqueta.
+Por otra parte, la \textbf{clasificación de objetos} se encarga de identificar qué tipo de objetos, en este caso que tipo de fitolito se a detectado. Como anteriormente ya se había comentado, dentro de la clasificación es donde obtendremos el porcentaje de confianza de la etiqueta.
 
 \section{Redes convolucionales}
 
-Las redes convolucionales son un tipo de redes neuronales artificiales que emulan el comportamiento de las neuronas de la corteza visual primaria en un cerebro biológico \cite{redes}.(Ver imagen \ref{fig:neuronal})
+Las redes convolucionales son un tipo de redes neuronales artificiales que emulan el comportamiento de las neuronas de la corteza visual primaria en un cerebro biológico~\cite{redes} (Ver imagen \ref{fig:neuronal}).
 
 La diferencia entre una red neuronal ordinaria y una convolucional, es que esta última está diseñada para trabajar con imágenes.
 
-\subsection{¿Porqué redes convolucionales y no convencionales?}
+\subsection{¿Por qué redes convolucionales y no convencionales?}
 
 El objetivo era el de reconocer y clasificar objetos dentro de imágenes de una complejidad razonablemente alta.
 Se trata de imágenes grandes y tienen mucha definición.
 
 Las redes neuronales convencionales pueden trabajar con imágenes, pero no escalan bien cuando las imágenes son más grandes o de una resolución mayor.
 
-Las redes convolucionales\cite{neurona} trabajan extrayendo poco a poco la información en sus capas superiores, va creando patrones que poco a poco se van simplificando y en las capas más profundas se intenta que los patrones que la red haya deducido coincidan con la foto original.
+Las redes convolucionales~\cite{neurona} trabajan extrayendo poco a poco la información en sus capas superiores, va creando patrones que poco a poco se van simplificando y en las capas más profundas se intenta que los patrones que la red haya deducido coincidan con la foto original.
 
 Tendremos acceso a este tipo de redes gracias a Tensorflow, del cual se hablará en el capítulo de técnicas y herramientas \ref{c.4}.
 
-\imagen{neuronal}{Esquema de funcionamiento de una red neuronal convolucional en la extracción de información para formar patrones. Imagen extraída de: \url{https://goo.gl/bJfXr5 }}
+\imagen{neuronal}{Esquema de funcionamiento de una red neuronal convolucional en la extracción de información para formar patrones.}{ Imagen extraída de: \url{https://goo.gl/bJfXr5 }}
+
+
 
 \section{\textit{mAP} en detección de objetos}
 
